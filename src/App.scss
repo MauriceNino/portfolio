@@ -1,0 +1,25 @@
+#heading {
+  color: lightgreen;
+}
+
+#sub-heading {
+  text-decoration: underline;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  cursor: pointer;
+
+  > div {
+    transition: background-color 0.3s, transform 0.3s, width 0.3s;
+    width: 100%;
+  }
+
+  > div:hover {
+    background-color: magenta;
+    transform: translateX(9.6px);
+    width: calc(100% - 9.6px);
+  }
+}

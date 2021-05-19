@@ -1,0 +1,24 @@
+
+.t-border-box {
+    > div:first-of-type, 
+    > div:last-of-type {
+        color: cyan;
+    }
+
+    .content-flex {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        > div:first-of-type,
+        > div:last-of-type {
+            overflow-wrap: break-word;
+            width: 9.6px;
+            color: cyan;
+        }
+
+        > div:nth-of-type(2) {
+            flex-grow: 1;
+        }
+    }
+}
