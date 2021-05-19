@@ -1,26 +1,41 @@
 import React from "react";
+import { CellsConverter } from "../../helpers/cells-converter";
 import './BorderBox.scss';
 
 export default class BorderBox extends React.Component<any, any, any>{
+    cRef: React.RefObject<any>;
+
+    constructor(props: any){
+      super(props)
+      this.cRef = React.createRef()
+    }
+
     render() {
-        const borderVerticalLine = '+' + '-'.repeat(this.props.vCells - 6) + '+';
-        const borderHorizontalLine = '|'.repeat(this.props.hCells - 4);
+        let vCells = this.props.vCells;
+        let hCells = this.props.hCells;
 
-        return (<>
-            <div className="t-border-box">
-                <div>{borderVerticalLine}</div>          
+        if(this.cRef?.current?.offsetHeight) {
+            const minimumVCells = CellsConverter.heightToCells(this.cRef?.current?.offsetHeight);
+            vCells = vCells > minimumVCells ? vCells : minimumVCells;
+        }
 
-                <div className="content-flex">
-                    <div>{borderHorizontalLine}</div>
+        const borderVerticalLine = '+' + '-'.repeat(hCells) + '+';
+        const borderHorizontalLine = '|'.repeat(vCells);
 
-                    <div>{this.props.children}</div>
+        return (
+        <div className="t-border-box">        
+            <div>{borderVerticalLine}</div>          
 
-                    <div>{borderHorizontalLine}</div>
-                </div>
-                
-                <div>{borderVerticalLine}</div>
+            <div className="content-flex">
+                <div>{borderHorizontalLine}</div>
+
+                <div><div ref={this.cRef}>{this.props.children}</div></div>
+
+                <div>{borderHorizontalLine}</div>
             </div>
-        </>)  
-
+            
+            <div>{borderVerticalLine}</div>
+        </div>
+        );
     }
 }

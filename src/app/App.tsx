@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
-import BorderBox from './components/border-box/BorderBox';
-import ConsoleContainer from './components/console-container/ConsoleContainer';
+import BorderBox from '../components/border-box/BorderBox';
+import ConsoleContainer from '../components/console-container/ConsoleContainer';
 
 class App extends React.Component<any, any, any> {
   constructor(props: any) {
@@ -32,13 +32,13 @@ class App extends React.Component<any, any, any> {
     const width = this.state.width;
     const height = this.state.height;
 
-    const verticalCellCount = Math.floor(width / 9.6);
-    const horizontalCellCount = Math.floor(height / 21);
+    const horizontalCellCount = Math.floor(width / 9.6);
+    const verticalCellCount = Math.floor(height / 21);
 
     return (
       <>
       <ConsoleContainer vCells={verticalCellCount} hCells={horizontalCellCount} showDimensions={true}>
-        <BorderBox vCells={verticalCellCount} hCells={horizontalCellCount}>
+        <BorderBox vCells={verticalCellCount - 4} hCells={horizontalCellCount - 6}>
           <h1 id="heading">
             █▀█ █▀█ █▀█ ▀█▀ █▀▀ █▀█ █░░ █ █▀█<br/>
             █▀▀ █▄█ █▀▄ ░█░ █▀░ █▄█ █▄▄ █ █▄█
