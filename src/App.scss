@@ -19,7 +19,7 @@
 
   > div:hover {
     background-color: magenta;
-    transform: translateX(9.6px);
-    width: calc(100% - 9.6px);
+    transform: translateX(calc(var(--text-width) * 1px));
+    width: calc(100% - calc(var(--text-width)) * 1px);
   }
 }
