@@ -13,7 +13,7 @@ td, footer, header, menu, nav, section, video {
 
 html {
   --background-color: #4f4f4f;
-  --text-color: #FFFFFF;
+  --text-color: #ffffff;
 
   --text-width: 9.6;
   --text-height: 21;
@@ -28,6 +28,7 @@ html, body, #root {
 
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 /* Track */
