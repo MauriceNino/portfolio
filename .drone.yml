@@ -1,0 +1,32 @@
+---
+kind: pipeline
+type: docker
+name: test & deploy
+
+steps:
+- name: build-local
+  image: node:lts-alpine
+  commands:
+  - npm ci
+- name: build & deploy image
+  image: docker:dind
+  when:
+    branch: master
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+  commands:
+  - docker image build -t portfolio .
+  - docker container stop portfolio || true
+  - docker container rm portfolio || true
+  - docker container run -itd
+      -p 127.0.0.1:8080:80
+      --restart unless-stopped
+      --name portfolio
+      portfolio
+  - docker image prune -f
+
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
