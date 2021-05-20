@@ -3,7 +3,7 @@ import './App.scss';
 import BorderBox from '../components/border-box/BorderBox';
 import ConsoleContainer from '../components/console-container/ConsoleContainer';
 import Heading from '../components/heading/heading';
-import SplashPage from '../components/splash-page/splash-page';
+import SplashPage from '../components/splash/splash';
 
 class App extends React.Component<any, any, any> {
   constructor(props: any) {
@@ -51,8 +51,8 @@ class App extends React.Component<any, any, any> {
         <Heading/>
         <br></br>
 
-        <BorderBox vCells={verticalCellCount - 7} hCells={horizontalCellCount - 6} minVCells={5}>
-          <SplashPage vCells={verticalCellCount - 7} hCells={horizontalCellCount - 6}/>
+        <BorderBox vCells={verticalCellCount - 7} hCells={horizontalCellCount - 6} minVCells={6}>
+          <SplashPage vCells={verticalCellCount - 7 > 6 ? verticalCellCount - 7 : 6} hCells={horizontalCellCount - 6}/>
         </BorderBox>
       </ConsoleContainer>
       </>
