@@ -11,15 +11,14 @@
         flex-direction: row;
         width: 100%;
 
-        > div:first-of-type,
-        > div:last-of-type {
+        > .border {
             overflow-wrap: break-word;
             width: calc(var(--text-width) * 1px);
             color: cyan;
             user-select: none;
         }
 
-        > div:nth-of-type(2) {
+        > .content {
             flex-grow: 1;
         }
     }

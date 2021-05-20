@@ -4,6 +4,7 @@ import BorderBox from '../components/border-box/BorderBox';
 import ConsoleContainer from '../components/console-container/ConsoleContainer';
 import Heading from '../components/heading/heading';
 import SplashPage from '../components/splash/splash';
+import Padded from '../components/padded/padded';
 
 class App extends React.Component<any, any, any> {
   constructor(props: any) {
@@ -45,15 +46,20 @@ class App extends React.Component<any, any, any> {
     const horizontalCellCount = this.state.horizontalCellCount;
     const verticalCellCount = this.state.verticalCellCount;
 
+    const disableSideLines = horizontalCellCount < 50;
+
     return (
       <>
       <ConsoleContainer vCells={verticalCellCount} hCells={horizontalCellCount} showDimensions={true}>
-        <Heading hCells={horizontalCellCount}/>
-        <br></br>
+        <Padded bottom={0}>
+          <Heading hCells={horizontalCellCount}/>
+        </Padded>
 
-        <BorderBox vCells={verticalCellCount - 7} hCells={horizontalCellCount - 6} minVCells={6}>
-          <SplashPage vCells={verticalCellCount - 7 > 6 ? verticalCellCount - 7 : 6} hCells={horizontalCellCount - 6}/>
-        </BorderBox>
+        <Padded left={disableSideLines ? 0 : 1} right={disableSideLines ? 0 : 1}>
+          <BorderBox vCells={verticalCellCount - 7} hCells={horizontalCellCount - (disableSideLines ? 0 : 2)} minVCells={6} disableSideLines={disableSideLines}>
+            <SplashPage vCells={verticalCellCount - 7 > 6 ? verticalCellCount - 7 : 6} hCells={horizontalCellCount - (disableSideLines ? 0 : 6)}/>
+          </BorderBox>
+        </Padded>
       </ConsoleContainer>
       </>
     );

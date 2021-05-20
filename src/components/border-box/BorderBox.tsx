@@ -39,25 +39,27 @@ export default class BorderBox extends React.Component<any, any, any>{
     }
 
     render() {
+        const disableSideLines = this.props.disableSideLines;
+        
         const vCells = this.getVCells();
         const hCells = this.props.hCells;
 
-        const borderVerticalLine = '+' + '-'.repeat(hCells) + '+';
-        const borderHorizontalLine = '|'.repeat(vCells);
+        const borderVerticalLine = '|'.repeat(vCells);
+        const borderHorizontalLine = '+' + '-'.repeat(hCells - 2) + '+';
 
         return (
         <div className="t-border-box">        
-            <div>{borderVerticalLine}</div>          
+            <div>{borderHorizontalLine}</div>          
 
             <div className="content-flex">
-                <div>{borderHorizontalLine}</div>
+                {disableSideLines || <div className="border">{borderVerticalLine}</div>}
 
-                <div style={this.getContentStyle()}><div ref={this.cRef}>{this.props.children}</div></div>
+                <div style={this.getContentStyle()} className="content"><div ref={this.cRef}>{this.props.children}</div></div>
 
-                <div>{borderHorizontalLine}</div>
+                {disableSideLines || <div className="border">{borderVerticalLine}</div>}
             </div>
             
-            <div>{borderVerticalLine}</div>
+            <div>{borderHorizontalLine}</div>
         </div>
         );
     }
