@@ -1,0 +1,14 @@
+#heading-container {
+    display: flex;
+    justify-content: space-between;
+    height: calc(var(--text-height) * 2px);
+
+    > h1 {
+        color: lightgreen;
+    }
+    > div {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap-reverse;
+    }
+}

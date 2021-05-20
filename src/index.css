@@ -11,6 +11,11 @@ td, footer, header, menu, nav, section, video {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a, a:checked, a:visited {
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
 html {
   --background-color: #4f4f4f;
   --text-color: #ffffff;

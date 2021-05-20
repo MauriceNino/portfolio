@@ -48,7 +48,7 @@ class App extends React.Component<any, any, any> {
     return (
       <>
       <ConsoleContainer vCells={verticalCellCount} hCells={horizontalCellCount} showDimensions={true}>
-        <Heading/>
+        <Heading hCells={horizontalCellCount}/>
         <br></br>
 
         <BorderBox vCells={verticalCellCount - 7} hCells={horizontalCellCount - 6} minVCells={6}>
