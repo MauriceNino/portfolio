@@ -93,6 +93,12 @@ export default class SplashPage extends React.Component<any, any, any> {
         })
 
       }
+
+      onClick() {
+        document.getElementById('main-page')?.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
     
       render() {
         const vCells = this.props.vCells;
@@ -104,7 +110,7 @@ export default class SplashPage extends React.Component<any, any, any> {
             I'm a Full-Stack-Developer {hCells < 44 && <br/>}from <span style={{color: '#ed4e50'}}>Au</span><span>str</span><span style={{color: '#ed4e50'}}>ia</span>
           </h1>,
           <br/>,
-          <div className="button">
+          <div className="button" onClick={this.onClick}>
             +------------+<br/>
             | <div className="down-arrow">&gt;</div> About Me |<br/>
             +------------+

@@ -5,6 +5,7 @@ import ConsoleContainer from '../components/console-container/ConsoleContainer';
 import Heading from '../components/heading/heading';
 import SplashPage from '../components/splash/splash';
 import Padded from '../components/padded/padded';
+import MainPage from '../components/main/main';
 
 class App extends React.Component<any, any, any> {
   constructor(props: any) {
@@ -58,6 +59,7 @@ class App extends React.Component<any, any, any> {
         <Padded left={disableSideLines ? 0 : 1} right={disableSideLines ? 0 : 1}>
           <BorderBox vCells={verticalCellCount - 7} hCells={horizontalCellCount - (disableSideLines ? 0 : 2)} minVCells={6} disableSideLines={disableSideLines}>
             <SplashPage vCells={verticalCellCount - 7 > 6 ? verticalCellCount - 7 : 6} hCells={horizontalCellCount - (disableSideLines ? 0 : 6)}/>
+            <MainPage vCells={verticalCellCount - 7 > 6 ? verticalCellCount - 7 : 6} hCells={horizontalCellCount - (disableSideLines ? 0 : 6)}/>
           </BorderBox>
         </Padded>
       </ConsoleContainer>
