@@ -30,7 +30,7 @@ export default class BorderBox extends React.Component<any, any, any>{
         let props: CSSProperties = {};
 
         if(!this.props.resizeToContent && this.props.minVCells) {
-            props.overflowX = 'auto';
+            props.overflow = 'overlay';
             props.minHeight = `${CellsConverter.cellsToHeight(this.props.minVCells)}px`;
             props.height = `${CellsConverter.cellsToHeight(this.getVCells())}px`;
         }

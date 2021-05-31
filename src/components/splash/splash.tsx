@@ -113,7 +113,10 @@ export default class SplashPage extends React.Component<any, any, any> {
 
         return (
             <>
-            <div id="splash-container">
+            <div id="splash-container" style={{
+              height: `${CellsConverter.cellsToHeight(vCells)}px`,
+              width: `${CellsConverter.cellsToWidth(hCells)}px`
+            }}>
               <div className="content">
                 {this.centered(headerParts, vCells, hCells)}
               </div>
