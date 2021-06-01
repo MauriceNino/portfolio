@@ -16,10 +16,9 @@
 
         #about-me {
             .avatar {
-                margin-left: calc(var(--text-width) * 2px);
+                margin-left: calc(var(--text-width) * 3px);
+                margin-bottom: calc(var(--text-height) * 1px);
                 float: right;
-                height: 200px;
-                width: 200px;
                 background-image: url('/assets/images/avatar.jpg');
                 background-position: center;
                 background-size: cover;

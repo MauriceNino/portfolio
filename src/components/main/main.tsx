@@ -53,7 +53,10 @@ export default function MainPage(props: any) {
                         <br />
 
                         <div>
-                            <div className="avatar"></div>
+                            <div className="avatar" style={{
+                                height: CellsConverter.cellsToHeight(isFullscreen ? 6 : 10),
+                                width: CellsConverter.cellsToWidth(isFullscreen ? 13 : 22),
+                            }}></div>
                             I am a 22 year old full stack developer currently living in Austria. My passion is creating experiences for users, especially on the web.
                             <br /><br />
                             I've worked on small private projects as well as large long-term international projects. 
