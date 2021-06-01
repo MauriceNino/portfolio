@@ -2,6 +2,7 @@ import React from "react";
 import { CellsConverter } from "../../helpers/cells-converter";
 import Padded from "../padded/padded";
 import './main.scss'
+import Progressbar from "./progressbar/progressbar";
 
 export default function MainPage(props: any) {
     const hCells = props.hCells;
@@ -12,10 +13,10 @@ export default function MainPage(props: any) {
     const usingCells = hCells > maxCells ? maxCells : hCells;
     const marginLeft = hCells - usingCells > 0 ? Math.floor((hCells - usingCells) / 2) : 0;
 
-    const leftCells = Math.floor(usingCells / 3);
-    const rightCells = usingCells - leftCells - 10;
-
     const isFullscreen = usingCells < 100;
+
+    const leftCells = isFullscreen ? usingCells : Math.floor(usingCells / 3);
+    const rightCells = isFullscreen ? usingCells : usingCells - leftCells;
 
     return (
         <div id="main-page" style={{minHeight: CellsConverter.cellsToHeight(vCells)}}>
@@ -23,38 +24,33 @@ export default function MainPage(props: any) {
                     width: CellsConverter.cellsToWidth(usingCells),
                     marginLeft: CellsConverter.cellsToWidth(marginLeft),
                 }}>
-                <div style={{width: CellsConverter.cellsToWidth(isFullscreen ? usingCells : leftCells)}}>
-                    <Padded top={5}>
+                <div style={{width: CellsConverter.cellsToWidth(leftCells)}}>
+                    <Padded top={isFullscreen ? 1 : 5}>
                         <h2>My Skills</h2>
                         <br />
 
-                        <table id="skills-table">
-                            <tbody>
-                                <tr>
-                                    <td>Angular</td>
-                                    <td>[=================&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;][90%]</td>
-                                </tr>
-                                <tr>
-                                    <td>React</td>
-                                    <td>[=================&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;][90%]</td>
-                                </tr>
-                                <tr>
-                                    <td>Java</td>
-                                    <td>[=================&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;][60%]</td>
-                                </tr>
-                                <tr>
-                                    <td>TypeScript</td>
-                                    <td>[=================&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;][75%]</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div>Frontend</div>
+                        <Progressbar hCells={leftCells - 2} title="JavaScript(+TS)" percent={90}/>
+                        <Progressbar hCells={leftCells - 2} title="Angular" percent={80}/>
+                        <Progressbar hCells={leftCells - 2} title="HTML & CSS/SCSS" percent={70}/>
+                        <Progressbar hCells={leftCells - 2} title="React" percent={20}/>
+                        <br/>
+
+                        <div>Backend</div>
+                        <Progressbar hCells={leftCells - 2} title="Java" percent={75}/>
+                        <Progressbar hCells={leftCells - 2} title="Node JS" percent={60}/>
+                        <br/>
+
+                        <div>Databases</div>
+                        <Progressbar hCells={leftCells - 2} title="Oracle" percent={50}/>
+                        <Progressbar hCells={leftCells - 2} title="PostgreSQL" percent={45}/>
+                        <Progressbar hCells={leftCells - 2} title="MongoDB" percent={25}/>
                     </Padded>
                 </div>
-                <div style={{width: CellsConverter.cellsToWidth(isFullscreen ? usingCells : rightCells)}} id="about-me">
-                    <Padded top={5}>
+                <div style={{width: CellsConverter.cellsToWidth(rightCells)}} id="about-me">
+                    <Padded top={isFullscreen ? 1 : 5} left={isFullscreen ? 1 : 10}>
                         <h2>About Me</h2>
                         <br />
-
 
                         <div>
                             <div className="avatar"></div>
