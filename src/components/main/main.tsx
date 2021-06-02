@@ -1,4 +1,3 @@
-import React from "react";
 import { CellsConverter } from "../../helpers/cells-converter";
 import Padded from "../padded/padded";
 import './main.scss'

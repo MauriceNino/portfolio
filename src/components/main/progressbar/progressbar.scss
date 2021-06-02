@@ -1,13 +1,29 @@
 .progress-item {
     white-space: nowrap;
+    position: relative;
 
-    .green {
-        color: lightgreen;
-    }
-    .yellow {
-        color: burlywood;
-    }
-    .red {
-        color: salmon;
+    .progress-item-colored {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: var(--background-color);
+
+        width: 0;
+        overflow: hidden;
+        transition: width 1s;
+
+        &.loaded {
+            width: 100%;
+        }
+
+        .green {
+            color: lightgreen;
+        }
+        .yellow {
+            color: burlywood;
+        }
+        .red {
+            color: salmon;
+        }
     }
 }

@@ -22,6 +22,8 @@
                 background-image: url('/assets/images/avatar.jpg');
                 background-position: center;
                 background-size: cover;
+
+                transition: width .3s, height .3s;
             }
         }
     }
