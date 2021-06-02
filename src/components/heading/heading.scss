@@ -1,10 +1,23 @@
 #heading-container {
-    display: flex;
-    justify-content: space-between;
+    position: relative;
     height: calc(var(--text-height) * 2px);
 
     > h1 {
+        position: absolute;
+        top: 0;
+        right: 0;
         color: lightgreen;
+        
+        opacity: 0;
+        transform: scaleX(0);
+        transform-origin: right;
+
+        transition: transform .3s, opacity .3s;
+
+        &.show {
+            opacity: 1;
+            transform: scaleX(1);
+        }
     }
     > div {
         display: flex;

@@ -8,10 +8,10 @@ export default function Heading(props: {hCells: number}) {
             <div>
                 <Socials/>
             </div>
-            {props.hCells > 57 && <h1>
+            <h1 className={props.hCells > 57 ? 'show' : ''}>
                 █▀▄▀█ ▄▀█ █░█ ▀█ ░ █ █▀█<br/>
                 █░▀░█ █▀█ █▄█ █▄ ▄ █ █▄█
-            </h1>}
+            </h1>
         </div>
     )
 } 
