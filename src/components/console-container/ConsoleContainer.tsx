@@ -6,8 +6,8 @@ export default function ConsoleContainer (props: any) {
     const consoleHeight = `${Math.ceil(props.vCells * 21 + 1)}px`;
 
     const dimensions = (
-        <div style={{position: 'absolute', top: '0', right: '19.2px'}}>
-            {props.vCells} / {props.hCells}
+        <div style={{position: 'absolute', bottom: '0', right: '19.2px'}}>
+            {props.vCells}H / {props.hCells}W
         </div>
     );
 
