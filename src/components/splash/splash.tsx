@@ -107,7 +107,7 @@ export default class SplashPage extends React.Component<any, any, any> {
         const headerParts = [
           <h1>Servus, I'm <span style={{color: '#ff80ff'}}>Maurice el-Banna</span></h1>,
           <h1>
-            I'm a Full-Stack-Developer {hCells < 44 && <br/>}from <span style={{color: '#ed4e50'}}>Au</span><span>str</span><span style={{color: '#ed4e50'}}>ia</span>
+            I'm a full stack developer {hCells < 44 && <br/>}from <span style={{color: '#ed4e50'}}>Au</span><span>str</span><span style={{color: '#ed4e50'}}>ia</span>
           </h1>,
           <br/>,
           <div className="button" onClick={this.onClick}>

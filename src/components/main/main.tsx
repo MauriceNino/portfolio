@@ -56,7 +56,7 @@ export default function MainPage(props: any) {
                                 height: CellsConverter.cellsToHeight(isFullscreen ? 6 : 10),
                                 width: CellsConverter.cellsToWidth(isFullscreen ? 13 : 22),
                             }}></div>
-                            I am a 22 year old full stack developer currently living in Austria. My passion is creating experiences for users, especially on the web.
+                            I'm a 22 year old full stack developer currently living in Austria. My passion is creating experiences for users, especially on the web.
                             <br /><br />
                             I've worked on small private projects as well as large long-term international projects. 
                             Despite having only 3 years of professional experience, I've been programming for over 10 years now.
