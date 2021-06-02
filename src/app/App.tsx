@@ -11,10 +11,7 @@ class App extends React.Component<any, any, any> {
   constructor(props: any) {
     super(props);
 
-    this.state = { 
-      horizontalCellCount: window.innerHeight,
-      verticalCellCount: window.innerWidth
-    };
+    this.state = this.getCurrentState();
     this.handleResize = this.handleResize.bind(this);
   }
 
@@ -26,26 +23,31 @@ class App extends React.Component<any, any, any> {
     window.removeEventListener("resize", this.handleResize);
   }
 
-  handleResize() {
+  getCurrentState() {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    const horizontalCellCount = Math.floor(width / 9.6);
-    const verticalCellCount = Math.floor(height / 21);
+    return {
+      horizontalCellCount: Math.floor(width / 9.6),
+      verticalCellCount: Math.floor(height / 21)
+    } 
+  }
+
+  handleResize() {
+    const state = this.getCurrentState();
 
 
-    if(this.state.horizontalCellCount !== horizontalCellCount
-      || this.state.verticalCellCount !== verticalCellCount) {
-      this.setState({
-        horizontalCellCount: horizontalCellCount,
-        verticalCellCount: verticalCellCount
-      });
+    if(this.state.horizontalCellCount !== state.horizontalCellCount
+      || this.state.verticalCellCount !== state.verticalCellCount) {
+      this.setState(state);
     }
   }
 
   render() {
     const horizontalCellCount = this.state.horizontalCellCount;
     const verticalCellCount = this.state.verticalCellCount;
+
+    console.log(horizontalCellCount, verticalCellCount)
 
     const disableSideLines = horizontalCellCount < 50;
 
