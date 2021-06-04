@@ -36,6 +36,10 @@
             float: left;
         }
 
+        &.fs :nth-child(even) .logo {
+            float: right;
+        }
+
         .logo {
             float: right;
 

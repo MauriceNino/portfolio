@@ -53,7 +53,7 @@ export default function MainPage(props: any) {
                     <h2>Some of my projects</h2>
                     <br/>
 
-                    <div id="projects-flex">
+                    <div id="projects-flex" className={isFullscreen ? 'fs' : ''}>
                         <div>
                             <h3>Portfolio</h3>
                             <div className="logo mauz">
