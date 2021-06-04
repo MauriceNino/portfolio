@@ -15,8 +15,16 @@
         z-index: 1;
         top: 0;
         left: 0;
-        opacity: .1;
         user-select: none;
+
+        .map {
+            opacity: .1;
+        }
+
+        .dom-dot {
+            opacity: .2;
+            position: absolute;
+        }
     }
 
     .button {

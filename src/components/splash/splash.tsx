@@ -12,40 +12,95 @@ function onClick() {
   });
 }
 
-const possibleChars = '+*~#\'-$%&/()=?!°^';
+const POSSIBLE_CHARS = '+*~#\'-$%&/()=?!°^';
+const SPACE = '\u00A0';
 
 function getRandomString(length: number): string[] {
   return new Array(length)
           .fill(0)
-          .map(() => Math.random() < 0.7 ? '\u00A0' : possibleChars[Math.round(Math.random() * (possibleChars.length - 1))]);
+          .map(() => Math.random() < 0.7 ? SPACE : POSSIBLE_CHARS[Math.round(Math.random() * (POSSIBLE_CHARS.length - 1))]);
 }
 
 function getCharMap(vCells: number, hCells: number): string[][] {
-  console.log(hCells)
   return new Array(vCells).fill(0).map(() => getRandomString(hCells));
 }
 
+function getDesiredDotCountBySize(vCells: number, hCells: number) {
+  return vCells * hCells / 10;
+}
+
 function getRandomDots(amount: number, vCells: number, hCells: number): Dot[] {
-  return new Array(amount).fill(0).map(() => ({
-    x: Math.round(Math.random() * hCells),
-    y: Math.round(Math.random() * vCells)
-  }));
+  const dots: Dot[] = [];
+
+  for(let i = 0; i < amount; i++) {
+    let newDot: Dot;
+    do {
+      newDot = {
+        x: Math.round(Math.random() * (hCells - 1)),
+        y: Math.round(Math.random() * (vCells - 1))
+      };
+    } while(dots.some(dot => dot.x === newDot.x && dot.y === newDot.y)); // eslint-disable-line no-loop-func
+
+    dots.push(newDot);
+  }
+
+  return dots;
 }
 
 function getDefaultState(vCells: number, hCells: number): State {
   return {
     map: getCharMap(vCells, hCells),
-    dots: getRandomDots(Math.round(Math.random() * 4 + 2), vCells, hCells)
+    dots: getRandomDots(getDesiredDotCountBySize(vCells, hCells), vCells, hCells)
   };
 }
 
-function mapToElements(state: State): JSX.Element[] {
-  console.log(state)
-  return state.map.map((line, i) => {
-    return <div key={i+''}>{
-      line.join('')
-    }</div>
-  });
+function getBackgroundDots({map, dots}: State): JSX.Element[] {
+  let domDots: JSX.Element[] = [];
+
+  for(let i = 0; i < dots.length; i++) {
+    const dot = dots[i];
+
+    if(map[dot.y][dot.x] !== SPACE) {
+      const domDot = <span key={`${dot.x}-${dot.y}`} className="dom-dot" style={{
+        left: CellsConverter.cellsToWidth(dot.x),
+        top: CellsConverter.cellsToHeight(dot.y),
+      }}>
+        {map[dot.y][dot.x]}
+      </span>;
+      domDots.push(domDot);
+    }
+  }
+
+  return domDots;
+}
+
+function getBackgroundMap({map}: State): JSX.Element[] {
+  return map.map((line, i) => <div key={i}>{line.join('')}</div>);
+}
+
+function extendBoard(state: State, hCells: number, vCells: number): State {
+  let map = [...state.map];
+  
+  if(vCells > map.length) {
+    map.push(...getCharMap(vCells - map.length, hCells));
+  } else if(vCells < map.length) {
+    map = map.slice(0, vCells);
+  }
+
+
+  for(let i = 0; i < map.length; i++) {
+    const line = map[i];
+
+    if(hCells > line.length) {
+      map[i].push(...getRandomString(hCells - line.length));
+    } else if(hCells < line.length) {
+      map[i] = line.slice(0, hCells);
+    }
+  }
+
+  const dots = state.dots.filter(dot => dot.x < hCells && dot.y < vCells);
+
+  return {map, dots};
 }
 
 export default function Splash(props: any) {
@@ -54,22 +109,23 @@ export default function Splash(props: any) {
 
   const [state, setState] = React.useState<State>(getDefaultState(vCells, hCells));
 
+
   if(state.map.length !== vCells || state.map[0]?.length !== hCells) {
-    setState(getDefaultState(vCells, hCells));
+    setState(extendBoard(state, hCells, vCells));
   }
 
   useEffect(() => {
-    // const interval = setInterval(() => {
-    //   setState({
-    //     map: state.map,
-    //     dots: []
-    //   });
-    // }, 2000);
+    const interval = setInterval(() => {
+      setState({
+        map: state.map,
+        dots: getRandomDots(getDesiredDotCountBySize(vCells, hCells), vCells, hCells)
+      });
+    }, 1000);
 
-    // return () => {
-    //   clearInterval(interval);
-    // }
-  }, []);
+    return () => {
+      clearInterval(interval);
+    }
+  });
 
   const headerParts = [
     <h1>Servus, I'm <span style={{color: '#ff80ff'}}>Maurice el-Banna</span></h1>,
@@ -95,7 +151,8 @@ export default function Splash(props: any) {
         </div>
 
         <div className="background">
-          {mapToElements(state)}
+          {getBackgroundDots(state)}
+          <div className="map">{getBackgroundMap(state)}</div>
         </div>
       </div>
       </>
