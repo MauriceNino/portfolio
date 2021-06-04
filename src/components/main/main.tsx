@@ -1,7 +1,12 @@
 import { CellsConverter } from "../../helpers/cells-converter";
 import Padded from "../padded/padded";
 import './main.scss'
-import Progressbar from "./progressbar/progressbar";
+import AboutMe from "./parts/about-me";
+import Skills from "./parts/skills";
+import GamerPals from "./projects/gamerpals";
+import Mauz from "./projects/mauz";
+import More from "./projects/more";
+import QHelp from "./projects/qhelp";
 
 export default function MainPage(props: any) {
     const hCells = props.hCells;
@@ -17,6 +22,11 @@ export default function MainPage(props: any) {
     const leftCells = isFullscreen ? usingCells : Math.floor(usingCells / 3);
     const rightCells = isFullscreen ? usingCells : usingCells - leftCells;
 
+    const qhelpLogo = QHelp.split('\n').map(q => <>{q.replaceAll(' ', '\u00A0')}<br/></>);
+    const mauzLogo = Mauz.split('\n').map(q => <>{q.replaceAll(' ', '\u00A0')}<br/></>);
+    const gamerpalsLogo = GamerPals.split('\n').map(q => <>{q.replaceAll(' ', '\u00A0')}<br/></>);
+    const moreLogo = More.split('\n').map(q => <>{q.replaceAll(' ', '\u00A0')}<br/></>);
+               
     return (
         <div id="main-page" style={{minHeight: CellsConverter.cellsToHeight(vCells)}}>
             <div className={`flex-container ${isFullscreen ? 'fs' : ''}`} style={{
@@ -25,44 +35,12 @@ export default function MainPage(props: any) {
                 }}>
                 <div style={{width: CellsConverter.cellsToWidth(leftCells)}}>
                     <Padded top={isFullscreen ? 1 : 5}>
-                        <h2>My Skills</h2>
-                        <br />
-
-                        <div>Frontend</div>
-                        <Progressbar hCells={leftCells - 2} title="JavaScript(+TS)" percent={90}/>
-                        <Progressbar hCells={leftCells - 2} title="Angular" percent={80}/>
-                        <Progressbar hCells={leftCells - 2} title="HTML & CSS/SCSS" percent={70}/>
-                        <Progressbar hCells={leftCells - 2} title="React" percent={20}/>
-                        <br/>
-
-                        <div>Backend</div>
-                        <Progressbar hCells={leftCells - 2} title="Java" percent={75}/>
-                        <Progressbar hCells={leftCells - 2} title="Node JS" percent={60}/>
-                        <br/>
-
-                        <div>Databases</div>
-                        <Progressbar hCells={leftCells - 2} title="Oracle" percent={50}/>
-                        <Progressbar hCells={leftCells - 2} title="PostgreSQL" percent={45}/>
-                        <Progressbar hCells={leftCells - 2} title="MongoDB" percent={25}/>
+                        <Skills hCells={leftCells - 2} />
                     </Padded>
                 </div>
                 <div style={{width: CellsConverter.cellsToWidth(rightCells)}} id="about-me">
                     <Padded top={isFullscreen ? 1 : 5} left={isFullscreen ? 1 : 10}>
-                        <h2>About Me</h2>
-                        <br />
-
-                        <div>
-                            <div className="avatar" style={{
-                                height: CellsConverter.cellsToHeight(isFullscreen ? 6 : 10),
-                                width: CellsConverter.cellsToWidth(isFullscreen ? 13 : 22),
-                            }}></div>
-                            I'm a 22 year old full stack developer currently living in Austria. My passion is creating experiences for users, especially on the web.
-                            <br /><br />
-                            I've worked on small private projects as well as large long-term international projects. 
-                            Despite having only 3 years of professional experience, I've been programming for over 10 years now.
-                            <br /><br />
-                            If you would like to have me on a project, feel free to contact me on <a href="https://www.linkedin.com/in/maurice-elbanna/" target="_blank" rel="noreferrer">LinkedIn</a>.
-                        </div>
+                        <AboutMe isFullscreen />
                     </Padded>
                 </div>
             </div>
@@ -71,8 +49,83 @@ export default function MainPage(props: any) {
                     width: CellsConverter.cellsToWidth(usingCells),
                     marginLeft: CellsConverter.cellsToWidth(marginLeft),
                 }}>
-                <Padded>
+                <Padded top={isFullscreen ? 1 : 5}>
                     <h2>Some of my projects</h2>
+                    <br/>
+
+                    <div id="projects-flex">
+                        <div>
+                            <h3>Portfolio</h3>
+                            <div className="logo mauz">
+                                <Padded bottom={3} left={3}>{mauzLogo}</Padded>
+                            </div>
+                            <Padded left={0} right={0} bottom={3}>
+                                The website you are looking at right now was written by me to learn React 
+                                and is the first one written by me in the framework (sorry for the bugs).  
+                                The idea for it came to me when I saw the project <a href="https://k9scli.io/" target="_blank" rel="noreferrer">"k9s"</a>
+                                and was impressed by the beautiful console application. I tried to create 
+                                a more or less convincing CLI feeling while using the modern features of a 
+                                browser for animations.
+
+                                <br/><br/>
+
+                                If you are interested in the code, look here: <a href="https://github.com/MauriceNino/portfolio" target="_blank" rel="noreferrer">github.com</a>
+                            </Padded>
+                            
+                        </div>
+                        <div>
+                            <h3>Q-Help</h3>
+                            <div className="logo qhelp">
+                                <Padded bottom={3} right={3}>{qhelpLogo}</Padded>
+                            </div>
+                            <Padded left={0} right={0} bottom={3}>
+                                At the start of the Corona crisis, myself and 2 colleagues thought that we
+                                would like to help the people in need somehow. The problem was that people
+                                who were in quarantine had no way to meet their daily needs, such as shopping, 
+                                or walking the dog. Q-Help helps people by bringing them together based on 
+                                geographical proximity. The project is based on Ionic/Angular and Firebase 
+                                (Storage, Firestore, Functions, Authentication, ...).
+
+                                <br/><br/>
+
+                                You can view the project live here: <a href="https://qhelp.app/" target="_blank" rel="noreferrer">qhelp.app</a>
+                            </Padded>
+                        </div>
+                        <div>
+                            <h3>GamerPals</h3>
+                            <div className="logo gamerpals">
+                                <Padded bottom={3} left={3}>{gamerpalsLogo}</Padded>
+                            </div>
+                            <Padded left={0} right={0} bottom={3}>
+                                As avid gamers, myself and a classmate teamed up to create the ultimate 
+                                group finding platform. The goal was to bring groups together based on relevant 
+                                criteria - be it guilds or even matchmaking groups. The relevant technologies 
+                                are Angular/Electron on the frontend and a backend consisting of a C# REST 
+                                service and a MongoDB database, where I worked mostly on the frontend.
+
+                                <br/><br/>
+
+                                You can view a demo of the project here: <a href="http://gamerpals-website.herokuapp.com/home" target="_blank" rel="noreferrer">gamerpals-website.herokuapp.com</a><br/>
+                                If you are interested in the frontend code, look here: <a href="https://github.com/MauriceNino/gamerpals-webclient" target="_blank" rel="noreferrer">github.com</a>
+                            </Padded>
+                        </div>
+                        <div>
+                            <h3>More</h3>
+                            <div className="logo more">
+                                <Padded bottom={3} right={3}>{moreLogo}</Padded>
+                            </div>
+                            <Padded left={0} right={0} bottom={3}>
+                                If you want to learn more about me, or if you want to check out some more of 
+                                my projects, I encourage you to visit the following links:
+
+                                <br/><br/>
+
+                                - <a href="https://github.com/MauriceNino" target="_blank" rel="noreferrer">GitHub</a><br/>
+                                - <a href="https://www.linkedin.com/in/maurice-elbanna/" target="_blank" rel="noreferrer">LinkedIn</a><br/>
+                                - <a href="https://stackoverflow.com/users/9150652/mauricenino" target="_blank" rel="noreferrer">StackOverflow</a>
+                            </Padded>
+                        </div>
+                    </div>
                 </Padded>
             </div>
         </div>

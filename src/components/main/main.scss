@@ -27,4 +27,33 @@
             }
         }
     }
+
+    #projects-flex {
+        display: flex;
+        flex-direction: column;
+
+        :nth-child(even) .logo {
+            float: left;
+        }
+
+        .logo {
+            float: right;
+
+            &.mauz {
+                color: lightgreen;
+            }
+
+            &.qhelp {
+                color: salmon;
+            }
+
+            &.gamerpals {
+                color: cornflowerblue;
+            }
+
+            &.more {
+                color: burlywood;
+            }
+        }
+    }
 }
