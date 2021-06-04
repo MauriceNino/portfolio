@@ -47,8 +47,6 @@ class App extends React.Component<any, any, any> {
     const horizontalCellCount = this.state.horizontalCellCount;
     const verticalCellCount = this.state.verticalCellCount;
 
-    console.log(horizontalCellCount, verticalCellCount)
-
     const disableSideLines = horizontalCellCount < 50;
 
     return (
