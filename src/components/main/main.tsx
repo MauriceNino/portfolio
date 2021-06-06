@@ -1,6 +1,6 @@
 import { CellsConverter } from "../../helpers/cells-converter";
 import Padded from "../padded/padded";
-import './main.scss'
+import styles from './main.module.scss'
 import AboutMe from "./parts/about-me";
 import Projects from "./parts/projects";
 import Skills from "./parts/skills";
@@ -20,8 +20,8 @@ export default function MainPage(props: any) {
     const rightCells = isFullscreen ? usingCells : usingCells - leftCells;
                
     return (
-        <div id="main-page" style={{minHeight: CellsConverter.cellsToHeight(vCells)}}>
-            <div className={`flex-container ${isFullscreen ? 'fs' : ''}`} style={{
+        <div id="mainPage" className={styles.mainPage} style={{minHeight: CellsConverter.cellsToHeight(vCells)}}>
+            <div className={`${styles.flexContainer} ${isFullscreen ? styles.fs : ''}`} style={{
                     width: CellsConverter.cellsToWidth(usingCells),
                     marginLeft: CellsConverter.cellsToWidth(marginLeft),
                 }}>
@@ -30,7 +30,7 @@ export default function MainPage(props: any) {
                         <Skills hCells={leftCells - 2} />
                     </Padded>
                 </div>
-                <div style={{width: CellsConverter.cellsToWidth(rightCells)}} id="about-me">
+                <div style={{width: CellsConverter.cellsToWidth(rightCells)}}>
                     <Padded top={isFullscreen ? 1 : 5} left={isFullscreen ? 1 : 10}>
                         <AboutMe isFullscreen={isFullscreen} />
                     </Padded>

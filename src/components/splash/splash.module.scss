@@ -1,4 +1,4 @@
-#splash-container {
+#splashContainer {
     position: relative;
 
     .content {
@@ -23,7 +23,7 @@
         .dots {
             position: absolute;
 
-            .dom-dot {
+            .domDot {
                 opacity: .2;
                 position: absolute;
             }
@@ -34,13 +34,13 @@
         cursor: pointer;
         user-select: none;
 
-        .down-arrow {
+        .downArrow {
             display: inline-block;
             transition: color .3s, transform .3s;
         }
 
         &:hover {
-            .down-arrow {
+            .downArrow {
                 transform: rotate(90deg);
             }
         }

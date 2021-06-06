@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { CellsConverter } from "../../helpers/cells-converter";
 import { TextHelper } from "../../helpers/text-helper";
-import './splash.scss';
+import styles from './splash.module.scss';
 
 type Dot = {x: number, y: number};
 type State = {map: string[][], dots: Dot[]};
 
 function onClick() {
-  document.getElementById('main-page')?.scrollIntoView({
+  console.log('hi')
+  document.getElementById('mainPage')?.scrollIntoView({
     behavior: 'smooth'
   });
 }
@@ -61,7 +62,7 @@ function getBackgroundDots({map, dots}: State): JSX.Element[] {
     const dot = dots[i];
 
     if(map[dot.y][dot.x] !== SPACE) {
-      const domDot = <span key={`${dot.x}-${dot.y}`} className="dom-dot" style={{
+      const domDot = <span key={`${dot.x}-${dot.y}`} className={styles.domDot} style={{
         left: CellsConverter.cellsToWidth(dot.x),
         top: CellsConverter.cellsToHeight(dot.y),
       }}>
@@ -134,26 +135,26 @@ export default function Splash(props: any) {
       I'm a full stack developer {hCells < 44 && <br/>}from <span style={{color: '#ed4e50'}}>Au</span><span>str</span><span style={{color: '#ed4e50'}}>ia</span>
     </h1>,
     <br/>,
-    <div className="button" onClick={onClick}>
+    <div className={styles.button} onClick={onClick}>
       +------------+<br/>
-      | <div className="down-arrow">&gt;</div> About Me |<br/>
+      | <div className={styles.downArrow}>&gt;</div> About Me |<br/>
       +------------+
     </div>
   ];
 
   return (
       <>
-      <div id="splash-container" style={{
+      <div id={styles.splashContainer} style={{
         height: `${CellsConverter.cellsToHeight(vCells)}px`,
         width: `${CellsConverter.cellsToWidth(hCells)}px`
       }}>
-        <div className="content">
+        <div className={styles.content}>
           {TextHelper.centered(headerParts, vCells, hCells)}
         </div>
 
-        <div className="background">
-          <div className="dots">{getBackgroundDots(state)}</div>
-          <div className="map">{getBackgroundMap(state)}</div>
+        <div className={styles.background}>
+          <div className={styles.dots}>{getBackgroundDots(state)}</div>
+          <div className={styles.map}>{getBackgroundMap(state)}</div>
         </div>
       </div>
       </>

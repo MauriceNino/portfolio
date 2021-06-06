@@ -1,21 +1,13 @@
 # build environment
-FROM node:lts-alpine as build
+FROM node:16-alpine
 
 WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
 
 COPY . ./
 
 RUN npm ci \
-    && npm i -g react-scripts@3.4.1 \
     && npm run build
 
-# production environment
-FROM nginx:stable-alpine
+EXPOSE 3000
 
-COPY --from=build /app/build /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "start"]

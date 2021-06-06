@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { CellsConverter } from "../../../helpers/cells-converter";
 import ScrollHelper from "../../../helpers/scroll-helper";
 import ViewportHelper from "../../../helpers/viewport-helper";
+import styles from './about-me.module.scss';
 
 
 export default function AboutMe(props: any) {
@@ -11,7 +12,7 @@ export default function AboutMe(props: any) {
     const thisRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const scrollContainer = document.querySelector('.content-flex > .content') as HTMLElement;
+        const scrollContainer = document.querySelector('#scrollable-content') as HTMLElement;
 
         const checkSize = () => {
             if (ViewportHelper.isVisibleInParent(thisRef)) {
@@ -32,7 +33,7 @@ export default function AboutMe(props: any) {
         <br />
 
         <div ref={thisRef} className={`fadeable ${isVisible ? '' : 'fade-out'}`}>
-            <div className="avatar" style={{
+            <div className={styles.avatar} style={{
                 height: CellsConverter.cellsToHeight(isFullscreen ? 6 : 10),
                 width: CellsConverter.cellsToWidth(isFullscreen ? 13 : 22),
             }}></div>

@@ -20,7 +20,7 @@ steps:
   - docker container stop portfolio || true
   - docker container rm portfolio || true
   - docker container run -itd
-      -p 127.0.0.1:8080:80
+      -p 127.0.0.1:8080:3000
       --restart unless-stopped
       --name portfolio
       portfolio

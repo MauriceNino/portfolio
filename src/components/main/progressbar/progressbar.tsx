@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import ScrollHelper from '../../../helpers/scroll-helper';
 import ViewportHelper from '../../../helpers/viewport-helper';
-import './progressbar.scss';
+import styles from './progressbar.module.scss';
 
 export default function Progressbar(props: any) {
     const { hCells, title, percent } = props;
@@ -10,7 +10,7 @@ export default function Progressbar(props: any) {
     const thisRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const scrollContainer = document.querySelector('.content-flex > .content') as HTMLElement;
+        const scrollContainer = document.querySelector('#scrollable-content') as HTMLElement;
 
         const checkSize = () => {
             if (ViewportHelper.isVisibleInParent(thisRef)) {
@@ -33,9 +33,9 @@ export default function Progressbar(props: any) {
     const fakeProgressText = getFakeProgressText(usingCells, title, percent);
 
     return (
-        <div className="progress-item" ref={thisRef}>
-            <div className="progress-item-uncolored" dangerouslySetInnerHTML={{ __html: fakeProgressText }}></div>
-            <div className={`progress-item-colored ${isVisible === false ? '' : 'loaded'}`} dangerouslySetInnerHTML={{ __html: progressText }}></div>
+        <div className={styles.progressItem} ref={thisRef}>
+            <div dangerouslySetInnerHTML={{ __html: fakeProgressText }}></div>
+            <div className={`${styles.progressItemColored} ${isVisible === false ? '' : styles.loaded}`} dangerouslySetInnerHTML={{ __html: progressText }}></div>
         </div>
     );
 }
@@ -59,7 +59,7 @@ function getProgressText(usingCells: number, title: string, percent: number) {
     progressText = `${title} ${progressText.substring(title.length + 1, progressText.length - percent.toString().length - 1)}${percent}%`;
 
     // Apply color to the relevant parts in the progressbar and add bounds
-    progressText = `[<span class="${colorClass}">${htmlWhitespace(progressText.substring(0, filledCells))}</span>`
+    progressText = `[<span class="${styles[colorClass]}">${htmlWhitespace(progressText.substring(0, filledCells))}</span>`
         + `${htmlWhitespace(progressText.substring(filledCells))}]`;
 
     return progressText;

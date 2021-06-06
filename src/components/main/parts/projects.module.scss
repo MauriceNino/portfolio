@@ -1,0 +1,22 @@
+#projectsFlex {
+    display: flex;
+    flex-direction: column;
+
+    .logo {
+        &.mauz {
+            color: lightgreen;
+        }
+
+        &.qhelp {
+            color: salmon;
+        }
+
+        &.gamerpals {
+            color: cornflowerblue;
+        }
+
+        &.more {
+            color: burlywood;
+        }
+    }
+}

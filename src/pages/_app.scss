@@ -50,3 +50,39 @@ html, body, #root {
   background-color: #888;
   border-radius: 2px;
 }
+
+#copyright {
+    float: right;
+    opacity: .3;
+}
+
+#scrollable-content {
+  height: 100%;
+  width: 100%;
+  overflow: overlay;
+  position: relative;
+}
+
+.movable {
+    opacity: 1;
+    transition: transform .5s, opacity .5s;
+
+    &.move-left {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    &.move-right {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.fadeable {
+    opacity: 1;
+    transition: opacity 1s;
+
+    &.fade-out {
+        opacity: 0;
+    }
+}

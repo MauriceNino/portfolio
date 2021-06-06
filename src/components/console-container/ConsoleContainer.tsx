@@ -1,4 +1,4 @@
-import './ConsoleContainer.scss';
+import styles from './ConsoleContainer.module.scss';
 
 export default function ConsoleContainer (props: any) {
 
@@ -12,7 +12,7 @@ export default function ConsoleContainer (props: any) {
     );
 
     return (
-        <div className="t-console-container" style={{width: consoleWidth, height: consoleHeight}}>
+        <div className={styles.tConsoleContainer} style={{width: consoleWidth, height: consoleHeight}}>
             {props.showDimensions && dimensions}
             {props.children}
         </div>

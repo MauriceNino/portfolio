@@ -6,6 +6,7 @@ import GamerPals from "../projects/gamerpals";
 import Mauz from "../projects/mauz";
 import More from "../projects/more";
 import QHelp from "../projects/qhelp";
+import styles from './projects.module.scss';
 
 function getAsDiv(el: string) {
     return el.split('\n')
@@ -23,7 +24,7 @@ function SingleProject(props: any) {
     const thisRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const scrollContainer = document.querySelector('.content-flex > .content') as HTMLElement;
+        const scrollContainer = document.querySelector('#scrollable-content') as HTMLElement;
 
         const checkSize = () => {
             if (ViewportHelper.isVisibleInParent(thisRef)) {
@@ -42,7 +43,7 @@ function SingleProject(props: any) {
     return (
         <div className={`movable ${isVisible ? '' : isLogoLeft ? 'move-left' : 'move-right'}`} ref={thisRef}>
             <h3>{title}</h3>
-            <div className={`logo ${logo.class}`} style={{float: isFullscreen ? 'right' : isLogoLeft ? 'left' : 'right'}}>
+            <div className={`${styles.logo} ${styles[logo.class]}`} style={{float: isFullscreen ? 'right' : isLogoLeft ? 'left' : 'right'}}>
                 <Padded 
                     bottom={3} 
                     left={isFullscreen ? 1 : isLogoLeft ? 1 : 3} 
@@ -71,7 +72,7 @@ export default function Projects(props: any) {
         <h2>Some of my projects</h2>
         <br/>
 
-        <div id="projects-flex" className={isFullscreen ? 'fs' : ''}>
+        <div id={styles.projectsFlex}>
             <SingleProject title="Portfolio" logo={{class: 'mauz', img: mauzLogo, logoLeft: false}} isFullscreen={isFullscreen}>
                 The website you are looking at right now was written by me to learn React 
                 and is the first one written by me in the framework (sorry for the bugs).  

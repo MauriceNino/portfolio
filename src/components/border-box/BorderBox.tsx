@@ -1,25 +1,18 @@
 import React, { CSSProperties } from "react";
 import { CellsConverter } from "../../helpers/cells-converter";
-import './BorderBox.scss';
+import style from './BorderBox.module.scss';
 
 export default class BorderBox extends React.Component<any, any, any>{
-    cRef: React.RefObject<any>;
-
     constructor(props: any){
       super(props)
-      this.cRef = React.createRef()
     }
 
     getVCells() {
         let vCells = this.props.vCells;
 
-        const resizeToContent = this.props.resizeToContent;
         const minVCells = this.props.minVCells;
 
-        if(resizeToContent && this.cRef?.current?.offsetHeight) {
-            const fittedVCells = CellsConverter.heightToCells(this.cRef?.current?.offsetHeight);
-            vCells = vCells > fittedVCells ? vCells : fittedVCells;
-        } else if (minVCells) {
+        if (minVCells) {
             vCells = vCells > minVCells ? vCells : minVCells;
         }
 
@@ -30,7 +23,6 @@ export default class BorderBox extends React.Component<any, any, any>{
         let props: CSSProperties = {};
 
         if(!this.props.resizeToContent && this.props.minVCells) {
-            props.overflow = 'overlay';
             props.minHeight = `${CellsConverter.cellsToHeight(this.props.minVCells)}px`;
             props.height = `${CellsConverter.cellsToHeight(this.getVCells())}px`;
         }
@@ -48,15 +40,15 @@ export default class BorderBox extends React.Component<any, any, any>{
         const borderHorizontalLine = '+' + '-'.repeat(hCells - 2) + '+';
 
         return (
-        <div className="t-border-box">        
+        <div className={style.tBorderBox}>
             <div>{borderHorizontalLine}</div>          
 
-            <div className="content-flex">
-                {disableSideLines || <div className="border">{borderVerticalLine}</div>}
+            <div className={style.contentFlex}>
+                {disableSideLines || <div className={style.border}>{borderVerticalLine}</div>}
 
-                <div style={this.getContentStyle()} className="content"><div ref={this.cRef}>{this.props.children}</div></div>
+                <div style={this.getContentStyle()} className={style.content}>{this.props.children}</div>
 
-                {disableSideLines || <div className="border">{borderVerticalLine}</div>}
+                {disableSideLines || <div className={style.border}>{borderVerticalLine}</div>}
             </div>
             
             <div>{borderHorizontalLine}</div>

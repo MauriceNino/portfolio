@@ -1,12 +1,12 @@
 
-.t-border-box {
+.tBorderBox {
     > div:first-of-type, 
     > div:last-of-type {
         color: cyan;
         user-select: none;
     }
 
-    .content-flex {
+    .contentFlex {
         display: flex;
         flex-direction: row;
         width: 100%;
