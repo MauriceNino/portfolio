@@ -51,16 +51,20 @@ class App extends React.Component<any, any, any> {
 
     return (
       <>
-      <ConsoleContainer vCells={verticalCellCount} hCells={horizontalCellCount} showDimensions={true}>
+      <ConsoleContainer vCells={verticalCellCount} hCells={horizontalCellCount} showDimensions={false}>
         <Padded bottom={0}>
           <Heading hCells={horizontalCellCount}/>
         </Padded>
 
-        <Padded left={disableSideLines ? 0 : 1} right={disableSideLines ? 0 : 1}>
+        <Padded left={disableSideLines ? 0 : 1} right={disableSideLines ? 0 : 1} bottom={0}>
           <BorderBox vCells={verticalCellCount - 7} hCells={horizontalCellCount - (disableSideLines ? 0 : 2)} minVCells={6} disableSideLines={disableSideLines}>
             <SplashPage vCells={verticalCellCount - 7 > 6 ? verticalCellCount - 7 : 6} hCells={horizontalCellCount - (disableSideLines ? 0 : 4)}/>
             <MainPage vCells={verticalCellCount - 7 > 6 ? verticalCellCount - 7 : 6} hCells={horizontalCellCount - (disableSideLines ? 0 : 4)}/>
           </BorderBox>
+        </Padded>
+
+        <Padded top={0} bottom={0}>
+          <div id="copyright">©2021 - Maurice el-Banna</div>
         </Padded>
       </ConsoleContainer>
       </>
