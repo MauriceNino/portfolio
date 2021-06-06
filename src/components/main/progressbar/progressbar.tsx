@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import ScrollHelper from '../../../helpers/scroll-helper';
 import './progressbar.scss';
-
-const htmlWhitespace = (str: string) => str.replaceAll(' ', '&nbsp;');
 
 export default function Progressbar(props: any) {
     const { hCells, title, percent } = props;
@@ -10,6 +9,8 @@ export default function Progressbar(props: any) {
     const thisRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        const scrollContainer = document.querySelector('.content-flex > .content') as HTMLElement;
+
         const checkSize = () => {
             const bounding = thisRef.current?.getBoundingClientRect();
 
@@ -18,18 +19,18 @@ export default function Progressbar(props: any) {
                 && bounding.left >= 0 
                 && bounding.right <= window.innerWidth 
                 && bounding.bottom <= window.innerHeight - 100) {
+
                 setIsVisible(true);
-                scrollableDiv?.removeEventListener('scroll', checkSize);
+            } else {
+                setIsVisible(false);
             }
         }
 
-        const scrollableDiv = document.querySelector('.content-flex > .content');
-        scrollableDiv?.addEventListener('scroll', checkSize, {passive: true});
-
+        ScrollHelper.addListener(scrollContainer, checkSize);
         checkSize();
 
         return () => {
-            scrollableDiv?.removeEventListener('scroll', checkSize);
+            ScrollHelper.removeListener(scrollContainer, checkSize);
         }
     }, []);
 
@@ -45,6 +46,8 @@ export default function Progressbar(props: any) {
         </div>
     );
 }
+
+const htmlWhitespace = (str: string) => str.replaceAll(' ', '\u00A0');
 
 function getFakeProgressText(usingCells: number, title: string, percent: number) {
     const filledCells = usingCells - title.length - percent.toString().length - 2;
