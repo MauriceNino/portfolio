@@ -74,8 +74,9 @@ function getBackgroundDots({map, dots}: State): JSX.Element[] {
   return domDots;
 }
 
-function getBackgroundMap({map}: State): JSX.Element[] {
-  return map.map((line, i) => <div key={i}>{line.join('')}</div>);
+function getBackgroundMap({map}: State): JSX.Element {
+  return map.map((line) => line.join(''))
+          .reduce((acc, e) => <>{acc}{acc.props.children ? <br/> : ''}{e}</>, <></>);
 }
 
 function extendBoard(state: State, hCells: number, vCells: number): State {
@@ -151,7 +152,7 @@ export default function Splash(props: any) {
         </div>
 
         <div className="background">
-          {getBackgroundDots(state)}
+          <div className="dots">{getBackgroundDots(state)}</div>
           <div className="map">{getBackgroundMap(state)}</div>
         </div>
       </div>

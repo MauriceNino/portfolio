@@ -34,23 +34,37 @@ export default function Progressbar(props: any) {
     }, []);
 
     const usingCells = hCells - 2;
-    const filledCells = Math.round(usingCells / 100 * percent);
 
-    const colorClass = percent > 74 ? 'green' : percent > 49 ? 'yellow' : 'red';
+    const progressText = getProgressText(usingCells, title, percent);
+    const fakeProgressText = getFakeProgressText(usingCells, title, percent);
 
-
-    let progressText = '|'.repeat(filledCells) + ' '.repeat(usingCells - filledCells);
-
-    progressText = `${title} ${progressText.substring(title.length + 1, progressText.length - percent.toString().length - 1)}${percent}%`;
-
-    progressText = `[<span class="${colorClass}">${htmlWhitespace(progressText.substring(0, filledCells))}</span>`
-        + `${htmlWhitespace(progressText.substring(filledCells))}]`;
-
-    const fakeProgressText = `[${title} ${'&nbsp;'.repeat(usingCells - title.length - percent.toString().length - 2)}${percent}%]`;
     return (
         <div className="progress-item" ref={thisRef}>
             <div className="progress-item-uncolored" dangerouslySetInnerHTML={{ __html: fakeProgressText }}></div>
             <div className={`progress-item-colored ${isVisible === false ? '' : 'loaded'}`} dangerouslySetInnerHTML={{ __html: progressText }}></div>
         </div>
     );
+}
+
+function getFakeProgressText(usingCells: number, title: string, percent: number) {
+    const filledCells = usingCells - title.length - percent.toString().length - 2;
+
+    return `[${title} ${'&nbsp;'.repeat(filledCells < 0 ? 0 : filledCells)}${percent}%]`;
+}
+
+function getProgressText(usingCells: number, title: string, percent: number) {
+    const colorClass = percent > 74 ? 'green' : percent > 49 ? 'yellow' : 'red';
+    const filledCells = Math.round(usingCells / 100 * percent);
+
+    // Get the progressbar without the text
+    let progressText = '|'.repeat(filledCells) + ' '.repeat(usingCells - filledCells);
+
+    // Replace parts of progressbar with the text
+    progressText = `${title} ${progressText.substring(title.length + 1, progressText.length - percent.toString().length - 1)}${percent}%`;
+
+    // Apply color to the relevant parts in the progressbar and add bounds
+    progressText = `[<span class="${colorClass}">${htmlWhitespace(progressText.substring(0, filledCells))}</span>`
+        + `${htmlWhitespace(progressText.substring(filledCells))}]`;
+
+    return progressText;
 }

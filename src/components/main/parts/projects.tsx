@@ -5,13 +5,19 @@ import Mauz from "../projects/mauz";
 import More from "../projects/more";
 import QHelp from "../projects/qhelp";
 
+function getAsDiv(el: string) {
+    return el.split('\n')
+            .map(e => e.replaceAll(' ', '\u00A0'))
+            .reduce((acc, e) => <>{acc}{acc.props.children ? <br/> : ''}{e}</>, <></>);
+} 
+
 export default function Projects(props: any) {
     const isFullscreen = props.isFullscreen;
 
-    const qhelpLogo = QHelp.split('\n').map(q => <>{q.replaceAll(' ', '\u00A0')}<br/></>);
-    const mauzLogo = Mauz.split('\n').map(q => <>{q.replaceAll(' ', '\u00A0')}<br/></>);
-    const gamerpalsLogo = GamerPals.split('\n').map(q => <>{q.replaceAll(' ', '\u00A0')}<br/></>);
-    const moreLogo = More.split('\n').map(q => <>{q.replaceAll(' ', '\u00A0')}<br/></>);
+    const qhelpLogo = getAsDiv(QHelp);
+    const mauzLogo = getAsDiv(Mauz);
+    const gamerpalsLogo = getAsDiv(GamerPals);
+    const moreLogo = getAsDiv(More);
 
     return (<>
         

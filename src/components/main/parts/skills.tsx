@@ -1,10 +1,7 @@
-import React from "react";
-import Padded from "../../padded/padded";
 import Progressbar from "../progressbar/progressbar";
 
 export default function Skills(props: any) {
     const hCells = props.hCells;
-    const isFullscreen = props.isFullscreen;
 
     return (
         <>

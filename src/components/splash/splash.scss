@@ -13,17 +13,20 @@
     .background {
         position: absolute;
         z-index: 1;
-        top: 0;
-        left: 0;
         user-select: none;
 
         .map {
+            position: absolute;
             opacity: .1;
         }
 
-        .dom-dot {
-            opacity: .2;
+        .dots {
             position: absolute;
+
+            .dom-dot {
+                opacity: .2;
+                position: absolute;
+            }
         }
     }
 
