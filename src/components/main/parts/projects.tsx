@@ -28,13 +28,13 @@ export default function Projects(props: any) {
             <div>
                 <h3>Portfolio</h3>
                 <div className="logo mauz">
-                    <Padded bottom={3} left={3}>{mauzLogo}</Padded>
+                    <Padded bottom={3} left={isFullscreen ? 1 : 3}>{mauzLogo}</Padded>
                 </div>
                 <Padded left={0} right={0} bottom={3}>
                     The website you are looking at right now was written by me to learn React 
                     and is the first one written by me in the framework (sorry for the bugs).  
-                    The idea for it came to me when I saw the project <a href="https://k9scli.io/" target="_blank" rel="noreferrer">"k9s"</a>
-                    and was impressed by the beautiful console application. I tried to create 
+                    The idea for it came to me when I saw the project <a href="https://k9scli.io/" target="_blank" rel="noreferrer">"k9s"</a> and
+                    was impressed by the beautiful console application. I tried to create 
                     a more or less convincing CLI feeling while using the modern features of a 
                     browser for animations.
 
@@ -47,7 +47,7 @@ export default function Projects(props: any) {
             <div>
                 <h3>Q-Help</h3>
                 <div className="logo qhelp">
-                    <Padded bottom={3} right={3}>{qhelpLogo}</Padded>
+                    <Padded bottom={3} right={isFullscreen ? 1 : 3}>{qhelpLogo}</Padded>
                 </div>
                 <Padded left={0} right={0} bottom={3}>
                     At the start of the Corona crisis, myself and 2 colleagues thought that we
@@ -65,9 +65,9 @@ export default function Projects(props: any) {
             <div>
                 <h3>GamerPals</h3>
                 <div className="logo gamerpals">
-                    <Padded bottom={3} left={3}>{gamerpalsLogo}</Padded>
+                    <Padded bottom={3} left={isFullscreen ? 1 : 3}>{gamerpalsLogo}</Padded>
                 </div>
-                <Padded left={0} right={0} bottom={3}>
+                <Padded left={0} right={isFullscreen ? 1 : 0} bottom={3}>
                     As avid gamers, myself and a classmate teamed up to create the ultimate 
                     group finding platform. The goal was to bring groups together based on relevant 
                     criteria - be it guilds or even matchmaking groups. The relevant technologies 
@@ -83,7 +83,7 @@ export default function Projects(props: any) {
             <div>
                 <h3>More</h3>
                 <div className="logo more">
-                    <Padded bottom={3} right={3}>{moreLogo}</Padded>
+                    <Padded bottom={3} right={isFullscreen ? 1 : 3}>{moreLogo}</Padded>
                 </div>
                 <Padded left={0} right={0} bottom={3}>
                     If you want to learn more about me, or if you want to check out some more of 
