@@ -1,12 +1,12 @@
 type MapValue = {throttled: boolean, functions: Function[], listener?: Function};
 
-class _ScrollHelper {
+export default class ScrollHelper {
     private static readonly THROTTLE_MS = 250; 
-    public map = new Map<HTMLElement, MapValue>();
+    public static map = new Map<HTMLElement, MapValue>();
 
-    private initEventListener(container: HTMLElement, options?: boolean | AddEventListenerOptions): void {
+    private static initEventListener(container: HTMLElement, options?: boolean | AddEventListenerOptions): void {
         const eventListener = () => {
-            const value = this.map.get(container) as MapValue;
+            const value = ScrollHelper.map.get(container) as MapValue;
 
             if (value.throttled === true) return;
             value.throttled = true;
@@ -17,35 +17,35 @@ class _ScrollHelper {
                 });
 
                 value.throttled = false;
-            }, _ScrollHelper.THROTTLE_MS);
+            }, ScrollHelper.THROTTLE_MS);
         };
 
-        (this.map.get(container) as MapValue).listener = eventListener;
+        (ScrollHelper.map.get(container) as MapValue).listener = eventListener;
         container.addEventListener('scroll', eventListener, options);
     }
 
-    private removeEventListener(container: HTMLElement): void {
-        container.removeEventListener('scroll', (this.map.get(container) as MapValue).listener as EventListener);
+    private static removeEventListener(container: HTMLElement): void {
+        container.removeEventListener('scroll', (ScrollHelper.map.get(container) as MapValue).listener as EventListener);
     }
 
-    public addListener(container: HTMLElement, listener: Function, options?: boolean | AddEventListenerOptions): void {
-        if(this.map.has(container)){
-            const arr = this.map.get(container)?.functions;
+    public static addListener(container: HTMLElement, listener: Function, options?: boolean | AddEventListenerOptions): void {
+        if(ScrollHelper.map.has(container)){
+            const arr = ScrollHelper.map.get(container)?.functions;
 
             if(!arr?.includes(listener)) {
                 arr?.push(listener);
             }
         } else {
-            this.map.set(container, {
+            ScrollHelper.map.set(container, {
                 throttled: false,
                 functions: [listener]
             });
-            this.initEventListener(container, options);
+            ScrollHelper.initEventListener(container, options);
         }
     }
 
-    public removeListener(container: HTMLElement, listener: Function): void {
-        const value = this.map.get(container);
+    public static removeListener(container: HTMLElement, listener: Function): void {
+        const value = ScrollHelper.map.get(container);
 
         if(!value) return;
 
@@ -54,12 +54,8 @@ class _ScrollHelper {
         }
 
         if(value.functions.length === 0) {
-            this.removeEventListener(container);
-            this.map.delete(container);
+            ScrollHelper.removeEventListener(container);
+            ScrollHelper.map.delete(container);
         }
     }
 }
-
-const ScrollHelper = new _ScrollHelper()
-
-export default ScrollHelper;

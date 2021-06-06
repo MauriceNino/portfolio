@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import ScrollHelper from '../../../helpers/scroll-helper';
+import ViewportHelper from '../../../helpers/viewport-helper';
 import './progressbar.scss';
 
 export default function Progressbar(props: any) {
@@ -12,17 +13,9 @@ export default function Progressbar(props: any) {
         const scrollContainer = document.querySelector('.content-flex > .content') as HTMLElement;
 
         const checkSize = () => {
-            const bounding = thisRef.current?.getBoundingClientRect();
-
-            if (bounding !== undefined 
-                && bounding.top >= 200
-                && bounding.left >= 0 
-                && bounding.right <= window.innerWidth 
-                && bounding.bottom <= window.innerHeight - 100) {
-
+            if (ViewportHelper.isVisibleInParent(thisRef)) {
                 setIsVisible(true);
-            } else {
-                setIsVisible(false);
+                ScrollHelper.removeListener(scrollContainer, checkSize);
             }
         }
 
