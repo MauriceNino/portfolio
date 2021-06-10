@@ -49,10 +49,12 @@ function getRandomDots(amount: number, vCells: number, hCells: number): Dot[] {
 }
 
 function getDefaultState(vCells: number, hCells: number): State {
-  return {
+  const state = {
     map: getCharMap(vCells, hCells),
     dots: getRandomDots(getDesiredDotCountBySize(vCells, hCells), vCells, hCells)
   };
+  console.log(state);
+  return state;
 }
 
 function getBackgroundDots({map, dots}: State): JSX.Element[] {
@@ -109,12 +111,10 @@ export default function Splash(props: any) {
   const vCells = props.vCells;
   const hCells = props.hCells;
 
-  const [state, setState] = React.useState<State>(getDefaultState(vCells, hCells));
-
-
-  if(state.map.length !== vCells || state.map[0]?.length !== hCells) {
-    setState(extendBoard(state, hCells, vCells));
-  }
+  const [state, setState] = React.useState<State>({
+    map: [],
+    dots: []
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -123,6 +123,10 @@ export default function Splash(props: any) {
         dots: getRandomDots(getDesiredDotCountBySize(vCells, hCells), vCells, hCells)
       });
     }, 1000);
+
+    if(state.map.length !== vCells || state.map[0]?.length !== hCells) {
+      setState(extendBoard(state, hCells, vCells));
+    }
 
     return () => {
       clearInterval(interval);
