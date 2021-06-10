@@ -1,6 +1,7 @@
 #projectsFlex {
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 
     .logo {
         &.mauz {
