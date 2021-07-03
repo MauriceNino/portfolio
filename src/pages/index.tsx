@@ -53,7 +53,7 @@ export default function App() {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta
         name="description"
-        content="Web site created using create-react-app"
+        content="Servus, I'm Maurice el-Banna, I'm a full stack developer from Austria"
       />
 
       <link rel="preconnect" href="https://fonts.gstatic.com" />
