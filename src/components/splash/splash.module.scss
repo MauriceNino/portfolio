@@ -16,6 +16,7 @@
         user-select: none;
 
         .map {
+            white-space: nowrap;
             position: absolute;
             opacity: .1;
         }
