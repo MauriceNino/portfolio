@@ -2,22 +2,6 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.12.0",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "@types/jest": "^26.0.23",
-    "@types/node": "^12.20.13",
-    "@types/react": "^17.0.6",
-    "@types/react-dom": "^17.0.5",
-    "next": "^10.2.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "sass": "^1.34.1",
-    "typescript": "^4.2.4",
-    "web-vitals": "^1.1.2"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -27,6 +11,25 @@
     "build-docker": "docker image build -t portfolio .",
     "prettier:check": "npx prettier --check --ignore-path .gitignore .",
     "prettier:format": "npx prettier --write --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "next": "^10.2.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.1.2"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "prettier": "^2.3.2",
+    "sass": "^1.34.1",
+    "typescript": "^4.2.4",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^12.20.13",
+    "@types/react": "^17.0.6",
+    "@types/react-dom": "^17.0.5"
   },
   "eslintConfig": {
     "extends": [
@@ -45,8 +48,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "prettier": "^2.3.2"
   }
 }
