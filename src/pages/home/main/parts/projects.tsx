@@ -81,7 +81,11 @@ function SingleProject(props: any) {
   );
 }
 
-export default function Projects(props: any) {
+type ProjectProps = {
+  isFullscreen: boolean;
+};
+
+const Projects = (props: ProjectProps) => {
   const isFullscreen = props.isFullscreen;
 
   const qhelpLogo = getAsDiv(QHelp);
@@ -206,4 +210,6 @@ export default function Projects(props: any) {
       </div>
     </>
   );
-}
+};
+
+export default Projects;

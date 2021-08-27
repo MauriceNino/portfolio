@@ -1,6 +1,9 @@
 import Progressbar from '../../../../components/progressbar/progressbar';
+import { HCellProps } from '../../../../types/default-props';
 
-export default function Skills(props: any) {
+type SkillsProps = HCellProps;
+
+const Skills = (props: SkillsProps) => {
   const hCells = props.hCells;
 
   return (
@@ -11,7 +14,7 @@ export default function Skills(props: any) {
       <div>Frontend</div>
       <Progressbar hCells={hCells} title="JavaScript(+TS)" percent={90} />
       <Progressbar hCells={hCells} title="Angular" percent={80} />
-      <Progressbar hCells={hCells} title="HTML & CSS/SCSS" percent={70} />
+      <Progressbar hCells={hCells} title="HTML &amp; CSS/SCSS" percent={70} />
       <Progressbar hCells={hCells} title="React" percent={20} />
       <br />
 
@@ -26,4 +29,6 @@ export default function Skills(props: any) {
       <Progressbar hCells={hCells} title="MongoDB" percent={25} />
     </>
   );
-}
+};
+
+export default Skills;

@@ -12,7 +12,7 @@ function getCurrentState() {
   };
 }
 
-export default function App() {
+const App = () => {
   const [state, setState] = useState({
     horizontalCellCount: 10,
     verticalCellCount: 10
@@ -65,4 +65,6 @@ export default function App() {
       />
     </>
   );
-}
+};
+
+export default App;

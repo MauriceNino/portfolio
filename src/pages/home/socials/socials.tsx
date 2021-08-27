@@ -1,6 +1,6 @@
 import styles from './socials.module.scss';
 
-export default function Socials() {
+const Socials = () => {
   return (
     <>
       <div className={styles.socialLink}>
@@ -25,4 +25,6 @@ export default function Socials() {
       </div>
     </>
   );
-}
+};
+
+export default Socials;

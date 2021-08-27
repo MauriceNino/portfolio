@@ -1,6 +1,12 @@
+import { CellProps } from '../../types/default-props';
 import styles from './ConsoleContainer.module.scss';
 
-export default function ConsoleContainer(props: any) {
+type ConsoleContainerProps = {
+  showDimensions: boolean;
+} & CellProps &
+  JSX.ElementChildrenAttribute;
+
+const ConsoleContainer = (props: ConsoleContainerProps) => {
   const consoleWidth = `${Math.ceil(props.hCells * 9.6 + 1)}px`;
   const consoleHeight = `${Math.ceil(props.vCells * 21 + 1)}px`;
 
@@ -19,4 +25,6 @@ export default function ConsoleContainer(props: any) {
       {props.children}
     </div>
   );
-}
+};
+
+export default ConsoleContainer;

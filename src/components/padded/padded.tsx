@@ -1,6 +1,13 @@
 import { CellsConverter } from '../../helpers/cells-converter';
 
-export default function Padded(props: any) {
+type PaddedProps = {
+  top?: number;
+  right?: number;
+  bottom?: number;
+  left?: number;
+} & JSX.ElementChildrenAttribute;
+
+const Padded = (props: PaddedProps) => {
   const top = props.top;
   const bottom = props.bottom;
   const left = props.left;
@@ -26,4 +33,6 @@ export default function Padded(props: any) {
       {props.children}
     </div>
   );
-}
+};
+
+export default Padded;

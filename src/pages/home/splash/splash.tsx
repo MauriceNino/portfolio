@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { CellsConverter } from '../../../helpers/cells-converter';
 import { TextHelper } from '../../../helpers/text-helper';
+import { CellProps } from '../../../types/default-props';
 import styles from './splash.module.scss';
 
 type Dot = { x: number; y: number };
@@ -52,19 +53,6 @@ function getRandomDots(amount: number, vCells: number, hCells: number): Dot[] {
   }
 
   return dots;
-}
-
-function getDefaultState(vCells: number, hCells: number): State {
-  const state = {
-    map: getCharMap(vCells, hCells),
-    dots: getRandomDots(
-      getDesiredDotCountBySize(vCells, hCells),
-      vCells,
-      hCells
-    )
-  };
-  console.log(state);
-  return state;
 }
 
 function getBackgroundDots({ map, dots }: State): JSX.Element[] {
@@ -132,7 +120,9 @@ function extendBoard(state: State, hCells: number, vCells: number): State {
   return { map, dots };
 }
 
-export default function Splash(props: any) {
+type SplashProps = CellProps;
+
+const Splash = (props: SplashProps) => {
   const vCells = props.vCells;
   const hCells = props.hCells;
 
@@ -160,7 +150,7 @@ export default function Splash(props: any) {
     return () => {
       clearInterval(interval);
     };
-  });
+  }, [state, vCells, hCells]);
 
   const headerParts = [
     <h1>
@@ -200,4 +190,6 @@ export default function Splash(props: any) {
       </div>
     </>
   );
-}
+};
+
+export default Splash;

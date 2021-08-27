@@ -1,8 +1,11 @@
 import React from 'react';
+import { HCellProps } from '../../../types/default-props';
 import Socials from '../socials/socials';
 import styles from './heading.module.scss';
 
-export default function Heading(props: { hCells: number }) {
+type HeadingProps = HCellProps;
+
+const Heading = (props: HeadingProps) => {
   return (
     <div id={styles.headingContainer}>
       <div>
@@ -15,4 +18,6 @@ export default function Heading(props: { hCells: number }) {
       </h1>
     </div>
   );
-}
+};
+
+export default Heading;

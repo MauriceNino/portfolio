@@ -1,9 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import ScrollHelper from '../../helpers/scroll-helper';
 import ViewportHelper from '../../helpers/viewport-helper';
+import { HCellProps } from '../../types/default-props';
 import styles from './progressbar.module.scss';
 
-export default function Progressbar(props: any) {
+type ProgressbarProps = {
+  title: string;
+  percent: number;
+} & HCellProps;
+
+const Progressbar = (props: ProgressbarProps) => {
   const { hCells, title, percent } = props;
 
   const [isVisible, setIsVisible] = useState(false);
@@ -45,7 +51,7 @@ export default function Progressbar(props: any) {
       ></div>
     </div>
   );
-}
+};
 
 const htmlWhitespace = (str: string) => str.replaceAll(' ', '\u00A0');
 
@@ -76,10 +82,11 @@ function getProgressText(usingCells: number, title: string, percent: number) {
   )}${percent}%`;
 
   // Apply color to the relevant parts in the progressbar and add bounds
-  progressText =
-    `[<span class="${styles[colorClass]}">${htmlWhitespace(
-      progressText.substring(0, filledCells)
-    )}</span>` + `${htmlWhitespace(progressText.substring(filledCells))}]`;
+  progressText = `[<span class="${styles[colorClass]}">${htmlWhitespace(
+    progressText.substring(0, filledCells)
+  )}</span>${htmlWhitespace(progressText.substring(filledCells))}]`;
 
   return progressText;
 }
+
+export default Progressbar;

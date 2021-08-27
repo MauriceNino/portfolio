@@ -1,11 +1,14 @@
 import Padded from '../../../components/padded/padded';
 import { CellsConverter } from '../../../helpers/cells-converter';
+import { CellProps } from '../../../types/default-props';
 import styles from './main.module.scss';
 import AboutMe from './parts/about-me';
 import Projects from './parts/projects';
 import Skills from './parts/skills';
 
-export default function MainPage(props: any) {
+type MainPageProps = CellProps;
+
+const MainPage = (props: MainPageProps) => {
   const hCells = props.hCells;
   const vCells = props.vCells;
 
@@ -57,4 +60,6 @@ export default function MainPage(props: any) {
       </div>
     </div>
   );
-}
+};
+
+export default MainPage;

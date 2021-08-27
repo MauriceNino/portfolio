@@ -1,66 +1,68 @@
 import React, { CSSProperties } from 'react';
 import { CellsConverter } from '../../helpers/cells-converter';
+import { CellProps } from '../../types/default-props';
 import style from './BorderBox.module.scss';
 
-export default class BorderBox extends React.Component<any, any, any> {
-  constructor(props: any) {
-    super(props);
-  }
+type BorderBoxProps = {
+  minVCells: number;
+  resizeToContent?: boolean;
+  disableSideLines: boolean;
+} & CellProps &
+  JSX.ElementChildrenAttribute;
 
-  getVCells() {
-    let vCells = this.props.vCells;
+const BorderBox = (props: BorderBoxProps) => {
+  const getVCells = () => {
+    let vCells = props.vCells;
 
-    const minVCells = this.props.minVCells;
+    const minVCells = props.minVCells;
 
     if (minVCells) {
       vCells = vCells > minVCells ? vCells : minVCells;
     }
 
     return vCells;
-  }
+  };
 
-  getContentStyle(): CSSProperties {
-    let props: CSSProperties = {};
+  const getContentStyle = (): CSSProperties => {
+    let css: CSSProperties = {};
 
-    if (!this.props.resizeToContent && this.props.minVCells) {
-      props.minHeight = `${CellsConverter.cellsToHeight(
-        this.props.minVCells
-      )}px`;
-      props.height = `${CellsConverter.cellsToHeight(this.getVCells())}px`;
+    if (!props.resizeToContent && props.minVCells) {
+      css.minHeight = `${CellsConverter.cellsToHeight(props.minVCells)}px`;
+      css.height = `${CellsConverter.cellsToHeight(getVCells())}px`;
     }
 
-    return props;
-  }
+    return css;
+  };
 
-  render() {
-    const disableSideLines = this.props.disableSideLines;
+  const disableSideLines = props.disableSideLines;
 
-    const vCells = this.getVCells();
-    const hCells = this.props.hCells;
+  const vCells = getVCells();
+  const hCells = props.hCells;
 
-    const borderVerticalLine = '|'.repeat(vCells);
-    const borderHorizontalLine = '+' + '-'.repeat(hCells - 2) + '+';
+  const borderVerticalLine = '|'.repeat(vCells);
+  const borderHorizontalLine = '+' + '-'.repeat(hCells - 2) + '+';
 
-    return (
-      <div className={style.tBorderBox}>
-        <div>{borderHorizontalLine}</div>
+  return (
+    <div className={style.tBorderBox}>
+      <div>{borderHorizontalLine}</div>
 
-        <div className={style.contentFlex}>
-          {disableSideLines || (
-            <div className={style.border}>{borderVerticalLine}</div>
-          )}
+      <div className={style.contentFlex}>
+        {disableSideLines || (
+          <div className={style.border}>{borderVerticalLine}</div>
+        )}
 
-          <div style={this.getContentStyle()} className={style.content}>
-            {this.props.children}
-          </div>
-
-          {disableSideLines || (
-            <div className={style.border}>{borderVerticalLine}</div>
-          )}
+        <div style={getContentStyle()} className={style.content}>
+          {props.children}
         </div>
 
-        <div>{borderHorizontalLine}</div>
+        {disableSideLines || (
+          <div className={style.border}>{borderVerticalLine}</div>
+        )}
       </div>
-    );
-  }
-}
+
+      <div>{borderHorizontalLine}</div>
+    </div>
+  );
+};
+
+export default BorderBox;
