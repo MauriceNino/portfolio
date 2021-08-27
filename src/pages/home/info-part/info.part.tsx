@@ -1,10 +1,10 @@
 import Padded from '../../../components/padded/padded';
 import { CellsConverter } from '../../../helpers/cells-converter';
 import { CellProps } from '../../../types/default-props';
-import styles from './main.module.scss';
-import AboutMe from './parts/about-me';
-import Projects from './parts/projects';
-import Skills from './parts/skills';
+import AboutMe from './about-me/about-me';
+import styles from './info.part.module.scss';
+import Projects from './projects/projects';
+import Skills from './skills/skills';
 
 type MainPageProps = CellProps;
 

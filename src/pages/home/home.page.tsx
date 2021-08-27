@@ -4,8 +4,8 @@ import ConsoleContainer from '../../components/console-container/ConsoleContaine
 import Padded from '../../components/padded/padded';
 import { CellProps } from '../../types/default-props';
 import Heading from './heading/heading';
-import MainPage from './main/main';
-import SplashPage from './splash/splash';
+import MainPage from './info-part/info.part';
+import SplashPage from './splash-part/splash.part';
 
 type HomePageProps = CellProps;
 

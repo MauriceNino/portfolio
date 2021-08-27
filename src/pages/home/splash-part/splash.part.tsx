@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { CellsConverter } from '../../../helpers/cells-converter';
 import { TextHelper } from '../../../helpers/text-helper';
 import { CellProps } from '../../../types/default-props';
-import styles from './splash.module.scss';
+import styles from './splash.part.module.scss';
 
 type Dot = { x: number; y: number };
 type State = { map: string[][]; dots: Dot[] };

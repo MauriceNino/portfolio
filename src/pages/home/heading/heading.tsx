@@ -1,7 +1,7 @@
 import React from 'react';
 import { HCellProps } from '../../../types/default-props';
-import Socials from '../socials/socials';
 import styles from './heading.module.scss';
+import Socials from './socials';
 
 type HeadingProps = HCellProps;
 

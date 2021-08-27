@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import GamerPals from '../../../../assets/projects/gamerpals';
+import Mauz from '../../../../assets/projects/mauz';
+import More from '../../../../assets/projects/more';
+import QHelp from '../../../../assets/projects/qhelp';
 import Padded from '../../../../components/padded/padded';
 import ScrollHelper from '../../../../helpers/scroll-helper';
 import ViewportHelper from '../../../../helpers/viewport-helper';
-import GamerPals from '../projects/gamerpals';
-import Mauz from '../projects/mauz';
-import More from '../projects/more';
-import QHelp from '../projects/qhelp';
 import styles from './projects.module.scss';
 
 function getAsDiv(el: string) {
