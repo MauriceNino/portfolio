@@ -1,11 +1,10 @@
-
 .avatar {
-    margin-left: calc(var(--text-width) * 3px);
-    margin-bottom: calc(var(--text-height) * 1px);
-    float: right;
-    background-image: url('/assets/images/avatar.jpg');
-    background-position: center;
-    background-size: cover;
+  margin-left: calc(var(--text-width) * 3px);
+  margin-bottom: calc(var(--text-height) * 1px);
+  float: right;
+  background-image: url('/assets/images/avatar.jpg');
+  background-position: center;
+  background-size: cover;
 
-    transition: width .3s, height .3s;
+  transition: width 0.3s, height 0.3s;
 }

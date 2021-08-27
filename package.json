@@ -24,7 +24,9 @@
     "start": "next start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build-docker": "docker image build -t portfolio ."
+    "build-docker": "docker image build -t portfolio .",
+    "prettier:check": "npx prettier --check --ignore-path .gitignore .",
+    "prettier:format": "npx prettier --write --ignore-path .gitignore ."
   },
   "eslintConfig": {
     "extends": [
@@ -43,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.3.2"
   }
 }

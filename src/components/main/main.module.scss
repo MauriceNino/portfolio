@@ -1,17 +1,17 @@
 .mainPage {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    .flexContainer {
-        display: flex;
-        flex-wrap: wrap;
+  .flexContainer {
+    display: flex;
+    flex-wrap: wrap;
 
-        &.fs {
-            flex-direction: column-reverse;
-        }
-
-        #skillsTable {
-            white-space: nowrap;
-        }
+    &.fs {
+      flex-direction: column-reverse;
     }
+
+    #skillsTable {
+      white-space: nowrap;
+    }
+  }
 }

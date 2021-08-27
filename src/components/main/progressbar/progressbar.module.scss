@@ -1,29 +1,29 @@
 .progressItem {
-    white-space: nowrap;
-    position: relative;
+  white-space: nowrap;
+  position: relative;
 
-    .progressItemColored {
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: var(--background-color);
+  .progressItemColored {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--background-color);
 
-        width: 0;
-        overflow: hidden;
-        transition: width 1s;
+    width: 0;
+    overflow: hidden;
+    transition: width 1s;
 
-        &.loaded {
-            width: 100%;
-        }
-
-        .green {
-            color: lightgreen;
-        }
-        .yellow {
-            color: burlywood;
-        }
-        .red {
-            color: salmon;
-        }
+    &.loaded {
+      width: 100%;
     }
+
+    .green {
+      color: lightgreen;
+    }
+    .yellow {
+      color: burlywood;
+    }
+    .red {
+      color: salmon;
+    }
+  }
 }

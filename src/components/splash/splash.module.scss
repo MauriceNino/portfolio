@@ -1,49 +1,49 @@
 #splashContainer {
-    position: relative;
+  position: relative;
 
-    .content {
+  .content {
+    position: absolute;
+    z-index: 2;
+
+    > * {
+      width: fit-content;
+      background-color: var(--background-color);
+    }
+  }
+  .background {
+    position: absolute;
+    z-index: 1;
+    user-select: none;
+
+    .map {
+      white-space: nowrap;
+      position: absolute;
+      opacity: 0.1;
+    }
+
+    .dots {
+      position: absolute;
+
+      .domDot {
+        opacity: 0.2;
         position: absolute;
-        z-index: 2;
-
-        > * {
-            width: fit-content;
-            background-color: var(--background-color);
-        }
+      }
     }
-    .background {
-        position: absolute;
-        z-index: 1;
-        user-select: none;
+  }
 
-        .map {
-            white-space: nowrap;
-            position: absolute;
-            opacity: .1;
-        }
+  .button {
+    cursor: pointer;
+    user-select: none;
 
-        .dots {
-            position: absolute;
-
-            .domDot {
-                opacity: .2;
-                position: absolute;
-            }
-        }
+    .downArrow {
+      display: inline-block;
+      transition: color 0.3s, transform 0.3s;
     }
 
-    .button {
-        cursor: pointer;
-        user-select: none;
-
-        .downArrow {
-            display: inline-block;
-            transition: color .3s, transform .3s;
-        }
-
-        &:hover {
-            .downArrow {
-                transform: rotate(90deg);
-            }
-        }
+    &:hover {
+      .downArrow {
+        transform: rotate(90deg);
+      }
     }
+  }
 }
