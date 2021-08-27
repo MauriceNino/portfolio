@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { CellsConverter } from '../../helpers/cells-converter';
-import { TextHelper } from '../../helpers/text-helper';
+import { CellsConverter } from '../../../helpers/cells-converter';
+import { TextHelper } from '../../../helpers/text-helper';
 import styles from './splash.module.scss';
 
 type Dot = { x: number; y: number };

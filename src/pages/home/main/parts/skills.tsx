@@ -1,4 +1,4 @@
-import Progressbar from '../progressbar/progressbar';
+import Progressbar from '../../../../components/progressbar/progressbar';
 
 export default function Skills(props: any) {
   const hCells = props.hCells;

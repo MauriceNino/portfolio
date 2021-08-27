@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
-import ScrollHelper from '../../../helpers/scroll-helper';
-import ViewportHelper from '../../../helpers/viewport-helper';
+import { useEffect, useRef, useState } from 'react';
+import ScrollHelper from '../../helpers/scroll-helper';
+import ViewportHelper from '../../helpers/viewport-helper';
 import styles from './progressbar.module.scss';
 
 export default function Progressbar(props: any) {

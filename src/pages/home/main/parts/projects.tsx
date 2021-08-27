@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
-import ScrollHelper from '../../../helpers/scroll-helper';
-import ViewportHelper from '../../../helpers/viewport-helper';
-import Padded from '../../padded/padded';
+import { useEffect, useRef, useState } from 'react';
+import Padded from '../../../../components/padded/padded';
+import ScrollHelper from '../../../../helpers/scroll-helper';
+import ViewportHelper from '../../../../helpers/viewport-helper';
 import GamerPals from '../projects/gamerpals';
 import Mauz from '../projects/mauz';
 import More from '../projects/more';

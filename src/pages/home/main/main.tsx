@@ -1,5 +1,5 @@
-import { CellsConverter } from '../../helpers/cells-converter';
-import Padded from '../padded/padded';
+import Padded from '../../../components/padded/padded';
+import { CellsConverter } from '../../../helpers/cells-converter';
 import styles from './main.module.scss';
 import AboutMe from './parts/about-me';
 import Projects from './parts/projects';
