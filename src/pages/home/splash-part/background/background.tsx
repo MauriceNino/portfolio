@@ -43,58 +43,6 @@ const getRandomCircle = (vCells: number, hCells: number): Circle => {
   };
 };
 
-const getTestCircles = (): Circle[] => {
-  return [
-    {
-      x: 100,
-      y: 500,
-      radius: 50,
-      name: '1',
-      animInfo: {
-        startTime: Date.now(),
-        start: { x: 100, y: 500 },
-        velocity: { x: 0, y: -100 }
-      }
-    },
-
-    {
-      x: 100,
-      y: 100,
-      radius: 50,
-      name: '2',
-      animInfo: {
-        startTime: Date.now(),
-        start: { x: 100, y: 100 },
-        velocity: { x: 0, y: 100 }
-      }
-    },
-
-    {
-      x: 100,
-      y: 100,
-      radius: 50,
-      name: '3',
-      animInfo: {
-        startTime: Date.now(),
-        start: { x: 100, y: 100 },
-        velocity: { x: 100, y: 0 }
-      }
-    },
-
-    {
-      x: 1000,
-      y: 100,
-      radius: 50,
-      name: '4',
-      animInfo: {
-        startTime: Date.now(),
-        start: { x: 1000, y: 100 },
-        velocity: { x: -100, y: 0 }
-      }
-    }
-  ];
-};
-
 const Background = (props: BackgroundProps) => {
   const { vCells, hCells } = props;
 
@@ -160,7 +108,6 @@ const Background = (props: BackgroundProps) => {
       circle.x - circle.radius <= 0 && animInfo.velocity.x < 0;
 
     if (hitTopBound() || hitBottomBound()) {
-      console.log('HIZ TOP BOTTOM');
       animInfo.velocity.y = -animInfo.velocity.y;
       animInfo.startTime = Date.now();
       animInfo.start = { x: circle.x, y: circle.y };
@@ -191,45 +138,69 @@ const Background = (props: BackgroundProps) => {
     );
   };
 
+  const rotateVelocity = (
+    v: Circle['animInfo']['velocity'],
+    theta: number
+  ): Circle['animInfo']['velocity'] => {
+    return {
+      x: v.x * Math.cos(theta) - v.y * Math.sin(theta),
+      y: v.x * Math.sin(theta) + v.y * Math.cos(theta)
+    };
+  };
+
   const updateCollidingCircles = (
     ctx: CanvasRenderingContext2D,
-    circle: Circle,
-    otherCircle: Circle
+    c1: Circle,
+    c2: Circle
   ) => {
-    const hypotenuse = Math.round(checkDistance(circle, otherCircle));
-    const adjacent = Math.abs(Math.round(otherCircle.x) - Math.round(circle.x));
+    const ca1 = c1.animInfo,
+      ca2 = c2.animInfo;
 
-    const angle = Math.acos(adjacent / hypotenuse) * (180 / Math.PI);
+    const dVel = {
+      x: ca1.velocity.x - ca2.velocity.x,
+      y: ca1.velocity.y - ca2.velocity.y
+    };
+    if (dVel.x * (c2.x - c1.x) + dVel.y * (c2.y - c1.y) >= 0) {
+      // Calculate the masses
+      const m1 = Math.PI * c1.radius ** 2;
+      const m2 = Math.PI * c2.radius ** 2;
 
-    ctx.strokeStyle = 'red';
-    ctx.fillStyle = 'lightblue';
-    ctx.beginPath();
-    ctx.moveTo(circle.x, circle.y);
-    ctx.lineTo(otherCircle.x, otherCircle.y);
-    ctx.stroke();
+      // Calculate the angle between the circles (in radians)
+      const theta = -Math.atan2(c2.y - c1.y, c2.x - c1.x);
 
-    ctx.font = ctx.font.replace(/\d+px/, '16px');
-    ctx.fillText(`${angle}°`, circle.x, circle.y + CellsConverter.CELL_HEIGHT);
-    ctx.fillText(
-      `${hypotenuse}, ${adjacent}`,
-      circle.x,
-      circle.y + 2 * CellsConverter.CELL_HEIGHT
-    );
+      // Calculate the normalized velocities
+      const v1 = rotateVelocity(ca1.velocity, theta);
+      const v2 = rotateVelocity(ca2.velocity, theta);
 
-    // const updateCircle = (c: Circle) => {
-    //   const newDirection = getNewDirection(c.animInfo.direction);
+      // Calculate the final velocities and denormalize them
+      const u1 = rotateVelocity(
+        {
+          x: (v1.x * (m1 - m2)) / (m1 + m2) + (v2.x * 2 * m2) / (m1 + m2),
+          y: v1.y
+        },
+        -theta
+      );
+      const u2 = rotateVelocity(
+        {
+          x: (v2.x * (m2 - m1)) / (m1 + m2) + (v1.x * 2 * m1) / (m1 + m2),
+          y: v2.y
+        },
+        -theta
+      );
 
-    //   console.log(`${c.animInfo.direction} -> ${newDirection}`);
-    //   c.animInfo.startTime = Date.now();
-    //   c.animInfo.startX = c.x;
-    //   c.animInfo.startY = c.y;
-    //   c.animInfo.direction = newDirection;
-    // };
+      // Update the animation info on the circles
+      ca1.velocity.x = u1.x;
+      ca1.velocity.y = u1.y;
+      ca1.start.x = c1.x;
+      ca1.start.y = c1.y;
+      ca1.startTime = Date.now();
 
-    // if (!alreadyMovingAway(circle.animInfo.direction)) {
-    //   updateCircle(circle);
-    //   updateCircle(otherCircle);
-    // }
+      ca2.velocity.x = u2.x;
+      ca2.velocity.y = u2.y;
+      ca2.start.x = c2.x;
+      ca2.start.y = c2.y;
+      ca2.startTime = Date.now();
+    }
   };
 
   const drawFrame = () => {
@@ -266,11 +237,17 @@ const Background = (props: BackgroundProps) => {
   };
 
   useEffect(() => {
-    setCircles(
-      // new Array(50).fill(0).map(() => getRandomCircle(vCells, hCells))
-      getTestCircles()
-    );
-  }, []);
+    if (canvasRef) {
+      const pixelsPerCircle = 100000;
+      const pixels = canvasRef!.width * canvasRef!.height;
+
+      setCircles(
+        new Array(Math.round(pixels / pixelsPerCircle))
+          .fill(0)
+          .map(() => getRandomCircle(vCells, hCells))
+      );
+    }
+  }, [canvasRef]);
 
   useEffect(() => {
     animRequestRef.current = requestAnimationFrame(() => step());
