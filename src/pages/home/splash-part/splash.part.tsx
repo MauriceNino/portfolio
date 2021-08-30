@@ -5,9 +5,6 @@ import { CellProps } from '../../../types/default-props';
 import Background from './background/background';
 import styles from './splash.part.module.scss';
 
-type Dot = { x: number; y: number };
-type State = { map: string[][]; dots: Dot[] };
-
 function onClick() {
   document.getElementById('mainPage')?.scrollIntoView({
     behavior: 'smooth'

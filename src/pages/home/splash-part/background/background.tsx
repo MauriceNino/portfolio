@@ -9,22 +9,27 @@ type Circle = {
   x: number;
   y: number;
   radius: number;
+  name?: string;
 
   animInfo: {
     startTime: number;
-    startX: number;
-    startY: number;
-    speed: number;
-    direction: number; // degrees 0 - 360
+    start: {
+      x: number;
+      y: number;
+    };
+    velocity: {
+      x: number;
+      y: number;
+    };
   };
 };
 
-const getRandomCircle = (vCells: number, hCells: number) => {
+const getRandomCircle = (vCells: number, hCells: number): Circle => {
   const radius = Math.random() * 70 + 50;
   const x = Math.random() * CellsConverter.cellsToWidth(hCells);
   const y = Math.random() * CellsConverter.cellsToHeight(vCells);
-  const direction = Math.floor(Math.random() * 360);
-  const speed = Math.random() * 150 + 50;
+  const velX = Math.random() * 300 - 150;
+  const velY = Math.random() * 300 - 150;
 
   return {
     x,
@@ -32,15 +37,13 @@ const getRandomCircle = (vCells: number, hCells: number) => {
     radius,
     animInfo: {
       startTime: Date.now(),
-      startX: x,
-      startY: y,
-      speed,
-      direction
+      start: { x, y },
+      velocity: { x: velX, y: velY }
     }
   };
 };
 
-const getTestCircles = () => {
+const getTestCircles = (): Circle[] => {
   return [
     {
       x: 100,
@@ -49,10 +52,8 @@ const getTestCircles = () => {
       name: '1',
       animInfo: {
         startTime: Date.now(),
-        startX: 100,
-        startY: 500,
-        speed: 100,
-        direction: 0
+        start: { x: 100, y: 500 },
+        velocity: { x: 0, y: -100 }
       }
     },
 
@@ -63,10 +64,8 @@ const getTestCircles = () => {
       name: '2',
       animInfo: {
         startTime: Date.now(),
-        startX: 100,
-        startY: 100,
-        speed: 100,
-        direction: 180
+        start: { x: 100, y: 100 },
+        velocity: { x: 0, y: 100 }
       }
     },
 
@@ -77,10 +76,8 @@ const getTestCircles = () => {
       name: '3',
       animInfo: {
         startTime: Date.now(),
-        startX: 100,
-        startY: 100,
-        speed: 100,
-        direction: 90
+        start: { x: 100, y: 100 },
+        velocity: { x: 100, y: 0 }
       }
     },
 
@@ -91,10 +88,8 @@ const getTestCircles = () => {
       name: '4',
       animInfo: {
         startTime: Date.now(),
-        startX: 1000,
-        startY: 100,
-        speed: 100,
-        direction: 270
+        start: { x: 1000, y: 100 },
+        velocity: { x: -100, y: 0 }
       }
     }
   ];
@@ -137,9 +132,7 @@ const Background = (props: BackgroundProps) => {
         }
 
       }
-      //@ts-ignore
-      if (circle.name != undefined) {
-        //@ts-ignore
+      if (circle.name !== undefined) {
         ctx.fillText(circle.name, x, y);
       }
     }
@@ -147,45 +140,36 @@ const Background = (props: BackgroundProps) => {
 
   const updateCircle = (frameTime: number, circle: Circle) => {
     const animInfo = circle.animInfo;
-    const direction = animInfo.direction % 360;
 
     const timeDiff = frameTime - animInfo.startTime;
-    const distance = (animInfo.speed * timeDiff) / 1000;
-    const radians = (direction * Math.PI) / 180;
+    const distanceX = (animInfo.velocity.x * timeDiff) / 1000;
+    const distanceY = (animInfo.velocity.y * timeDiff) / 1000;
 
-    circle.x = animInfo.startX + distance * Math.sin(radians);
-    circle.y = animInfo.startY + distance * Math.cos(radians) * -1;
+    circle.x = animInfo.start.x + distanceX;
+    circle.y = animInfo.start.y + distanceY;
 
     // console.log(circle.x, circle.y);
 
-    const hitNorthBound = () =>
-      circle.y - circle.radius <= 0 && (direction <= 90 || direction >= 270);
-    const hitEastBound = () =>
-      circle.x + circle.radius >= canvasRef!.width &&
-      direction >= 0 &&
-      direction <= 180;
-    const hitSouthBound = () =>
-      circle.y + circle.radius >= canvasRef!.height &&
-      direction >= 90 &&
-      direction <= 270;
-    const hitWestBound = () =>
-      circle.x - circle.radius <= 0 && direction >= 180;
+    const hitTopBound = () =>
+      circle.y - circle.radius <= 0 && animInfo.velocity.y < 0;
+    const hitBottomBound = () =>
+      circle.y + circle.radius >= canvasRef!.height && animInfo.velocity.y > 0;
+    const hitRightBound = () =>
+      circle.x + circle.radius >= canvasRef!.width && animInfo.velocity.x > 0;
+    const hitLeftBound = () =>
+      circle.x - circle.radius <= 0 && animInfo.velocity.x < 0;
 
-    if (hitNorthBound() || hitSouthBound()) {
-      animInfo.direction = 180 - direction;
+    if (hitTopBound() || hitBottomBound()) {
+      console.log('HIZ TOP BOTTOM');
+      animInfo.velocity.y = -animInfo.velocity.y;
       animInfo.startTime = Date.now();
-      animInfo.startX = circle.x;
-      animInfo.startY = circle.y;
-      if (animInfo.direction < 0) {
-        animInfo.direction += 360;
-      }
+      animInfo.start = { x: circle.x, y: circle.y };
     }
 
-    if (hitEastBound() || hitWestBound()) {
-      animInfo.direction = 360 - direction;
+    if (hitRightBound() || hitLeftBound()) {
+      animInfo.velocity.x = -animInfo.velocity.x;
       animInfo.startTime = Date.now();
-      animInfo.startX = circle.x;
-      animInfo.startY = circle.y;
+      animInfo.start = { x: circle.x, y: circle.y };
     }
 
     // Helpers
