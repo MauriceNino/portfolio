@@ -35,14 +35,16 @@ const updateCircle = (
   circle.x += distanceX;
   circle.y += distanceY;
 
+  // TODO: Find out why top & right are off by one cell
   const hitTopBound = () =>
-    circle.y - circle.radius <= 0 && animInfo.velocity.y < 0;
+    circle.y - circle.radius - CellsConverter.CELL_HEIGHT <= 0 &&
+    animInfo.velocity.y < 0;
   const hitBottomBound = () =>
     circle.y + circle.radius >= CellsConverter.cellsToHeight(vCells) &&
     animInfo.velocity.y > 0;
   const hitRightBound = () =>
-    circle.x + circle.radius >= CellsConverter.cellsToWidth(hCells) &&
-    animInfo.velocity.x > 0;
+    circle.x + circle.radius + CellsConverter.CELL_WIDTH >=
+      CellsConverter.cellsToWidth(hCells) && animInfo.velocity.x > 0;
   const hitLeftBound = () =>
     circle.x - circle.radius <= 0 && animInfo.velocity.x < 0;
 
