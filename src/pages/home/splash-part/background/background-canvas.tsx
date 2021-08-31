@@ -80,7 +80,7 @@ const BackgroundCanvas = (props: BackgroundCanvasProps) => {
         drawCircle(ctx, circle);
       }
     }
-  }, [canvasRef, circles, recalculateFps]);
+  }, [canvasRef, circles, recalculateFps, hCells, vCells]);
   return (
     <PureCanvas hCells={hCells} vCells={vCells} contextRef={setCanvasRef} />
   );
