@@ -1,6 +1,10 @@
 #splashContainer {
   position: relative;
 
+  #heading {
+    color: var(--tertiary-color);
+  }
+
   .content {
     position: absolute;
     z-index: 2;

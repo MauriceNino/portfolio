@@ -19,7 +19,7 @@ const Splash = (props: SplashProps) => {
 
   const headerParts = [
     <h1>
-      Servus, I'm <span style={{ color: '#ff80ff' }}>Maurice el-Banna</span>
+      Servus, I'm <span id={styles.heading}>Maurice el-Banna</span>
     </h1>,
     <h1>
       I'm a full stack developer {hCells < 44 && <br />}from{' '}

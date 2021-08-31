@@ -1,7 +1,7 @@
 .tBorderBox {
   > div:first-of-type,
   > div:last-of-type {
-    color: cyan;
+    color: var(--secondary-color);
     user-select: none;
   }
 
@@ -13,7 +13,7 @@
     > .border {
       overflow-wrap: break-word;
       width: calc(var(--text-width) * 1px);
-      color: cyan;
+      color: var(--secondary-color);
       user-select: none;
     }
 
