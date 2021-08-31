@@ -10,7 +10,7 @@ const drawCircle = (ctx: CanvasRenderingContext2D, circle: Circle) => {
 
   for (
     let x_offset = 0;
-    x_offset <= (radius * 2) / Math.PI;
+    x_offset <= (radius * 2) / 2.9; // TODO: find out why this magic number works
     x_offset += CellsConverter.CELL_WIDTH
   ) {
     const y_offset = Math.sqrt(circle.radius ** 2 - x_offset ** 2);
