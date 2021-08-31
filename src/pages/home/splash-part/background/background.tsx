@@ -1,5 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import { CellsConverter } from '../../../../helpers/cells-converter';
+import { useSSRCheck } from '../../../../helpers/isSSRHook';
 import { Circle } from '../../../../types/background';
 import { CellProps } from '../../../../types/default-props';
 import BackgroundCanvas from './background-canvas';
@@ -130,78 +138,95 @@ const updateCollidingCircles = (c1: Circle, c2: Circle) => {
   }
 };
 
+const recalculateCircles = (vCells: number, hCells: number): Circle[] => {
+  const pixelsPerCircle = 80000;
+  const pixels =
+    CellsConverter.cellsToHeight(vCells) * CellsConverter.cellsToWidth(hCells);
+
+  console.log(
+    `Starting the animation with ${Math.round(pixels / pixelsPerCircle)} balls`
+  );
+
+  return new Array(Math.round(pixels / pixelsPerCircle))
+    .fill(0)
+    .map(() => getRandomCircle(vCells, hCells));
+};
+
+const updateFrame = (
+  currentTime: MutableRefObject<number | undefined>,
+  animRequestRef: MutableRefObject<number | undefined>,
+  cellsRef: MutableRefObject<CellProps>,
+  setCircles: Dispatch<SetStateAction<Circle[]>>,
+  circles: Circle[]
+): void => {
+  const newTime = Date.now();
+  const frameTime = newTime - currentTime.current!;
+  currentTime.current = newTime;
+
+  for (let i = 0; i < circles.length; i++) {
+    const circle = circles[i];
+
+    updateCircle(
+      cellsRef.current.vCells,
+      cellsRef.current.hCells,
+      frameTime,
+      circle
+    );
+
+    for (let j = i + 1; j < circles.length; j++) {
+      if (
+        checkDistance(circle, circles[j]) <=
+        circle.radius + circles[j].radius
+      ) {
+        updateCollidingCircles(circle, circles[j]);
+      }
+    }
+  }
+
+  setCircles([...circles]);
+  animRequestRef.current = requestAnimationFrame(() =>
+    updateFrame(currentTime, animRequestRef, cellsRef, setCircles, circles)
+  );
+};
+
 type BackgroundProps = CellProps;
 
 const Background = (props: BackgroundProps) => {
   const { vCells, hCells } = props;
   const [circles, setCircles] = useState<Circle[]>([]);
-  const [init, setInit] = useState<boolean>(false);
+  const [updateNotifier, setUpdateNotifier] = useState<{}>({});
+  const isSSR = useSSRCheck();
 
   const animRequestRef = useRef<number>();
-  const currentTime = useRef<number>(Date.now());
+  const currentTime = useRef<number>();
+  const cellsRef = useRef<CellProps>(props);
+
+  // updating reference to container size
+  // used, so that requestAnimationFrame does not have to be cancelled on resize
+  useEffect(() => {
+    cellsRef.current = props;
+  }, [props]);
 
   // Init the circles on the first render
   // TODO: This should be reevaluated when the window is resized
   useEffect(() => {
-    if (init) return;
-
-    const pixelsPerCircle = 80000;
-    const pixels =
-      CellsConverter.cellsToHeight(vCells) *
-      CellsConverter.cellsToWidth(hCells);
-
-    console.log(
-      `Starting the animation with ${Math.round(
-        pixels / pixelsPerCircle
-      )} balls`
-    );
-
-    const circles = new Array(Math.round(pixels / pixelsPerCircle))
-      .fill(0)
-      .map(() => getRandomCircle(vCells, hCells));
-    setCircles(circles);
-
-    if (circles.length > 0) {
-      setInit(true);
+    if (!isSSR) {
+      const circles = recalculateCircles(vCells, hCells);
+      setCircles(circles);
+      setUpdateNotifier({});
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [vCells, hCells]);
-
-  // Update the circles on every frame
-  // TODO: Maybe extract this? Also fix dependencies
-  const updateFrame = useCallback(() => {
-    const newTime = Date.now();
-    const frameTime = newTime - currentTime.current;
-    currentTime.current = newTime;
-
-    for (let i = 0; i < circles.length; i++) {
-      const circle = circles[i];
-
-      updateCircle(vCells, hCells, frameTime, circle);
-
-      for (let j = i + 1; j < circles.length; j++) {
-        if (
-          checkDistance(circle, circles[j]) <=
-          circle.radius + circles[j].radius
-        ) {
-          updateCollidingCircles(circle, circles[j]);
-        }
-      }
-    }
-    setCircles([...circles]);
-    animRequestRef.current = requestAnimationFrame(() => updateFrame());
-  }, [init, vCells, hCells]);
+  }, [isSSR]);
 
   // Restart animation when size changes, or init state changes
   // TODO: Fix dependencies
   useEffect(() => {
-    if (init) {
-      currentTime.current = Date.now();
-      animRequestRef.current = requestAnimationFrame(() => updateFrame());
-    }
+    currentTime.current = Date.now();
+    animRequestRef.current = requestAnimationFrame(() =>
+      updateFrame(currentTime, animRequestRef, cellsRef, setCircles, circles)
+    );
 
     return () => cancelAnimationFrame(animRequestRef.current!);
-  }, [init, vCells, hCells]);
+  }, [updateNotifier]);
 
   // Set currentTime to now, so that the animation starts from the time the page is focused again
   // Otherwise the circles might move off-screen

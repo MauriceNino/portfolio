@@ -1,43 +1,46 @@
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
+import { CellProps } from '../types/default-props';
 import HomePage from './home/home.page';
 
-function getCurrentState() {
+const getCurrentState = (): CellProps => {
   const width = window.innerWidth;
   const height = window.innerHeight;
 
   return {
-    horizontalCellCount: Math.floor(width / 9.6),
-    verticalCellCount: Math.floor(height / 21)
+    hCells: Math.floor(width / 9.6),
+    vCells: Math.floor(height / 21)
   };
-}
+};
 
 const App = () => {
-  // TODO: Get rid of the default state
-  const [state, setState] = useState({
-    horizontalCellCount: 10,
-    verticalCellCount: 10
+  const [state, setState] = useState<CellProps>({
+    hCells: 50,
+    vCells: 20
   });
+
+  useEffect(() => {
+    setState(getCurrentState());
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
       const newState = getCurrentState();
 
       if (
-        state.horizontalCellCount !== newState.horizontalCellCount ||
-        state.verticalCellCount !== newState.verticalCellCount
+        state.hCells !== newState.hCells ||
+        state.vCells !== newState.vCells
       ) {
         setState(newState);
       }
     };
 
     window.addEventListener('resize', handleResize);
-    handleResize();
 
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  });
+  }, [state]);
 
   return (
     <>
@@ -60,10 +63,7 @@ const App = () => {
         <link rel="manifest" href="manifest.json" />
       </Head>
 
-      <HomePage
-        vCells={state.verticalCellCount}
-        hCells={state.horizontalCellCount}
-      />
+      <HomePage vCells={state.vCells} hCells={state.hCells} />
     </>
   );
 };
