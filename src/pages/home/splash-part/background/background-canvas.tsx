@@ -66,7 +66,7 @@ const BackgroundCanvas = (props: BackgroundCanvasProps) => {
     const ctx = canvasRef?.getContext('2d');
 
     if (canvasRef && ctx) {
-      ctx.fillStyle = '#525056';
+      ctx.fillStyle = '#40434D';
       ctx.font = '16px Arial';
       ctx.clearRect(0, 0, canvasRef.width, canvasRef.height);
 
