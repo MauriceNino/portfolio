@@ -10,6 +10,8 @@ steps:
       - npm ci
   - name: build & deploy image
     image: docker:dind
+    when:
+      branch: master
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
