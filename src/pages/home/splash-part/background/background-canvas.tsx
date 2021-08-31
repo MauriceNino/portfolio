@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PureCanvas from '../../../../components/pure-canvas/pure-canvas';
 import { CellsConverter } from '../../../../helpers/cells-converter';
 import { Circle } from '../../../../types/background';
@@ -44,10 +44,23 @@ type BackgroundCanvasProps = {
   circles: Circle[];
 } & CellProps;
 
+const FPS_SMOOTHING = 0.99;
+
 const BackgroundCanvas = (props: BackgroundCanvasProps) => {
   const { hCells, vCells, circles } = props;
 
   const [canvasRef, setCanvasRef] = useState<HTMLCanvasElement | null>(null);
+  const isProd = useRef(process.env.isProd);
+  const currentFps = useRef(60);
+  const lastFrameTime = useRef(Date.now());
+
+  const recalculateFps = useCallback(() => {
+    const currentFrameTime = Date.now();
+    const delta = currentFrameTime - lastFrameTime.current;
+    lastFrameTime.current = currentFrameTime;
+    currentFps.current =
+      currentFps.current * FPS_SMOOTHING + (1000 / delta) * (1 - FPS_SMOOTHING);
+  }, []);
 
   useEffect(() => {
     const ctx = canvasRef?.getContext('2d');
@@ -57,12 +70,17 @@ const BackgroundCanvas = (props: BackgroundCanvasProps) => {
       ctx.font = '16px Arial';
       ctx.clearRect(0, 0, canvasRef.width, canvasRef.height);
 
+      if (!isProd.current) {
+        recalculateFps();
+        ctx.fillText(`FPS: ${Math.round(currentFps.current)}`, 10, 20);
+      }
+
       for (let i = 0; i < circles.length; i++) {
         const circle = circles[i];
         drawCircle(ctx, circle);
       }
     }
-  }, [canvasRef, circles]);
+  }, [canvasRef, circles, recalculateFps]);
   return (
     <PureCanvas hCells={hCells} vCells={vCells} contextRef={setCanvasRef} />
   );
