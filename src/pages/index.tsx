@@ -13,6 +13,7 @@ function getCurrentState() {
 }
 
 const App = () => {
+  // TODO: Get rid of the default state
   const [state, setState] = useState({
     horizontalCellCount: 10,
     verticalCellCount: 10
