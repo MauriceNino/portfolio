@@ -77,9 +77,12 @@ const updateCircle = (
   // }
 };
 
-const checkDistance = (circle: Circle, otherCircle: Circle): number => {
-  return Math.sqrt(
-    (otherCircle.x - circle.x) ** 2 + (otherCircle.y - circle.y) ** 2
+const areColliding = (circle: Circle, otherCircle: Circle): boolean => {
+  return (
+    Math.sqrt(
+      (otherCircle.x - circle.x) ** 2 + (otherCircle.y - circle.y) ** 2
+    ) <=
+    circle.radius + otherCircle.radius
   );
 };
 
@@ -138,18 +141,34 @@ const updateCollidingCircles = (c1: Circle, c2: Circle) => {
   }
 };
 
-const recalculateCircles = (vCells: number, hCells: number): Circle[] => {
+const recalculateCircles = (
+  oldCircles: Circle[],
+  vCells: number,
+  hCells: number
+): Circle[] => {
   const pixelsPerCircle = 80000;
   const pixels =
     CellsConverter.cellsToHeight(vCells) * CellsConverter.cellsToWidth(hCells);
+  const neededCircles = Math.round(pixels / pixelsPerCircle);
 
   console.log(
     `Starting the animation with ${Math.round(pixels / pixelsPerCircle)} balls`
   );
+  const circles: Circle[] = oldCircles;
 
-  return new Array(Math.round(pixels / pixelsPerCircle))
-    .fill(0)
-    .map(() => getRandomCircle(vCells, hCells));
+  while (circles.length < neededCircles) {
+    const circle = getRandomCircle(vCells, hCells);
+
+    if (circles.every(c => !areColliding(circle, c))) {
+      circles.push(circle);
+    }
+  }
+
+  while (circles.length > neededCircles) {
+    circles.pop();
+  }
+
+  return circles;
 };
 
 const updateFrame = (
@@ -174,10 +193,7 @@ const updateFrame = (
     );
 
     for (let j = i + 1; j < circles.length; j++) {
-      if (
-        checkDistance(circle, circles[j]) <=
-        circle.radius + circles[j].radius
-      ) {
+      if (areColliding(circle, circles[j])) {
         updateCollidingCircles(circle, circles[j]);
       }
     }
@@ -208,17 +224,16 @@ const Background = (props: BackgroundProps) => {
   }, [props]);
 
   // Init the circles on the first render
-  // TODO: This should be reevaluated when the window is resized
   useEffect(() => {
     if (!isSSR) {
-      const circles = recalculateCircles(vCells, hCells);
-      setCircles(circles);
+      const newCircles = recalculateCircles(circles, vCells, hCells);
+      setCircles(newCircles);
       setUpdateNotifier({});
     }
-  }, [isSSR]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSSR, vCells, hCells]);
 
   // Restart animation when size changes, or init state changes
-  // TODO: Fix dependencies
   useEffect(() => {
     currentTime.current = Date.now();
     animRequestRef.current = requestAnimationFrame(() =>
@@ -226,6 +241,7 @@ const Background = (props: BackgroundProps) => {
     );
 
     return () => cancelAnimationFrame(animRequestRef.current!);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateNotifier]);
 
   // Set currentTime to now, so that the animation starts from the time the page is focused again
