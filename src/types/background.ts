@@ -1,3 +1,5 @@
+import { Animation, AnimationState } from '../helpers/animations';
+
 export type Circle = {
   x: number;
   y: number;
@@ -10,4 +12,7 @@ export type Circle = {
       y: number;
     };
   };
+
+  scaleAnimation: Animation<{ scale: number }>;
+  scaleAnimationState: AnimationState<{ scale: number }> | null;
 };

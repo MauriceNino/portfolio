@@ -6,18 +6,34 @@ import React, {
   useRef,
   useState
 } from 'react';
+import { animate, Animation } from '../../../../helpers/animations';
 import { CellsConverter } from '../../../../helpers/cells-converter';
 import { useSSRCheck } from '../../../../helpers/isSSRHook';
 import { Circle } from '../../../../types/background';
 import { CellProps } from '../../../../types/default-props';
 import BackgroundCanvas from './background-canvas';
 
+const DEFAULT_POPUP_ANIMATION: Animation<{ scale: number }> = {
+  keyframes: {
+    0: { scale: 0 },
+    80: { scale: 1.4 },
+    100: { scale: 1 }
+  },
+  duration: 320,
+  offset: 0
+};
+
 const getRandomCircle = (vCells: number, hCells: number): Circle => {
   const radius = Math.random() * 70 + 50;
   const x = Math.random() * CellsConverter.cellsToWidth(hCells);
   const y = Math.random() * CellsConverter.cellsToHeight(vCells);
-  const velX = (Math.random() * 300 - 150) / 2;
-  const velY = (Math.random() * 300 - 150) / 2;
+  const velX = Math.random() * 150 - 75;
+  const velY = Math.random() * 150 - 75;
+
+  const customOffsetPopup = {
+    ...DEFAULT_POPUP_ANIMATION,
+    offset: Math.random() * 400
+  };
 
   return {
     x,
@@ -25,7 +41,9 @@ const getRandomCircle = (vCells: number, hCells: number): Circle => {
     radius,
     animInfo: {
       velocity: { x: velX, y: velY }
-    }
+    },
+    scaleAnimation: customOffsetPopup,
+    scaleAnimationState: null
   };
 };
 
@@ -64,17 +82,11 @@ const updateCircle = (
     animInfo.velocity.x = -animInfo.velocity.x;
   }
 
-  // Helpers
-  // if (animInfo.direction < 0) {
-  //   animInfo.direction = 360 + animInfo.direction;
-  // }
-  // if (circle.x < 0 || circle.x > 1500 || circle.y < 0 || circle.y > 500) {
-  //   circle.x = 200;
-  //   circle.y = 200;
-  //   animInfo.startX = 200;
-  //   animInfo.startY = 200;
-  //   animInfo.startTime = Date.now();
-  // }
+  circle.scaleAnimationState = animate(
+    circle.scaleAnimation,
+    circle.scaleAnimationState,
+    frameTime
+  );
 };
 
 const areColliding = (circle: Circle, otherCircle: Circle): boolean => {

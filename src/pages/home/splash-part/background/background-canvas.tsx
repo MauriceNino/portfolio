@@ -6,14 +6,18 @@ import { CellProps } from '../../../../types/default-props';
 const { roundToHeight, roundToWidth } = CellsConverter;
 
 const drawCircle = (ctx: CanvasRenderingContext2D, circle: Circle) => {
-  const { x, y, radius } = circle;
+  const { x, y } = circle;
+  const radius =
+    circle.radius * (circle.scaleAnimationState?.current.value.scale || 0);
+
+  if (radius === 0) return;
 
   for (
     let x_offset = 0;
     x_offset <= (radius * 2) / 2.9; // TODO: find out why this magic number works
     x_offset += CellsConverter.CELL_WIDTH
   ) {
-    const y_offset = Math.sqrt(circle.radius ** 2 - x_offset ** 2);
+    const y_offset = Math.sqrt(radius ** 2 - x_offset ** 2);
 
     // prettier-ignore
     // eslint-disable-next-line no-lone-blocks
