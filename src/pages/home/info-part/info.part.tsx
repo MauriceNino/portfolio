@@ -6,9 +6,9 @@ import styles from './info.part.module.scss';
 import Projects from './projects/projects';
 import Skills from './skills/skills';
 
-type MainPageProps = CellProps;
+type InfoProps = CellProps;
 
-const MainPage = (props: MainPageProps) => {
+const Info = (props: InfoProps) => {
   const hCells = props.hCells;
   const vCells = props.vCells;
 
@@ -62,4 +62,4 @@ const MainPage = (props: MainPageProps) => {
   );
 };
 
-export default MainPage;
+export default Info;

@@ -1,8 +1,30 @@
+@keyframes blink {
+  0% {
+      opacity: 0;
+  }
+
+  80% {
+      opacity: 1;
+  }
+
+  100% {
+      opacity: 0;
+  }
+}
+
 #splashContainer {
   position: relative;
 
+  #carret {
+    animation: blink 1s infinite;
+  }
+
   #heading {
-    color: var(--tertiary-color);
+    color: var(--primary-color);
+  }
+
+  .austriaColored {
+    color: var(--austria-color);
   }
 
   .content {

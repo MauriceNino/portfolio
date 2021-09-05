@@ -45,20 +45,14 @@ const App = () => {
   return (
     <>
       <Head>
+        <html lang="en-US" />
         <title>Maurice el-Banna</title>
         <link rel="icon" href="favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Servus, I'm Maurice el-Banna, I'm a full stack developer from Austria"
+          content="Servus, I'm Maurice el-Banna, a full stack developer from Austria"
         />
-
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Roboto+Mono"
-          rel="stylesheet"
-        />
-
         <link rel="apple-touch-icon" href="logo192.png" />
         <link rel="manifest" href="manifest.json" />
       </Head>

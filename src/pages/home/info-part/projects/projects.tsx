@@ -104,9 +104,9 @@ const Projects = (props: ProjectProps) => {
           logo={{ class: 'mauz', img: mauzLogo, logoLeft: false }}
           isFullscreen={isFullscreen}
         >
-          The website you are looking at right now was written by me to learn
-          React and is the first one written by me in the framework (sorry for
-          the bugs). The idea for it came to me when I saw the project{' '}
+          The website you are currently viewing, was written in React with the
+          goal of learning the framework in the progress.The idea for it came to
+          me when I saw the project{' '}
           <a href="https://k9scli.io/" target="_blank" rel="noreferrer">
             "k9s"
           </a>{' '}

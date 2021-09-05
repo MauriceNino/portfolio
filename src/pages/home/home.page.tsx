@@ -4,8 +4,8 @@ import ConsoleContainer from '../../components/console-container/ConsoleContaine
 import Padded from '../../components/padded/padded';
 import { CellProps } from '../../types/default-props';
 import Heading from './heading/heading';
-import MainPage from './info-part/info.part';
-import SplashPage from './splash-part/splash.part';
+import Info from './info-part/info.part';
+import Splash from './splash-part/splash.part';
 
 type HomePageProps = CellProps;
 
@@ -37,11 +37,11 @@ const HomePage = (props: HomePageProps) => {
           disableSideLines={disableSideLines}
         >
           <div id="scrollable-content">
-            <SplashPage
+            <Splash
               vCells={verticalCellCount - 7 > 6 ? verticalCellCount - 7 : 6}
               hCells={horizontalCellCount - (disableSideLines ? 0 : 4)}
             />
-            <MainPage
+            <Info
               vCells={verticalCellCount - 7 > 6 ? verticalCellCount - 7 : 6}
               hCells={horizontalCellCount - (disableSideLines ? 0 : 4)}
             />
