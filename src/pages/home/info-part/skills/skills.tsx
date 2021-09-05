@@ -15,7 +15,7 @@ const Skills = (props: SkillsProps) => {
       <Progressbar hCells={hCells} title="JavaScript(+TS)" percent={90} />
       <Progressbar hCells={hCells} title="Angular" percent={80} />
       <Progressbar hCells={hCells} title="HTML &amp; CSS/SCSS" percent={70} />
-      <Progressbar hCells={hCells} title="React" percent={20} />
+      <Progressbar hCells={hCells} title="React" percent={65} />
       <br />
 
       <div>Backend</div>
