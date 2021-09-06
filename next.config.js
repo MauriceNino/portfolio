@@ -7,5 +7,9 @@ const devEnv = {
 };
 
 module.exports = {
-  env: process.env.NODE_ENV === 'production' ? prodEnv : devEnv
+  env: process.env.NODE_ENV === 'production' ? prodEnv : devEnv,
+  i18n: {
+    locales: ['en-US', 'de-DE'],
+    defaultLocale: 'en-US'
+  }
 };

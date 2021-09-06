@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { CellsConverter } from '../../../../helpers/cells-converter';
 import ScrollHelper from '../../../../helpers/scroll-helper';
 import ViewportHelper from '../../../../helpers/viewport-helper';
@@ -13,6 +14,7 @@ const AboutMe = (props: AboutMeProps) => {
 
   const [isVisible, setIsVisible] = useState(false);
   const thisRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const scrollContainer = document.querySelector(
@@ -35,7 +37,7 @@ const AboutMe = (props: AboutMeProps) => {
 
   return (
     <>
-      <h2>About Me</h2>
+      <h2>{t('about_me.heading')}</h2>
       <br />
 
       <div ref={thisRef} className={`fadeable ${isVisible ? '' : 'fade-out'}`}>
@@ -46,24 +48,15 @@ const AboutMe = (props: AboutMeProps) => {
             width: CellsConverter.cellsToWidth(isFullscreen ? 13 : 22)
           }}
         ></div>
-        I'm a 22 year old full stack developer currently living in Austria. My
-        passion is creating experiences for users, especially on the web.
-        <br />
-        <br />
-        I've worked on small private projects as well as large long-term
-        international projects. Despite having only 3 years of professional
-        experience, I've been programming for over 10 years now.
-        <br />
-        <br />
-        If you would like to have me on a project, feel free to contact me on{' '}
-        <a
-          href="https://www.linkedin.com/in/maurice-elbanna/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          LinkedIn
-        </a>
-        .
+        <Trans i18nKey="about_me.text">
+          <a
+            href="https://www.linkedin.com/in/maurice-elbanna/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            LinkedIn
+          </a>
+        </Trans>
       </div>
     </>
   );

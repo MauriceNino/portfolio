@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
+import '../helpers/i18n';
 import { CellProps } from '../types/default-props';
 import HomePage from './home/home.page';
 
@@ -45,7 +46,7 @@ const App = () => {
   return (
     <>
       <Head>
-        <html lang="en-US" />
+        {/* <html lang="en-US" /> */}
         <title>Maurice el-Banna</title>
         <link rel="icon" href="favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

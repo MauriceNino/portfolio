@@ -1,0 +1,41 @@
+export const EN_US = {
+  splash: {
+    scroll_button: 'About me'
+  },
+  skills: {
+    heading: 'My skills',
+    frontend_heading: 'Frontend',
+    backend_heading: 'Backend',
+    database_heading: 'Database'
+  },
+  about_me: {
+    heading: 'About me',
+    text:
+      "I'm a 22 year old full stack developer currently living in Austria. My passion is creating experiences for users, especially on the web.<br/><br/>" +
+      "I've worked on small private projects as well as large long-term international projects. Despite having only 3 years of professional experience, I've been programming for over 10 years now.<br/><br/>" +
+      'If you would like to have me on a project, feel free to contact me on <0>LinkedIn</0>.'
+  },
+  projects: {
+    heading: 'Some of my projects',
+    portfolio: {
+      text:
+        'The website you are currently viewing, was written in React with the goal of learning the framework in the progress.The idea for it came to me when I saw the project <0>"k9s"</0> and was impressed by the beautiful console application. I tried to create a more or less convincing CLI feeling while using the modern features of a browser for animations.<br/><br/>' +
+        'If you are interested in the code, look here: <1>github.com</1>'
+    },
+    q_help: {
+      text:
+        'At the start of the Corona crisis, myself and 2 colleagues thought that we would like to help the people in need somehow. The problem was that people who were in quarantine had no way to meet their daily needs, such as shopping, or walking the dog. Q-Help helps people by bringing them together based on geographical proximity. The project is based on Ionic/Angular and Firebase (Storage, Firestore, Functions, Authentication, ...).<br/><br/>' +
+        'You can view the project live here: <0>qhelp.app</0>'
+    },
+    gamerpals: {
+      text:
+        'As avid gamers, myself and a classmate teamed up to create the ultimate group finding platform. The goal was to bring groups together based on relevant criteria - be it guilds or even matchmaking groups. The relevant technologies are Angular/Electron on the frontend and a backend consisting of a C# REST service and a MongoDB database, where I worked mostly on the frontend.<br/><br/>' +
+        'You can view a demo of the project here: <0>gamerpals-website.herokuapp.com</0><br/>' +
+        'If you are interested in the frontend code, look here: <1>github.com</1>'
+    },
+    more: {
+      heading: 'More',
+      text: 'If you want to learn more about me, or if you want to check out some more of my projects, I encourage you to visit the following links:'
+    }
+  }
+};
