@@ -3,6 +3,7 @@
   > div:last-of-type {
     color: var(--secondary-color);
     user-select: none;
+    white-space: nowrap;
   }
 
   .contentFlex {

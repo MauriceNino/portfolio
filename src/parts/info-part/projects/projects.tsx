@@ -1,12 +1,12 @@
+import { Trans, useTranslation } from 'next-i18next';
 import React, { useEffect, useRef, useState } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import GamerPals from '../../../../assets/projects/gamerpals';
-import Mauz from '../../../../assets/projects/mauz';
-import More from '../../../../assets/projects/more';
-import QHelp from '../../../../assets/projects/qhelp';
-import Padded from '../../../../components/padded/padded';
-import ScrollHelper from '../../../../helpers/scroll-helper';
-import ViewportHelper from '../../../../helpers/viewport-helper';
+import GamerPals from '../../../assets/projects/gamerpals';
+import Mauz from '../../../assets/projects/mauz';
+import More from '../../../assets/projects/more';
+import QHelp from '../../../assets/projects/qhelp';
+import Padded from '../../../components/padded/padded';
+import ScrollHelper from '../../../helpers/scroll-helper';
+import ViewportHelper from '../../../helpers/viewport-helper';
 import styles from './projects.module.scss';
 
 function getAsDiv(el: string) {

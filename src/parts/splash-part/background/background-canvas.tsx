@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import PureCanvas from '../../../../components/pure-canvas/pure-canvas';
-import { CellsConverter } from '../../../../helpers/cells-converter';
-import { Circle } from '../../../../types/background';
-import { CellProps } from '../../../../types/default-props';
+import PureCanvas from '../../../components/pure-canvas/pure-canvas';
+import { CellsConverter } from '../../../helpers/cells-converter';
+import { Circle } from '../../../types/background';
+import { CellProps } from '../../../types/default-props';
 const { roundToHeight, roundToWidth } = CellsConverter;
 
 const drawCircle = (ctx: CanvasRenderingContext2D, circle: Circle) => {

@@ -27,39 +27,22 @@
     color: var(--austria-color);
   }
 
-  .content {
+  #centeredContent {
     position: absolute;
-    z-index: 2;
 
-    > * {
-      width: fit-content;
-      background-color: var(--background-color);
+    > span {
+      display: inline-block;
     }
-  }
-  .background {
-    position: absolute;
-    z-index: 1;
-    user-select: none;
-
-    .map {
-      white-space: nowrap;
-      position: absolute;
-      opacity: 0.1;
-    }
-
-    .dots {
-      position: absolute;
-
-      .domDot {
-        opacity: 0.2;
-        position: absolute;
-      }
+    h1 > span {
+      display: inline-block;
     }
   }
 
   .button {
     cursor: pointer;
     user-select: none;
+    display: inline-block;
+    margin-top: calc(var(--text-height) * 1px);
 
     .downArrow {
       display: inline-block;

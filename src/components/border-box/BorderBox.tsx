@@ -4,9 +4,8 @@ import { CellProps } from '../../types/default-props';
 import style from './BorderBox.module.scss';
 
 type BorderBoxProps = {
-  minVCells: number;
-  resizeToContent?: boolean;
-  disableSideLines: boolean;
+  minVCells?: number;
+  disableSideLines?: boolean;
 } & CellProps &
   JSX.ElementChildrenAttribute;
 
@@ -26,7 +25,7 @@ const BorderBox = (props: BorderBoxProps) => {
   const getContentStyle = (): CSSProperties => {
     let css: CSSProperties = {};
 
-    if (!props.resizeToContent && props.minVCells) {
+    if (props.minVCells) {
       css.minHeight = `${CellsConverter.cellsToHeight(props.minVCells)}px`;
       css.height = `${CellsConverter.cellsToHeight(getVCells())}px`;
     }

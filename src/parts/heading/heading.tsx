@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSSRCheck } from '../../../helpers/isSSRHook';
-import { HCellProps } from '../../../types/default-props';
+import { useSSRCheck } from '../../helpers/isSSRHook';
+import { HCellProps } from '../../types/default-props';
 import styles from './heading.module.scss';
 import Socials from './socials';
 

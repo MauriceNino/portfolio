@@ -1,6 +1,6 @@
-import Padded from '../../../components/padded/padded';
-import { CellsConverter } from '../../../helpers/cells-converter';
-import { CellProps } from '../../../types/default-props';
+import Padded from '../../components/padded/padded';
+import { CellsConverter } from '../../helpers/cells-converter';
+import { CellProps } from '../../types/default-props';
 import AboutMe from './about-me/about-me';
 import styles from './info.part.module.scss';
 import Projects from './projects/projects';

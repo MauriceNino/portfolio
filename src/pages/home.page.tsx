@@ -1,11 +1,11 @@
 import React from 'react';
-import BorderBox from '../../components/border-box/BorderBox';
-import ConsoleContainer from '../../components/console-container/ConsoleContainer';
-import Padded from '../../components/padded/padded';
-import { CellProps } from '../../types/default-props';
-import Heading from './heading/heading';
-import Info from './info-part/info.part';
-import Splash from './splash-part/splash.part';
+import BorderBox from '../components/border-box/BorderBox';
+import ConsoleContainer from '../components/console-container/ConsoleContainer';
+import Padded from '../components/padded/padded';
+import Heading from '../parts/heading/heading';
+import Info from '../parts/info-part/info.part';
+import Splash from '../parts/splash-part/splash.part';
+import { CellProps } from '../types/default-props';
 
 type HomePageProps = CellProps;
 

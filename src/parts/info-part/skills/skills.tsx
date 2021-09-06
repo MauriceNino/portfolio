@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next';
-import Progressbar from '../../../../components/progressbar/progressbar';
-import { HCellProps } from '../../../../types/default-props';
+import { useTranslation } from 'next-i18next';
+import Progressbar from '../../../components/progressbar/progressbar';
+import { HCellProps } from '../../../types/default-props';
 
 type SkillsProps = HCellProps;
 

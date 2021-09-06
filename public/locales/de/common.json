@@ -1,0 +1,31 @@
+{
+  "splash": {
+    "scroll_button": "Über mich"
+  },
+  "skills": {
+    "heading": "Meine Skills",
+    "frontend_heading": "Frontend",
+    "backend_heading": "Backend",
+    "database_heading": "Datenbanken"
+  },
+  "about_me": {
+    "heading": "Über mich",
+    "text": "Ich bin ein 22-jähriger Full-Stack-Entwickler, der derzeit in Österreich lebt. Meine Leidenschaft ist es, Erlebnisse für Benutzer zu schaffen, vor allem im Web.<br/><br/>Ich habe bereits sowohl an kleinen privaten Projekten als auch an großen internationalen Langzeitprojekten gearbeitet. Obwohl ich nur 3 Jahre Berufserfahrung habe, programmiere ich schon seit über 10 Jahren.<br/><br/>Wenn Sie mich für ein Projekt engagieren möchten, können Sie mich gerne auf <0>LinkedIn</0> kontaktieren."
+  },
+  "projects": {
+    "heading": "Einige meiner Projekte",
+    "portfolio": {
+      "text": "Die Website, die Sie gerade sehen, wurde in React geschrieben, mit dem Ziel, das Framework im Laufe der Zeit zu erlernen. Die Idee dazu kam mir, als ich das Projekt <0>\"k9s\"</0> sah und von der schönen Konsolenanwendung beeindruckt war. Ich habe versucht, ein mehr oder weniger überzeugendes CLI-Feeling zu erzeugen und dabei die modernen Features eines Browsers für Animationen zu nutzen.<br/><br/>Wenn Sie sich für den Code interessieren, schauen Sie hier: <1>github.com</1>"
+    },
+    "q_help": {
+      "text": "Zu Beginn der Corona-Krise dachten ich und 2 Kollegen, dass wir den Menschen in Not irgendwie helfen wollen. Das Problem war, dass die Menschen, die unter Quarantäne standen, keine Möglichkeit hatten, ihre täglichen Bedürfnisse zu erfüllen, wie z.B. einkaufen oder mit dem Hund spazieren gehen. Q-Help hilft Menschen, indem es sie aufgrund ihrer geografischen Nähe zusammenbringt. Das Projekt basiert auf Ionic/Angular und Firebase (Storage, Firestore, Functions, Authentication, ...).<br/><br/>Sie können sich das Projekt hier live ansehen: <0>qhelp.app</0>"
+    },
+    "gamerpals": {
+      "text": "Als begeisterte Gamer haben ich mich mit einem Klassenkameraden zusammengetan, um die ultimative Plattform zur Gruppenfindung zu schaffen. Das Ziel war es, Gruppen auf der Grundlage relevanter Kriterien zusammenzubringen - seien es Gilden oder sogar Matchmaking-Gruppen. Die relevanten Technologien sind Angular/Electron auf dem Frontend und ein Backend bestehend aus einem C# REST Service und einer MongoDB Datenbank, wobei ich hauptsächlich am Frontend gearbeitet habe.<br/><br/>Eine Demo des Projekts können Sie sich hier ansehen: <0>gamerpals-website.herokuapp.com</0><br/>Wenn Sie sich für den Frontend-Code interessieren, schauen Sie hier: <1>github.com</1>"
+    },
+    "more": {
+      "heading": "Mehr",
+      "text": "Wenn Sie mehr über mich erfahren möchten oder sich einige meiner Projekte ansehen wollen, empfehle ich Ihnen, die folgenden Links zu besuchen:"
+    }
+  }
+}

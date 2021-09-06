@@ -6,11 +6,11 @@ import React, {
   useRef,
   useState
 } from 'react';
-import { animate, Animation } from '../../../../helpers/animations';
-import { CellsConverter } from '../../../../helpers/cells-converter';
-import { useSSRCheck } from '../../../../helpers/isSSRHook';
-import { Circle } from '../../../../types/background';
-import { CellProps } from '../../../../types/default-props';
+import { animate, Animation } from '../../../helpers/animations';
+import { CellsConverter } from '../../../helpers/cells-converter';
+import { useSSRCheck } from '../../../helpers/isSSRHook';
+import { Circle } from '../../../types/background';
+import { CellProps } from '../../../types/default-props';
 import BackgroundCanvas from './background-canvas';
 
 const DEFAULT_POPUP_ANIMATION: Animation<{ scale: number }> = {

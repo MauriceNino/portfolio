@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { CellsConverter } from '../../../../helpers/cells-converter';
-import ScrollHelper from '../../../../helpers/scroll-helper';
-import ViewportHelper from '../../../../helpers/viewport-helper';
+import { CellsConverter } from '../../../helpers/cells-converter';
+import ScrollHelper from '../../../helpers/scroll-helper';
+import ViewportHelper from '../../../helpers/viewport-helper';
 import styles from './about-me.module.scss';
 
 type AboutMeProps = {

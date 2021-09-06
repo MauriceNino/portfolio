@@ -1,8 +1,14 @@
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-import '../helpers/i18n';
 import { CellProps } from '../types/default-props';
-import HomePage from './home/home.page';
+import HomePage from './home.page';
+
+export const getServerSideProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common']))
+  }
+});
 
 const getCurrentState = (): CellProps => {
   const width = window.innerWidth;
@@ -46,7 +52,6 @@ const App = () => {
   return (
     <>
       <Head>
-        {/* <html lang="en-US" /> */}
         <title>Maurice el-Banna</title>
         <link rel="icon" href="favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
