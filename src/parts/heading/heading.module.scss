@@ -2,7 +2,8 @@
   position: relative;
   height: calc(var(--text-height) * 2px);
 
-  > h1 {
+  > p {
+    user-select: none;
     position: absolute;
     top: 0;
     right: 0;

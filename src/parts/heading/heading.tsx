@@ -15,11 +15,11 @@ const Heading = (props: HeadingProps) => {
         <Socials />
       </div>
       {!isSSR && (
-        <h1 className={props.hCells > 57 ? styles.show : ''}>
+        <p className={props.hCells > 57 ? styles.show : ''}>
           █▀▄▀█ ▄▀█ █░█ ▀█ ░ █ █▀█
           <br />
           █░▀░█ █▀█ █▄█ █▄ ▄ █ █▄█
-        </h1>
+        </p>
       )}
     </div>
   );
