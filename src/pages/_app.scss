@@ -81,17 +81,6 @@ body,
   height: 0px;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background-color: unset;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-radius: 2px;
-}
-
 #copyright {
   float: right;
   opacity: 0.3;
@@ -100,7 +89,7 @@ body,
 #scrollable-content {
   height: 100%;
   width: 100%;
-  overflow: overlay;
+  overflow-y: scroll;
   position: relative;
 }
 
