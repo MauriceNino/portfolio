@@ -20,31 +20,33 @@ const Centered = (props: CenteredProps) => {
     if (child) {
       const { horizontal, vertical, absolute, vCells, hCells } = props;
 
-      if (horizontal) {
-        const left = CellsConverter.cellsToWidth(
-          Math.round(
-            hCells / 2 - CellsConverter.widthToCells(child.offsetWidth / 2)
-          )
-        );
+      setTimeout(() => {
+        if (horizontal) {
+          const left = CellsConverter.cellsToWidth(
+            Math.round(
+              hCells / 2 - CellsConverter.widthToCells(child.offsetWidth / 2)
+            )
+          );
 
-        if (absolute) {
-          setStyle(style => ({ ...style, left: `${left}px` }));
-        } else {
-          setStyle(style => ({ ...style, marginLeft: `${left}px` }));
+          if (absolute) {
+            setStyle(style => ({ ...style, left: `${left}px` }));
+          } else {
+            setStyle(style => ({ ...style, marginLeft: `${left}px` }));
+          }
         }
-      }
-      if (vertical) {
-        const top = CellsConverter.cellsToHeight(
-          Math.round(
-            vCells / 2 - CellsConverter.heightToCells(child.offsetHeight / 2)
-          )
-        );
-        if (absolute) {
-          setStyle(style => ({ ...style, top: `${top}px` }));
-        } else {
-          setStyle(style => ({ ...style, marginTop: `${top}px` }));
+        if (vertical) {
+          const top = CellsConverter.cellsToHeight(
+            Math.round(
+              vCells / 2 - CellsConverter.heightToCells(child.offsetHeight / 2)
+            )
+          );
+          if (absolute) {
+            setStyle(style => ({ ...style, top: `${top}px` }));
+          } else {
+            setStyle(style => ({ ...style, marginTop: `${top}px` }));
+          }
         }
-      }
+      }, 50);
     }
   }, [childRef, props]);
 
