@@ -5,5 +5,9 @@ module.exports = {
     defaultLocale: 'en',
     locales: ['en', 'de']
   },
+  fallbackLng: 'en',
+  supportedLngs: ['en', 'de'],
+  nonExplicitSupportedLngs: true,
+  load: 'all',
   reloadOnPrerender: !isProd
 };
