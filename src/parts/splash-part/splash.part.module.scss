@@ -27,15 +27,8 @@
     color: var(--austria-color);
   }
 
-  #centeredContent {
-    position: absolute;
-
-    > span {
-      display: inline-block;
-    }
-    h1 > span {
-      display: inline-block;
-    }
+  h1 > span {
+    display: inline-block;
   }
 
   .button {

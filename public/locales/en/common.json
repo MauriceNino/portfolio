@@ -1,6 +1,13 @@
 {
+  "meta": {
+    "description": "Servus, I'm Maurice el-Banna, a full stack developer from Austria"
+  },
   "splash": {
-    "scroll_button": "About me"
+    "scroll_button": "About me",
+    "heading_part1": "Servus,",
+    "heading_part2": "I'm <0>Maurice el-Banna</0>",
+    "heading_part3": "a full stack developer",
+    "heading_part4": "from <1>Au</1>str<1>ia</1>"
   },
   "skills": {
     "heading": "My skills",

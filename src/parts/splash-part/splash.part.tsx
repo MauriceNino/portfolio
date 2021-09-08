@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { Trans, useTranslation } from 'next-i18next';
 import React from 'react';
 import BorderBox from '../../components/border-box/BorderBox';
 import Centered from '../../components/centered/centered';
@@ -22,46 +22,51 @@ const Splash = (props: SplashProps) => {
   const { t } = useTranslation();
 
   const btn_text = t('splash.scroll_button');
+  const heading_part1 = <>{t('splash.heading_part1')}&nbsp;</>;
+  const heading_part2 = (
+    <>
+      <Trans i18nKey="splash.heading_part2">
+        <span id={styles.heading}>Name</span>
+      </Trans>
+    </>
+  );
+  const heading_part3 = <>{t('splash.heading_part3')}&nbsp;</>;
+  const heading_part4 = (
+    <>
+      <Trans i18nKey="splash.heading_part4">
+        <span className={styles.austriaColored}></span>
+        <span className={styles.austriaColored}></span>
+      </Trans>
+    </>
+  );
 
-  const heading_big = (
+  const heading_big = () => (
     <>
       <Centered vCells={vCells} hCells={hCells} horizontal={true}>
-        <span>
-          <span id={styles.carret}>&gt;</span> Servus, I'm{' '}
-          <span id={styles.heading}>Maurice el-Banna</span>,
-        </span>
+        <span id={styles.carret}>&gt;</span>&nbsp;
+        {heading_part1}
+        {heading_part2}
       </Centered>
       <Centered vCells={vCells} hCells={hCells} horizontal={true}>
-        <span>
-          a full stack developer from{' '}
-          <span className={styles.austriaColored}>Au</span>
-          str
-          <span className={styles.austriaColored}>ia</span>
-        </span>
+        {heading_part3}
+        {heading_part4}
       </Centered>
     </>
   );
-  const heading_small = (
+  const heading_small = () => (
     <>
       <Centered vCells={vCells} hCells={hCells} horizontal={true}>
-        <span>
-          <span id={styles.carret}>&gt;</span> Servus,
-        </span>
+        <span id={styles.carret}>&gt;</span>&nbsp;
+        <span>{heading_part1}</span>
       </Centered>
       <Centered vCells={vCells} hCells={hCells} horizontal={true}>
-        <span>
-          I'm <span id={styles.heading}>Maurice el-Banna</span>,
-        </span>
+        {heading_part2}
       </Centered>
       <Centered vCells={vCells} hCells={hCells} horizontal={true}>
-        <span>a full stack developer</span>
+        {heading_part3}
       </Centered>
       <Centered vCells={vCells} hCells={hCells} horizontal={true}>
-        <span>
-          from <span className={styles.austriaColored}>Au</span>
-          str
-          <span className={styles.austriaColored}>ia</span>
-        </span>
+        {heading_part4}
       </Centered>
     </>
   );
@@ -81,17 +86,15 @@ const Splash = (props: SplashProps) => {
           vertical={true}
           absolute={true}
         >
-          <div id={styles.centeredContent}>
-            <h1>{hCells > 40 ? heading_big : heading_small}</h1>
+          <h1>{hCells > 40 ? heading_big() : heading_small()}</h1>
 
-            <Centered vCells={vCells} hCells={hCells} horizontal={true}>
-              <div className={styles.button} onClick={onClick}>
-                <BorderBox hCells={btn_text.length + 6} vCells={1}>
-                  &nbsp;<div className={styles.downArrow}>&gt;</div> {btn_text}
-                </BorderBox>
-              </div>
-            </Centered>
-          </div>
+          <Centered vCells={vCells} hCells={hCells} horizontal={true}>
+            <div className={styles.button} onClick={onClick}>
+              <BorderBox hCells={btn_text.length + 6} vCells={1}>
+                &nbsp;<div className={styles.downArrow}>&gt;</div> {btn_text}
+              </BorderBox>
+            </div>
+          </Centered>
         </Centered>
 
         <Background vCells={vCells} hCells={hCells} />

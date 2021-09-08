@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
@@ -21,6 +22,7 @@ const getCurrentState = (): CellProps => {
 };
 
 const App = () => {
+  const { t } = useTranslation();
   const [state, setState] = useState<CellProps>({
     hCells: 50,
     vCells: 20
@@ -52,13 +54,10 @@ const App = () => {
   return (
     <>
       <Head>
-        <title>Maurice el-Banna</title>
+        <title>Maurice el-Banna //Portfolio</title>
         <link rel="icon" href="favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="description"
-          content="Servus, I'm Maurice el-Banna, a full stack developer from Austria"
-        />
+        <meta name="description" content={t('meta.description')} />
         <link rel="apple-touch-icon" href="logo192.png" />
         <link rel="manifest" href="manifest.json" />
       </Head>

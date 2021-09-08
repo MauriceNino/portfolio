@@ -3,14 +3,13 @@ import { CellsConverter } from '../../helpers/cells-converter';
 import { CellProps } from '../../types/default-props';
 
 type CenteredProps = {
-  children: React.ReactElement;
+  children: React.ReactNode;
   absolute?: boolean;
   horizontal?: boolean;
   vertical?: boolean;
 } & CellProps;
 
 const Centered = (props: CenteredProps) => {
-  const childElement = React.Children.only(props.children);
   const childRef = React.useRef<HTMLElement>();
   const [style, setStyle] = React.useState<React.CSSProperties>({});
 
@@ -29,9 +28,16 @@ const Centered = (props: CenteredProps) => {
           );
 
           if (absolute) {
-            setStyle(style => ({ ...style, left: `${left}px` }));
+            setStyle(style => ({
+              ...style,
+              left: `${left}px`,
+              position: 'absolute'
+            }));
           } else {
-            setStyle(style => ({ ...style, marginLeft: `${left}px` }));
+            setStyle(style => ({
+              ...style,
+              marginLeft: `${left}px`
+            }));
           }
         }
         if (vertical) {
@@ -41,19 +47,27 @@ const Centered = (props: CenteredProps) => {
             )
           );
           if (absolute) {
-            setStyle(style => ({ ...style, top: `${top}px` }));
+            setStyle(style => ({
+              ...style,
+              top: `${top}px`,
+              position: 'absolute'
+            }));
           } else {
-            setStyle(style => ({ ...style, marginTop: `${top}px` }));
+            setStyle(style => ({
+              ...style,
+              marginTop: `${top}px`
+            }));
           }
         }
       }, 50);
     }
   }, [childRef, props]);
 
-  return React.cloneElement(childElement, {
-    ref: (el: HTMLElement) => (childRef.current = el),
-    style: style
-  });
+  return (
+    <span ref={(el: HTMLElement) => (childRef.current = el)} style={style}>
+      {props.children}
+    </span>
+  );
 };
 
 export default Centered;
