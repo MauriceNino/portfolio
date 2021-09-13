@@ -3,6 +3,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import { i18n } from '../../next-i18next.config';
+import { useSSRCheck } from '../helpers/isSSRHook';
+import Loader from '../parts/loader/loader';
 import { CellProps } from '../types/default-props';
 import HomePage from './home.page';
 
@@ -28,9 +30,13 @@ const App = () => {
     hCells: 50,
     vCells: 20
   });
+  const [initialized, setInitialized] = useState<boolean>(false);
 
   useEffect(() => {
     setState(getCurrentState());
+
+    // Give the page time to load
+    setTimeout(() => setInitialized(true), 100);
   }, []);
 
   useEffect(() => {
@@ -52,6 +58,8 @@ const App = () => {
     };
   }, [state]);
 
+  const isSSR = useSSRCheck();
+
   return (
     <>
       <Head>
@@ -71,6 +79,8 @@ const App = () => {
           />
         ))}
       </Head>
+
+      {(isSSR || !initialized) && <Loader />}
 
       <HomePage vCells={state.vCells} hCells={state.hCells} />
     </>
