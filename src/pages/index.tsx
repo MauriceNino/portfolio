@@ -69,7 +69,7 @@ const App = () => {
   return (
     <>
       <Head>
-        <title>Maurice el-Banna //Portfolio</title>
+        <title>{t('meta.title')}</title>
         <link rel="icon" href="favicon.ico" />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -84,6 +84,15 @@ const App = () => {
             href={`https://mauz.io/${locale}`}
           />
         ))}
+
+        <meta property="og:title" content={t('meta.title')} />
+        <meta property="og:description" content={t('meta.description')} />
+        <meta property="og:image" content="https://mauz.io/logo512.png" />
+        <meta property="og:url" content="https://mauz.io" />
+        <meta name="twitter:card" content="summary" />
+
+        <meta property="og:site_name" content={t('meta.title')} />
+        <meta name="twitter:image:alt" content="Logo" />
       </Head>
 
       {(isSSR || !initialized) && <Loader />}
