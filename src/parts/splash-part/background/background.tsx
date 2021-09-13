@@ -188,11 +188,13 @@ const updateFrame = (
   animRequestRef: MutableRefObject<number | undefined>,
   cellsRef: MutableRefObject<CellProps>,
   setCircles: Dispatch<SetStateAction<Circle[]>>,
-  circles: Circle[]
+  circlesRef: MutableRefObject<Circle[]>
 ): void => {
   const newTime = Date.now();
   const frameTime = newTime - currentTime.current!;
   currentTime.current = newTime;
+
+  const circles = circlesRef.current;
 
   for (let i = 0; i < circles.length; i++) {
     const circle = circles[i];
@@ -212,8 +214,10 @@ const updateFrame = (
   }
 
   setCircles([...circles]);
+  circlesRef.current = circles;
+
   animRequestRef.current = requestAnimationFrame(() =>
-    updateFrame(currentTime, animRequestRef, cellsRef, setCircles, circles)
+    updateFrame(currentTime, animRequestRef, cellsRef, setCircles, circlesRef)
   );
 };
 
@@ -228,32 +232,33 @@ const Background = (props: BackgroundProps) => {
   const animRequestRef = useRef<number>();
   const currentTime = useRef<number>();
   const cellsRef = useRef<CellProps>(props);
+  const circlesRef = useRef<Circle[]>(circles);
 
-  // updating reference to container size
-  // used, so that requestAnimationFrame does not have to be cancelled on resize
-  useEffect(() => {
-    cellsRef.current = props;
-  }, [props]);
-
-  // Init the circles on the first render
+  // Init the circles on the first render, or on size change
   useEffect(() => {
     if (!isSSR) {
-      const newCircles = recalculateCircles(circles, vCells, hCells);
-      setCircles(newCircles);
+      const newCircles = recalculateCircles(circlesRef.current, vCells, hCells);
+      setCircles(() => newCircles);
       setUpdateNotifier({});
+      circlesRef.current = newCircles;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // updating reference to container size
+    // used, so that requestAnimationFrame does not have to be cancelled on resize
+    cellsRef.current = {
+      vCells,
+      hCells
+    };
   }, [isSSR, vCells, hCells]);
 
-  // Restart animation when size changes, or init state changes
+  // Restart animation when init state changes
   useEffect(() => {
     currentTime.current = Date.now();
     animRequestRef.current = requestAnimationFrame(() =>
-      updateFrame(currentTime, animRequestRef, cellsRef, setCircles, circles)
+      updateFrame(currentTime, animRequestRef, cellsRef, setCircles, circlesRef)
     );
 
     return () => cancelAnimationFrame(animRequestRef.current!);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateNotifier]);
 
   // Set currentTime to now, so that the animation starts from the time the page is focused again
