@@ -50,7 +50,9 @@ const HomePage = (props: HomePageProps) => {
       </Padded>
 
       <Padded top={0} bottom={0}>
-        <div id="copyright">©2021 - Maurice el-Banna</div>
+        <div id="copyright" role="presentation">
+          ©2021 - Maurice el-Banna
+        </div>
       </Padded>
     </ConsoleContainer>
   );
