@@ -1,7 +1,8 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import TagManager from 'react-gtm-module';
 import { i18n } from '../../next-i18next.config';
 import { useSSRCheck } from '../helpers/isSSRHook';
 import Loader from '../parts/loader/loader';
@@ -31,8 +32,13 @@ const App = () => {
     vCells: 20
   });
   const [initialized, setInitialized] = useState<boolean>(false);
+  const gtmId = useRef(process.env.gtmId!);
 
   useEffect(() => {
+    TagManager.initialize({
+      gtmId: gtmId.current
+    });
+
     setState(getCurrentState());
 
     // Give the page time to load
