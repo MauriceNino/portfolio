@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { CellsConverter } from '../../../helpers/cells-converter';
@@ -42,12 +43,19 @@ const AboutMe = (props: AboutMeProps) => {
 
       <div ref={thisRef} className={`fadeable ${isVisible ? '' : 'fade-out'}`}>
         <div
-          className={styles.avatar}
+          id={styles.avatar}
           style={{
-            height: CellsConverter.cellsToHeight(isFullscreen ? 6 : 10),
-            width: CellsConverter.cellsToWidth(isFullscreen ? 13 : 22)
+            width: CellsConverter.cellsToWidth(isFullscreen ? 13 : 22),
+            height: CellsConverter.cellsToHeight(isFullscreen ? 6 : 10)
           }}
-        ></div>
+        >
+          <Image
+            layout="fill"
+            src={'/assets/images/avatar.jpg'}
+            objectFit="cover"
+            alt="Avatar"
+          />
+        </div>
         <Trans i18nKey="about_me.text">
           <a
             href="https://www.linkedin.com/in/maurice-elbanna/"
