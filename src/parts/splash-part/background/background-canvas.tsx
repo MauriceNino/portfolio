@@ -3,7 +3,14 @@ import PureCanvas from '../../../components/pure-canvas/pure-canvas';
 import { CellsConverter } from '../../../helpers/cells-converter';
 import { Circle } from '../../../types/background';
 import { CellProps } from '../../../types/default-props';
-const { roundToHeight, roundToWidth } = CellsConverter;
+
+const roundToHeight = (h: number) => {
+  return Math.ceil(h / CellsConverter.CELL_HEIGHT) * CellsConverter.CELL_HEIGHT;
+};
+
+const roundToWidth = (w: number) => {
+  return Math.floor(w / CellsConverter.CELL_WIDTH) * CellsConverter.CELL_WIDTH;
+};
 
 const drawCircle = (ctx: CanvasRenderingContext2D, circle: Circle) => {
   const { x, y } = circle;
@@ -42,6 +49,11 @@ const drawCircle = (ctx: CanvasRenderingContext2D, circle: Circle) => {
       ctx.fillText(circle.name, x, y);
     }
   }
+
+  // Draw circle stroke
+  // ctx.beginPath();
+  // ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+  // ctx.stroke();
 };
 
 type BackgroundCanvasProps = {

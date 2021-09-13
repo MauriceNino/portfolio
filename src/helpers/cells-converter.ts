@@ -17,16 +17,4 @@ export class CellsConverter {
   public static heightToCells(h: number) {
     return h / CellsConverter.CELL_HEIGHT;
   }
-
-  public static roundToHeight(h: number) {
-    return (
-      Math.round(h / CellsConverter.CELL_HEIGHT) * CellsConverter.CELL_HEIGHT
-    );
-  }
-
-  public static roundToWidth(w: number) {
-    return (
-      Math.round(w / CellsConverter.CELL_WIDTH) * CellsConverter.CELL_WIDTH
-    );
-  }
 }
