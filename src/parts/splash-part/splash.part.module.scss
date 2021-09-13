@@ -29,6 +29,7 @@
 
   h1 > span {
     display: inline-block;
+    background-color: var(--background-color);
   }
 
   .button {
@@ -36,6 +37,7 @@
     user-select: none;
     display: inline-block;
     margin-top: calc(var(--text-height) * 1px);
+    background-color: var(--background-color);
 
     .downArrow {
       display: inline-block;
