@@ -47,6 +47,7 @@ const Splash = (props: SplashProps) => {
         {heading_part1}
         {heading_part2}
       </Centered>
+      <br />
       <Centered vCells={vCells} hCells={hCells} horizontal={true}>
         {heading_part3}
         {heading_part4}
@@ -62,6 +63,7 @@ const Splash = (props: SplashProps) => {
       <Centered vCells={vCells} hCells={hCells} horizontal={true}>
         {heading_part2}
       </Centered>
+      <br />
       <Centered vCells={vCells} hCells={hCells} horizontal={true}>
         {heading_part3}
       </Centered>
