@@ -3,6 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import React, { useEffect, useRef, useState } from 'react';
 import TagManager from 'react-gtm-module';
+import { hotjar } from 'react-hotjar';
 import { i18n } from '../../next-i18next.config';
 import { useSSRCheck } from '../helpers/isSSRHook';
 import Loader from '../parts/loader/loader';
@@ -33,12 +34,18 @@ const App = () => {
   });
   const [initialized, setInitialized] = useState<boolean>(false);
   const gtmId = useRef(process.env.gtmId!);
+  const hotjarSiteId = useRef(+process.env.hotjarSiteId!);
 
   useEffect(() => {
+    // Init Google Tag Manager / Analytics
     TagManager.initialize({
       gtmId: gtmId.current
     });
 
+    // Init Hotjar
+    hotjar.initialize(hotjarSiteId.current, 6);
+
+    // Set initial resize state
     setState(getCurrentState());
 
     // Give the page time to load

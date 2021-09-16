@@ -3,12 +3,14 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const prodEnv = {
   isProd: true,
-  gtmId: 'GTM-PJ9RHMK'
+  gtmId: 'GTM-PJ9RHMK',
+  hotjarSiteId: '2606583'
 };
 
 const devEnv = {
   isProd: false,
-  gtmId: 'GTM-PJ9RHMK'
+  gtmId: 'GTM-PJ9RHMK',
+  hotjarSiteId: '2606583'
 };
 
 module.exports = {
