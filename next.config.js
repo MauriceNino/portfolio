@@ -8,9 +8,7 @@ const prodEnv = {
 };
 
 const devEnv = {
-  isProd: false,
-  gtmId: 'GTM-PJ9RHMK',
-  hotjarSiteId: '2606583'
+  isProd: false
 };
 
 module.exports = {
