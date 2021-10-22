@@ -1,4 +1,6 @@
 import React from 'react';
+import SimpleBar from 'simplebar-react';
+import 'simplebar/src/simplebar.css';
 import BorderBox from '../components/border-box/BorderBox';
 import ConsoleContainer from '../components/console-container/ConsoleContainer';
 import Padded from '../components/padded/padded';
@@ -36,7 +38,10 @@ const HomePage = (props: HomePageProps) => {
           minVCells={6}
           disableSideLines={disableSideLines}
         >
-          <div id="scrollable-content">
+          <SimpleBar
+            scrollableNodeProps={{ id: 'scrollable-content' }}
+            style={{ maxHeight: '100%' }}
+          >
             <Splash
               vCells={verticalCellCount - 7 > 6 ? verticalCellCount - 7 : 6}
               hCells={horizontalCellCount - (disableSideLines ? 0 : 4)}
@@ -45,7 +50,7 @@ const HomePage = (props: HomePageProps) => {
               vCells={verticalCellCount - 7 > 6 ? verticalCellCount - 7 : 6}
               hCells={horizontalCellCount - (disableSideLines ? 0 : 4)}
             />
-          </div>
+          </SimpleBar>
         </BorderBox>
       </Padded>
 

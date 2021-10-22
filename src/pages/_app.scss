@@ -76,21 +76,50 @@ body,
   overflow: hidden;
 }
 
-::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
+.simplebar-track.simplebar-vertical {
+  pointer-events: all;
+  width: 5px !important;
+  right: 3px;
+
+  transition: width 0.2s ease-in-out;
+
+  .simplebar-scrollbar {
+    width: 100%;
+
+    &::before {
+      width: 100%;
+      left: 0;
+      right: 0;
+
+      background-color: var(--text-color) !important;
+
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    &.simplebar-visible {
+      &::before {
+        opacity: 0.2;
+      }
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    width: 15px !important;
+
+    .simplebar-scrollbar {
+      &::before {
+        opacity: 0.5;
+      }
+    }
+  }
 }
 
 #copyright {
   float: right;
   opacity: 0.3;
-}
-
-#scrollable-content {
-  height: 100%;
-  width: 100%;
-  overflow-y: scroll;
-  position: relative;
 }
 
 .movable {
