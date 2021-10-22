@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/src/simplebar.css';
 import BorderBox from '../components/border-box/BorderBox';
@@ -16,6 +16,8 @@ const HomePage = (props: HomePageProps) => {
   const verticalCellCount = props.vCells;
 
   const disableSideLines = horizontalCellCount < 50;
+
+  const scrollbarRef = useRef<SimpleBar>(null);
 
   return (
     <ConsoleContainer
@@ -39,10 +41,12 @@ const HomePage = (props: HomePageProps) => {
           disableSideLines={disableSideLines}
         >
           <SimpleBar
+            ref={scrollbarRef}
             scrollableNodeProps={{ id: 'scrollable-content' }}
             style={{ maxHeight: '100%' }}
           >
             <Splash
+              scrollbarRef={scrollbarRef}
               vCells={verticalCellCount - 7 > 6 ? verticalCellCount - 7 : 6}
               hCells={horizontalCellCount - (disableSideLines ? 0 : 4)}
             />

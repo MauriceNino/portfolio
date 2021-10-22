@@ -1,5 +1,6 @@
 import { Trans, useTranslation } from 'next-i18next';
-import React from 'react';
+import React, { RefObject } from 'react';
+import SimpleBar from 'simplebar-react';
 import BorderBox from '../../components/border-box/BorderBox';
 import Centered from '../../components/centered/centered';
 import { CellsConverter } from '../../helpers/cells-converter';
@@ -7,13 +8,9 @@ import { CellProps } from '../../types/default-props';
 import Background from './background/background';
 import styles from './splash.part.module.scss';
 
-function onClick() {
-  document.getElementById('mainPage')?.scrollIntoView({
-    behavior: 'smooth'
-  });
-}
-
-type SplashProps = CellProps;
+type SplashProps = CellProps & {
+  scrollbarRef: RefObject<SimpleBar>;
+};
 
 const Splash = (props: SplashProps) => {
   const vCells = props.vCells;
@@ -72,6 +69,15 @@ const Splash = (props: SplashProps) => {
       </Centered>
     </>
   );
+
+  const onClick = () => {
+    const splashContainer = document.getElementById(styles.splashContainer)!;
+
+    props.scrollbarRef.current?.getScrollElement().scrollTo({
+      top: splashContainer.clientHeight,
+      behavior: 'smooth'
+    });
+  };
 
   return (
     <>
