@@ -4,29 +4,40 @@ type: docker
 name: test & deploy
 
 steps:
-  - name: build-local
+  - name: build
     image: node:lts-alpine
     commands:
       - npm ci
-  - name: build & deploy image
-    image: docker:dind
+  - name: update server files
+    image: alpine/git
+    when:
+      branch: master
+    volumes:
+      - name: repo
+        path: /_repos/portfolio
+    commands:
+      - cd /_repos/portfolio && git pull --rebase
+  - name: deploy to server
+    image: docker/compose
     when:
       branch: master
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
+      - name: repo
+        path: /_repos/portfolio
+      - name: compose
+        path: /_compose/portfolio
     commands:
-      - docker image build -t portfolio .
-      - docker container stop portfolio || true
-      - docker container rm portfolio || true
-      - docker container run -itd
-        -p 127.0.0.1:8080:3000
-        --restart unless-stopped
-        --name portfolio
-        portfolio
-      - docker image prune -f
+      - docker-compose -f /_compose/portfolio/docker-compose.yml up -d
 
 volumes:
   - name: dockersock
     host:
       path: /var/run/docker.sock
+  - name: repo
+    host:
+      path: /server/_repos/portfolio
+  - name: compose
+    host:
+      path: /server/_compose/portfolio
