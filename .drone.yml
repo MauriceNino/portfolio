@@ -41,3 +41,8 @@ volumes:
   - name: compose
     host:
       path: /server/_compose/portfolio
+---
+kind: signature
+hmac: 9849dcd1c3a3e068de0e91fb3c4f1224ed6cea731f5976933b4933f82b17320c
+
+...
