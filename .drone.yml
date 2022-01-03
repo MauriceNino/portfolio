@@ -4,7 +4,7 @@ type: docker
 name: test & deploy
 
 steps:
-  - name: build
+  - name: test
     image: node:lts-alpine
     commands:
       - npm ci
@@ -13,10 +13,11 @@ steps:
     when:
       branch: master
     volumes:
-      - name: repo
-        path: /_repos/portfolio
+      - name: server
+        path: /server
     commands:
-      - cd /_repos/portfolio && git pull --rebase
+      - cd /server/_repos/portfolio
+      - git pull --rebase
   - name: deploy to server
     image: docker/compose
     when:
@@ -24,25 +25,19 @@ steps:
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
-      - name: repo
-        path: /_repos/portfolio
-      - name: compose
-        path: /_compose/portfolio
+      - name: server
+        path: /server
     commands:
-      - docker-compose -f /_compose/portfolio/docker-compose.yml up -d
+      - cd /server
+      - ./start.sh portfolio --build
 
 volumes:
   - name: dockersock
     host:
       path: /var/run/docker.sock
-  - name: repo
+  - name: server
     host:
-      path: /server/_repos/portfolio
-  - name: compose
-    host:
-      path: /server/_compose/portfolio
+      path: /server
 ---
 kind: signature
-hmac: 9849dcd1c3a3e068de0e91fb3c4f1224ed6cea731f5976933b4933f82b17320c
-
-...
+hmac: 547ca6af68dddf4068d17af06f5cd5b4006e49c16d196ef8b3d0963c91219c4f
