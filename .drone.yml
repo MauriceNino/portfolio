@@ -7,7 +7,7 @@ steps:
   - name: test
     image: node:lts-alpine
     commands:
-      - npm ci
+      - yarn --immutable --immutable-cache
   - name: update server files
     image: alpine/git
     when:
@@ -17,6 +17,7 @@ steps:
         path: /server
     commands:
       - cd /server/_repos/portfolio
+      - git config --global --add safe.directory /server/_repos/portfolio
       - git pull --rebase
   - name: deploy to server
     image: docker/compose
@@ -40,4 +41,4 @@ volumes:
       path: /server
 ---
 kind: signature
-hmac: 547ca6af68dddf4068d17af06f5cd5b4006e49c16d196ef8b3d0963c91219c4f
+hmac: 30af6d31f66da6769f70a8490c3e627e431007cf9384f0acb29bf3f0eef6c961

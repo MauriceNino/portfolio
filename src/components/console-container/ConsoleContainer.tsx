@@ -1,10 +1,11 @@
+import { ReactNode } from 'react';
 import { CellProps } from '../../types/default-props';
 import styles from './ConsoleContainer.module.scss';
 
 type ConsoleContainerProps = {
   showDimensions: boolean;
-} & CellProps &
-  JSX.ElementChildrenAttribute;
+  children: ReactNode;
+} & CellProps;
 
 const ConsoleContainer = (props: ConsoleContainerProps) => {
   const consoleWidth = `${Math.ceil(props.hCells * 9.6 + 1)}px`;

@@ -5,9 +5,9 @@ WORKDIR /app
 
 COPY . ./
 
-RUN npm ci \
-    && npm run build
+RUN yarn \
+    && yarn build
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]

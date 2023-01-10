@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import { CellsConverter } from '../../helpers/cells-converter';
 import { CellProps } from '../../types/default-props';
 import style from './BorderBox.module.scss';
@@ -6,8 +6,8 @@ import style from './BorderBox.module.scss';
 type BorderBoxProps = {
   minVCells?: number;
   disableSideLines?: boolean;
-} & CellProps &
-  JSX.ElementChildrenAttribute;
+  children: ReactNode;
+} & CellProps;
 
 const BorderBox = (props: BorderBoxProps) => {
   const getVCells = () => {

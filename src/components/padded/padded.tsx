@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { CellsConverter } from '../../helpers/cells-converter';
 
 type PaddedProps = {
@@ -5,7 +6,8 @@ type PaddedProps = {
   right?: number;
   bottom?: number;
   left?: number;
-} & JSX.ElementChildrenAttribute;
+  children: ReactNode;
+};
 
 const Padded = (props: PaddedProps) => {
   const top = props.top;
