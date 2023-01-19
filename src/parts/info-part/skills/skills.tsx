@@ -11,15 +11,15 @@ export const Skills: FC = () => {
       <br />
 
       <div>{t('skills.frontend_heading')}</div>
-      <Progressbar title="JavaScript(+TS)" percent={90} />
-      <Progressbar title="Angular" percent={80} />
-      <Progressbar title="HTML &amp; CSS/SCSS" percent={70} />
-      <Progressbar title="React" percent={65} />
+      <Progressbar title="JavaScript(+TS)" percent={95} />
+      <Progressbar title="React" percent={90} />
+      <Progressbar title="HTML &amp; CSS/SCSS" percent={80} />
+      <Progressbar title="Angular" percent={65} />
       <br />
 
       <div>{t('skills.backend_heading')}</div>
-      <Progressbar title="Java" percent={75} />
-      <Progressbar title="Node JS" percent={60} />
+      <Progressbar title="Node JS" percent={70} />
+      <Progressbar title="Java" percent={60} />
       <br />
 
       <div>{t('skills.database_heading')}</div>

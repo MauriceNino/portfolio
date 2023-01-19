@@ -7,12 +7,12 @@ import styles from './info.part.module.scss';
 import { Projects } from './projects/projects';
 import { Skills } from './skills/skills';
 
+const MAX_WIDTH_CELLS = 130;
+
 export const Info: FC = () => {
   const { hCells, vCells } = useContainerCells();
 
-  const maxCells = 130;
-
-  const usingCells = hCells > maxCells ? maxCells : hCells;
+  const usingCells = Math.min(MAX_WIDTH_CELLS, hCells);
   const marginLeft =
     hCells - usingCells > 0 ? Math.floor((hCells - usingCells) / 2) : 0;
 
@@ -58,7 +58,7 @@ export const Info: FC = () => {
             heightUnset
             padding={{
               top: isFullscreen ? 1 : 5,
-              left: isFullscreen ? 1 : 10,
+              left: isFullscreen ? 1 : 7,
               right: 1,
               bottom: 1
             }}

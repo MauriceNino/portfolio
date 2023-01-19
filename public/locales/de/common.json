@@ -1,27 +1,27 @@
 {
   "meta": {
     "title": "Maurice el-Banna //Portfolio",
-    "description": "Portfolio von Maurice el-Banna, einem Full-Stack Entwickler aus Österreich. Schauen sie sich meine Skills und Erfahrungen an, oder treten Sie mit mir in Kontakt!"
+    "description": "Portfolio von Maurice el-Banna, einem Frontend Entwickler aus Österreich. Schauen sie sich meine Skills und Erfahrungen an, oder treten Sie mit mir in Kontakt!"
   },
   "splash": {
-    "scroll_button": "Über mich",
+    "scroll_button": "Über Mich",
     "heading_part1": "Servus,",
     "heading_part2": "Ich bin <0>Maurice el-Banna</0>,",
-    "heading_part3": "ein Full-Stack Entwickler",
+    "heading_part3": "ein Frontend Entwickler",
     "heading_part4": "aus <1>Öst</1>erre<1>ich</1>"
   },
   "skills": {
-    "heading": "Meine Skills",
+    "heading": "Meine Skills (via Pluralsight)",
     "frontend_heading": "Frontend",
     "backend_heading": "Backend",
     "database_heading": "Datenbanken"
   },
   "about_me": {
-    "heading": "Über mich",
-    "text": "Ich bin ein 23-jähriger Full-Stack-Entwickler, der derzeit in Österreich lebt. Meine Leidenschaft ist es, Erlebnisse für Benutzer zu schaffen, vor allem im Web.<br/><br/>Ich habe bereits sowohl an kleinen privaten Projekten als auch an großen internationalen Langzeitprojekten gearbeitet. Obwohl ich nur 3 Jahre Berufserfahrung habe, programmiere ich schon seit über 10 Jahren.<br/><br/>Wenn Sie mich für ein Projekt engagieren möchten, können Sie mich gerne auf <0>LinkedIn</0> kontaktieren."
+    "heading": "Über Mich",
+    "text": "Ich bin ein 24-jähriger Full-Stack-Entwickler, der derzeit in Österreich lebt. Meine Leidenschaft ist es, Erlebnisse für Benutzer zu schaffen, vor allem im Web.<br/><br/>Ich habe bereits sowohl an kleinen privaten Projekten als auch an großen internationalen Langzeitprojekten gearbeitet. Obwohl ich nur 3 Jahre Berufserfahrung habe, programmiere ich schon seit über 10 Jahren.<br/><br/>Wenn Sie mich für ein Projekt engagieren möchten, können Sie mich gerne auf <0>LinkedIn</0> kontaktieren."
   },
   "projects": {
-    "heading": "Einige meiner Projekte",
+    "heading": "Einige Meiner Projekte",
     "portfolio": {
       "text": "Die Website, die Sie gerade sehen, wurde in React geschrieben, mit dem Ziel, das Framework im Laufe der Zeit zu erlernen. Die Idee dazu kam mir, als ich das Projekt <0>\"k9s\"</0> sah und von der schönen Konsolenanwendung beeindruckt war. Ich habe versucht, ein mehr oder weniger überzeugendes CLI-Feeling zu erzeugen und dabei die modernen Features eines Browsers für Animationen zu nutzen.<br/><br/>Wenn Sie sich für den Code interessieren, schauen Sie hier: <1>github.com</1>"
     },

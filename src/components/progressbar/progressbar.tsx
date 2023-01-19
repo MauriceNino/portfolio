@@ -11,7 +11,7 @@ const getFakeProgressText = (
   title: string,
   percent: number
 ) => {
-  const filledCells = usingCells - title.length - percent.toString().length - 2;
+  const filledCells = usingCells - title.length - percent.toString().length - 4;
 
   return `[${title} ${'&nbsp;'.repeat(
     filledCells < 0 ? 0 : filledCells
@@ -24,11 +24,11 @@ const getProgressText = (
   percent: number
 ) => {
   const colorClass = percent > 74 ? 'green' : percent > 49 ? 'yellow' : 'red';
-  const filledCells = Math.round((usingCells / 100) * percent);
+  const filledCells = Math.round(((usingCells - 5) / 100) * percent);
 
   // Get the progressbar without the text
   let progressText =
-    '|'.repeat(filledCells) + ' '.repeat(usingCells - filledCells);
+    '|'.repeat(filledCells) + ' '.repeat(usingCells - filledCells - 2);
 
   // Replace parts of progressbar with the text
   progressText = `${title} ${progressText.substring(
@@ -76,10 +76,8 @@ export const Progressbar: FC<ProgressbarProps> = props => {
     };
   }, []);
 
-  const usingCells = hCells - 2;
-
-  const progressText = getProgressText(usingCells, title, percent);
-  const fakeProgressText = getFakeProgressText(usingCells, title, percent);
+  const progressText = getProgressText(hCells, title, percent);
+  const fakeProgressText = getFakeProgressText(hCells, title, percent);
 
   return (
     <div className={styles.progressItem} ref={thisRef}>
