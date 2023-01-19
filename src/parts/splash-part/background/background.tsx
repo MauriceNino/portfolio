@@ -1,4 +1,4 @@
-import React, {
+import {
   Dispatch,
   MutableRefObject,
   SetStateAction,
@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import { animate, Animation } from '../../../helpers/animations';
 import { CellsConverter } from '../../../helpers/cells-converter';
-import { useSSRCheck } from '../../../helpers/isSSRHook';
+import { useIsSSR } from '../../../hooks/isSSR';
 import { Circle } from '../../../types/background';
 import { CellProps } from '../../../types/default-props';
 import BackgroundCanvas from './background-canvas';
@@ -225,7 +225,7 @@ const Background = (props: BackgroundProps) => {
   const { vCells, hCells } = props;
   const [circles, setCircles] = useState<Circle[]>([]);
   const [updateNotifier, setUpdateNotifier] = useState<{}>({});
-  const isSSR = useSSRCheck();
+  const isSSR = useIsSSR();
 
   const animRequestRef = useRef<number>();
   const currentTime = useRef<number>();

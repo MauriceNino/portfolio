@@ -1,15 +1,15 @@
 import { GetServerSideProps } from 'next';
-import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import Head from 'next/head';
-import { useEffect, useRef, useState } from 'react';
-import TagManager from 'react-gtm-module';
-import { hotjar } from 'react-hotjar';
-import { i18n } from '../../next-i18next.config';
-import { useSSRCheck } from '../helpers/isSSRHook';
-import Loader from '../parts/loader/loader';
-import { CellProps } from '../types/default-props';
-import HomePage from './home.page';
+import { FC, useRef } from 'react';
+import SimpleBar from 'simplebar-react';
+import 'simplebar/src/simplebar.css';
+import BorderBox from '../components/border-box/BorderBox';
+import ConsoleContainer from '../components/console-container/ConsoleContainer';
+import Padded from '../components/padded/padded';
+import { usePageCells } from '../hooks/pageCells';
+import Heading from '../parts/heading/heading';
+import Info from '../parts/info-part/info.part';
+import Splash from '../parts/splash-part/splash.part';
 
 // Parse the accept-language header to an array of locales
 const getLocales = (str: string | undefined): string[] => {
@@ -69,101 +69,58 @@ export const getServerSideProps: GetServerSideProps = async ({
   };
 };
 
-const getCurrentState = (): CellProps => {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+const HomePage: FC = () => {
+  const cells = usePageCells();
+  const scrollbarRef = useRef<SimpleBar>(null);
 
-  return {
-    hCells: Math.floor(width / 9.6),
-    vCells: Math.floor(height / 21)
-  };
-};
-
-const App = () => {
-  const { t } = useTranslation();
-  const [state, setState] = useState<CellProps>({
-    hCells: 50,
-    vCells: 20
-  });
-  const [initialized, setInitialized] = useState<boolean>(false);
-  const isProd = useRef(process.env.isProd as any as boolean);
-
-  const gtmId = useRef(process.env.gtmId!);
-  const hotjarSiteId = useRef(+process.env.hotjarSiteId!);
-
-  useEffect(() => {
-    if (isProd.current === true) {
-      // Init Google Tag Manager / Analytics
-      TagManager.initialize({
-        gtmId: gtmId.current
-      });
-
-      // Init Hotjar
-      hotjar.initialize(hotjarSiteId.current, 6);
-    }
-
-    // Set initial resize state
-    setState(getCurrentState());
-
-    // Give the page time to load
-    setTimeout(() => setInitialized(true), 100);
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const newState = getCurrentState();
-
-      if (
-        state.hCells !== newState.hCells ||
-        state.vCells !== newState.vCells
-      ) {
-        setState(newState);
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [state]);
-
-  const isSSR = useSSRCheck();
+  const disableSideLines = cells.hCells < 50;
 
   return (
-    <>
-      <Head>
-        <title>{t('meta.title')}</title>
-        <link rel="icon" href="favicon.ico" />
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={t('meta.description')} />
-        <link rel="apple-touch-icon" href="logo192.png" />
-        <link rel="manifest" href="manifest.json" />
-        {i18n.locales.map(locale => (
-          <link
-            key={locale}
-            rel="alternate"
-            hrefLang={locale}
-            href={`https://mauz.io/${locale}`}
-          />
-        ))}
+    <ConsoleContainer
+      vCells={cells.vCells}
+      hCells={cells.hCells}
+      showDimensions={false}
+    >
+      <Padded bottom={0}>
+        <Heading hCells={cells.hCells} />
+      </Padded>
 
-        <meta property="og:title" content={t('meta.title')} />
-        <meta property="og:description" content={t('meta.description')} />
-        <meta property="og:image" content="https://mauz.io/logo512.png" />
-        <meta property="og:url" content="https://mauz.io" />
-        <meta name="twitter:card" content="summary" />
+      <Padded
+        left={disableSideLines ? 0 : 1}
+        right={disableSideLines ? 0 : 1}
+        bottom={0}
+      >
+        <BorderBox
+          vCells={cells.vCells - 7}
+          hCells={cells.hCells - (disableSideLines ? 0 : 2)}
+          minVCells={6}
+          disableSideLines={disableSideLines}
+        >
+          <SimpleBar
+            ref={scrollbarRef}
+            scrollableNodeProps={{ id: 'scrollable-content' }}
+            style={{ maxHeight: '100%' }}
+          >
+            <Splash
+              scrollbarRef={scrollbarRef}
+              vCells={cells.vCells - 7 > 6 ? cells.vCells - 7 : 6}
+              hCells={cells.hCells - (disableSideLines ? 0 : 4)}
+            />
+            <Info
+              vCells={cells.vCells - 7 > 6 ? cells.vCells - 7 : 6}
+              hCells={cells.hCells - (disableSideLines ? 0 : 4)}
+            />
+          </SimpleBar>
+        </BorderBox>
+      </Padded>
 
-        <meta property="og:site_name" content={t('meta.title')} />
-        <meta name="twitter:image:alt" content="Logo" />
-      </Head>
-
-      {(isSSR || !initialized) && <Loader />}
-
-      <HomePage vCells={state.vCells} hCells={state.hCells} />
-    </>
+      <Padded top={0} bottom={0}>
+        <div id="copyright" role="presentation">
+          ©2021 - Maurice el-Banna
+        </div>
+      </Padded>
+    </ConsoleContainer>
   );
 };
 
-export default App;
+export default HomePage;

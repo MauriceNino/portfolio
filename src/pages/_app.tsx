@@ -1,8 +1,16 @@
 import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
+import { PageLayout } from '../components/page-layout/page-layout';
+import { PageCellsProvider } from '../hooks/pageCells';
 import './_app.scss';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+function AppBase({ Component, pageProps }: AppProps) {
+  return (
+    <PageCellsProvider>
+      <PageLayout>
+        <Component {...pageProps} />
+      </PageLayout>
+    </PageCellsProvider>
+  );
 }
-export default appWithTranslation(MyApp);
+export default appWithTranslation(AppBase);

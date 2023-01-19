@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const useSSRCheck = () => {
+export const useIsSSR = () => {
   const [isSSR, setIsSSR] = useState<boolean>(true);
 
   useEffect(() => {
