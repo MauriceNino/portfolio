@@ -1,5 +1,6 @@
 import {
   Dispatch,
+  FC,
   MutableRefObject,
   SetStateAction,
   useEffect,
@@ -8,10 +9,11 @@ import {
 } from 'react';
 import { animate, Animation } from '../../../helpers/animations';
 import { CellsConverter } from '../../../helpers/cells-converter';
+import { useContainerCells } from '../../../hooks/containerCells';
 import { useIsSSR } from '../../../hooks/isSSR';
 import { Circle } from '../../../types/background';
 import { CellProps } from '../../../types/default-props';
-import BackgroundCanvas from './background-canvas';
+import { BackgroundCanvas } from './background-canvas';
 
 const DEFAULT_POPUP_ANIMATION: Animation<{ scale: number }> = {
   keyframes: {
@@ -219,17 +221,15 @@ const updateFrame = (
   );
 };
 
-type BackgroundProps = CellProps;
-
-const Background = (props: BackgroundProps) => {
-  const { vCells, hCells } = props;
+export const Background: FC = () => {
+  const { vCells, hCells } = useContainerCells();
   const [circles, setCircles] = useState<Circle[]>([]);
   const [updateNotifier, setUpdateNotifier] = useState<{}>({});
   const isSSR = useIsSSR();
 
   const animRequestRef = useRef<number>();
   const currentTime = useRef<number>();
-  const cellsRef = useRef<CellProps>(props);
+  const cellsRef = useRef<CellProps>({ vCells, hCells });
   const circlesRef = useRef<Circle[]>(circles);
 
   // Init the circles on the first render, or on size change
@@ -275,5 +275,3 @@ const Background = (props: BackgroundProps) => {
 
   return <BackgroundCanvas hCells={hCells} vCells={vCells} circles={circles} />;
 };
-
-export default Background;

@@ -1,5 +1,5 @@
 import { Trans, useTranslation } from 'next-i18next';
-import { useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { CellsConverter } from '../../../helpers/cells-converter';
 import ScrollHelper from '../../../helpers/scroll-helper';
 import ViewportHelper from '../../../helpers/viewport-helper';
@@ -9,7 +9,7 @@ type AboutMeProps = {
   isFullscreen: boolean;
 };
 
-const AboutMe = (props: AboutMeProps) => {
+export const AboutMe: FC<AboutMeProps> = props => {
   const isFullscreen = props.isFullscreen;
 
   const [isVisible, setIsVisible] = useState(false);
@@ -61,5 +61,3 @@ const AboutMe = (props: AboutMeProps) => {
     </>
   );
 };
-
-export default AboutMe;

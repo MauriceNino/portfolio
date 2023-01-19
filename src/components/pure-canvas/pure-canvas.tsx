@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { FC, memo } from 'react';
 import { CellsConverter } from '../../helpers/cells-converter';
 import { CellProps } from '../../types/default-props';
 
@@ -6,7 +6,7 @@ type PureCanvasProps = {
   contextRef: (el: HTMLCanvasElement) => void;
 } & CellProps;
 
-const PureCanvas = (props: PureCanvasProps) => {
+export const PureCanvas: FC<PureCanvasProps> = memo(props => {
   const { vCells, hCells } = props;
 
   return (
@@ -18,6 +18,4 @@ const PureCanvas = (props: PureCanvasProps) => {
       }}
     ></canvas>
   );
-};
-
-export default memo(PureCanvas);
+});

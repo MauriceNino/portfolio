@@ -1,17 +1,58 @@
-import { useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import ScrollHelper from '../../helpers/scroll-helper';
 import ViewportHelper from '../../helpers/viewport-helper';
-import { HCellProps } from '../../types/default-props';
+import { useContainerCells } from '../../hooks/containerCells';
 import styles from './progressbar.module.scss';
+
+const htmlWhitespace = (str: string) => str.replaceAll(' ', '\u00A0');
+
+const getFakeProgressText = (
+  usingCells: number,
+  title: string,
+  percent: number
+) => {
+  const filledCells = usingCells - title.length - percent.toString().length - 2;
+
+  return `[${title} ${'&nbsp;'.repeat(
+    filledCells < 0 ? 0 : filledCells
+  )}${percent}%]`;
+};
+
+const getProgressText = (
+  usingCells: number,
+  title: string,
+  percent: number
+) => {
+  const colorClass = percent > 74 ? 'green' : percent > 49 ? 'yellow' : 'red';
+  const filledCells = Math.round((usingCells / 100) * percent);
+
+  // Get the progressbar without the text
+  let progressText =
+    '|'.repeat(filledCells) + ' '.repeat(usingCells - filledCells);
+
+  // Replace parts of progressbar with the text
+  progressText = `${title} ${progressText.substring(
+    title.length + 1,
+    progressText.length - percent.toString().length - 1
+  )}${percent}%`;
+
+  // Apply color to the relevant parts in the progressbar and add bounds
+  progressText = `[<span class="${styles[colorClass]}">${htmlWhitespace(
+    progressText.substring(0, filledCells)
+  )}</span>${htmlWhitespace(progressText.substring(filledCells))}]`;
+
+  return progressText;
+};
 
 type ProgressbarProps = {
   title: string;
   percent: number;
-} & HCellProps;
+};
 
-const Progressbar = (props: ProgressbarProps) => {
-  const { hCells, title, percent } = props;
+export const Progressbar: FC<ProgressbarProps> = props => {
+  const { title, percent } = props;
 
+  const { hCells } = useContainerCells();
   const [isVisible, setIsVisible] = useState(false);
   const thisRef = useRef<HTMLDivElement>(null);
 
@@ -52,41 +93,3 @@ const Progressbar = (props: ProgressbarProps) => {
     </div>
   );
 };
-
-const htmlWhitespace = (str: string) => str.replaceAll(' ', '\u00A0');
-
-function getFakeProgressText(
-  usingCells: number,
-  title: string,
-  percent: number
-) {
-  const filledCells = usingCells - title.length - percent.toString().length - 2;
-
-  return `[${title} ${'&nbsp;'.repeat(
-    filledCells < 0 ? 0 : filledCells
-  )}${percent}%]`;
-}
-
-function getProgressText(usingCells: number, title: string, percent: number) {
-  const colorClass = percent > 74 ? 'green' : percent > 49 ? 'yellow' : 'red';
-  const filledCells = Math.round((usingCells / 100) * percent);
-
-  // Get the progressbar without the text
-  let progressText =
-    '|'.repeat(filledCells) + ' '.repeat(usingCells - filledCells);
-
-  // Replace parts of progressbar with the text
-  progressText = `${title} ${progressText.substring(
-    title.length + 1,
-    progressText.length - percent.toString().length - 1
-  )}${percent}%`;
-
-  // Apply color to the relevant parts in the progressbar and add bounds
-  progressText = `[<span class="${styles[colorClass]}">${htmlWhitespace(
-    progressText.substring(0, filledCells)
-  )}</span>${htmlWhitespace(progressText.substring(filledCells))}]`;
-
-  return progressText;
-}
-
-export default Progressbar;

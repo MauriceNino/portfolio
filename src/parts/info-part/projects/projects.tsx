@@ -1,15 +1,22 @@
 import { Trans, useTranslation } from 'next-i18next';
-import React, { useEffect, useRef, useState } from 'react';
+import {
+  FC,
+  PropsWithChildren,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import GamerPals from '../../../assets/projects/gamerpals';
 import Mauz from '../../../assets/projects/mauz';
 import More from '../../../assets/projects/more';
 import QHelp from '../../../assets/projects/qhelp';
-import Padded from '../../../components/padded/padded';
+import { Container } from '../../../components/container/container';
 import ScrollHelper from '../../../helpers/scroll-helper';
 import ViewportHelper from '../../../helpers/viewport-helper';
 import styles from './projects.module.scss';
 
-function getAsDiv(el: string) {
+const getAsDiv = (el: string) => {
   return el
     .split('\n')
     .map(e => e.replaceAll(' ', '\u00A0'))
@@ -23,9 +30,15 @@ function getAsDiv(el: string) {
       ),
       <></>
     );
-}
+};
 
-function SingleProject(props: any) {
+type SingleProjectProps = PropsWithChildren<{
+  title: string;
+  logo: { class: string; img: ReactNode; logoLeft: boolean };
+  isFullscreen: boolean;
+}>;
+
+const SingleProject: FC<SingleProjectProps> = props => {
   const title = props.title;
   const logo = props.logo;
   const isFullscreen = props.isFullscreen;
@@ -67,26 +80,38 @@ function SingleProject(props: any) {
           float: isFullscreen ? 'right' : isLogoLeft ? 'left' : 'right'
         }}
       >
-        <Padded
-          bottom={3}
-          left={isFullscreen ? 1 : isLogoLeft ? 1 : 3}
-          right={isFullscreen ? 1 : isLogoLeft ? 3 : 1}
+        <Container
+          padding={{
+            top: 1,
+            bottom: 3,
+            left: isFullscreen ? 1 : isLogoLeft ? 1 : 3,
+            right: isFullscreen ? 1 : isLogoLeft ? 3 : 1
+          }}
+          heightUnset
+          widthUnset
         >
           {logo.img}
-        </Padded>
+        </Container>
       </div>
-      <Padded left={0} right={0} bottom={3}>
+      <Container
+        padding={{
+          top: 1,
+          bottom: 3
+        }}
+        heightUnset
+        widthUnset
+      >
         {props.children}
-      </Padded>
+      </Container>
     </div>
   );
-}
+};
 
 type ProjectProps = {
   isFullscreen: boolean;
 };
 
-const Projects = (props: ProjectProps) => {
+export const Projects: FC<ProjectProps> = props => {
   const isFullscreen = props.isFullscreen;
 
   const qhelpLogo = getAsDiv(QHelp);
@@ -189,5 +214,3 @@ const Projects = (props: ProjectProps) => {
     </>
   );
 };
-
-export default Projects;

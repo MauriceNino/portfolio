@@ -1,53 +1,50 @@
 @keyframes blink {
   0% {
-      opacity: 0;
+    opacity: 0;
   }
 
   80% {
-      opacity: 1;
+    opacity: 1;
   }
 
   100% {
-      opacity: 0;
+    opacity: 0;
   }
 }
 
-#splashContainer {
-  position: relative;
+#carret {
+  animation: blink 1s infinite;
+}
 
-  #carret {
-    animation: blink 1s infinite;
-  }
+#name {
+  color: var(--primary-color);
+}
 
-  #heading {
-    color: var(--primary-color);
-  }
+.austriaColored {
+  color: var(--austria-color);
+}
 
-  .austriaColored {
-    color: var(--austria-color);
-  }
-
-  h1 > span {
-    display: inline-block;
+#heading {
+  span {
     background-color: var(--background-color);
   }
+}
 
-  .button {
-    cursor: pointer;
-    user-select: none;
+.button {
+  cursor: pointer;
+  user-select: none;
+  display: inline-block;
+  margin-top: calc(var(--text-height) * 1px);
+  background-color: var(--background-color);
+
+  .downArrow {
     display: inline-block;
-    margin-top: calc(var(--text-height) * 1px);
-    background-color: var(--background-color);
+    transition: color 0.3s, transform 0.3s;
+  }
 
+  &:hover {
     .downArrow {
-      display: inline-block;
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    &:hover {
-      .downArrow {
-        transform: rotate(90deg);
-      }
+      transform: rotate(90deg);
     }
   }
 }

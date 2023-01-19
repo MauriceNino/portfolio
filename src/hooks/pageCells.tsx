@@ -1,12 +1,13 @@
 import {
   createContext,
   FC,
-  ReactNode,
+  PropsWithChildren,
   useContext,
   useEffect,
   useState
 } from 'react';
 import { CellProps } from '../types/default-props';
+import { ContainerCellsProvider } from './containerCells';
 
 const PageCellsContext = createContext<CellProps>({
   hCells: 50,
@@ -23,9 +24,7 @@ const getCurrentState = (): CellProps => {
   };
 };
 
-export const PageCellsProvider: FC<{ children: ReactNode }> = ({
-  children
-}) => {
+export const PageCellsProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, setState] = useState<CellProps>({
     hCells: 50,
     vCells: 20
@@ -56,7 +55,7 @@ export const PageCellsProvider: FC<{ children: ReactNode }> = ({
 
   return (
     <PageCellsContext.Provider value={state}>
-      {children}
+      <ContainerCellsProvider value={state}>{children}</ContainerCellsProvider>
     </PageCellsContext.Provider>
   );
 };

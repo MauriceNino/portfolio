@@ -1,42 +1,34 @@
-import { CSSProperties, ReactNode } from 'react';
+import { CSSProperties, FC, PropsWithChildren } from 'react';
 import { CellsConverter } from '../../helpers/cells-converter';
-import { CellProps } from '../../types/default-props';
+import {
+  ContainerCellsProvider,
+  useContainerCells
+} from '../../hooks/containerCells';
 import style from './BorderBox.module.scss';
 
-type BorderBoxProps = {
+const getContentStyle = (vCells: number, minVCells?: number): CSSProperties => {
+  let css: CSSProperties = {};
+
+  if (minVCells) {
+    css.minHeight = `${CellsConverter.cellsToHeight(minVCells)}px`;
+    css.height = `${CellsConverter.cellsToHeight(
+      Math.max(vCells, minVCells)
+    )}px`;
+  }
+
+  return css;
+};
+
+type BorderBoxProps = PropsWithChildren<{
   minVCells?: number;
-  disableSideLines?: boolean;
-  children: ReactNode;
-} & CellProps;
+  disabledSidelines?: boolean;
+}>;
 
-const BorderBox = (props: BorderBoxProps) => {
-  const getVCells = () => {
-    let vCells = props.vCells;
+export const BorderBox: FC<BorderBoxProps> = props => {
+  const containerCells = useContainerCells();
 
-    const minVCells = props.minVCells;
-
-    if (minVCells) {
-      vCells = vCells > minVCells ? vCells : minVCells;
-    }
-
-    return vCells;
-  };
-
-  const getContentStyle = (): CSSProperties => {
-    let css: CSSProperties = {};
-
-    if (props.minVCells) {
-      css.minHeight = `${CellsConverter.cellsToHeight(props.minVCells)}px`;
-      css.height = `${CellsConverter.cellsToHeight(getVCells())}px`;
-    }
-
-    return css;
-  };
-
-  const disableSideLines = props.disableSideLines;
-
-  const vCells = getVCells();
-  const hCells = props.hCells;
+  const vCells = Math.max(containerCells.vCells - 2, props.minVCells ?? 0);
+  const hCells = containerCells.hCells;
 
   const borderVerticalLine = '|'.repeat(vCells);
   const borderHorizontalLine = '+' + '-'.repeat(hCells - 2) + '+';
@@ -46,15 +38,25 @@ const BorderBox = (props: BorderBoxProps) => {
       <div>{borderHorizontalLine}</div>
 
       <div className={style.contentFlex}>
-        {disableSideLines || (
+        {props.disabledSidelines || (
           <div className={style.border}>{borderVerticalLine}</div>
         )}
 
-        <div style={getContentStyle()} className={style.content}>
-          {props.children}
+        <div
+          style={getContentStyle(vCells, props.minVCells)}
+          className={style.content}
+        >
+          <ContainerCellsProvider
+            value={{
+              hCells: hCells - (props.disabledSidelines ? 0 : 2),
+              vCells: vCells
+            }}
+          >
+            {props.children}
+          </ContainerCellsProvider>
         </div>
 
-        {disableSideLines || (
+        {props.disabledSidelines || (
           <div className={style.border}>{borderVerticalLine}</div>
         )}
       </div>
@@ -63,5 +65,3 @@ const BorderBox = (props: BorderBoxProps) => {
     </div>
   );
 };
-
-export default BorderBox;

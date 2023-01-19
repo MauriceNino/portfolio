@@ -1,14 +1,22 @@
 import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
-import { FC, ReactNode, useEffect, useRef, useState } from 'react';
+import { FC, PropsWithChildren, useEffect, useRef, useState } from 'react';
 import TagManager from 'react-gtm-module';
 import { hotjar } from 'react-hotjar';
 import { i18n } from '../../../next-i18next.config';
 import { useIsSSR } from '../../hooks/isSSR';
-import Loader from '../../parts/loader/loader';
+import { usePageCells } from '../../hooks/pageCells';
+import { ScrollbarProvider } from '../../hooks/scrollbar';
+import { Heading } from '../../parts/heading/heading';
+import { Loader } from '../../parts/loader/loader';
+import { BorderBox } from '../border-box/BorderBox';
+import { ConsoleContainer } from '../console-container/ConsoleContainer';
+import { Container } from '../container/container';
 
-export const PageLayout: FC<{ children: ReactNode }> = ({ children }) => {
+export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
   const { t } = useTranslation();
+  const cells = usePageCells();
+
   const [initialized, setInitialized] = useState<boolean>(false);
   const isProd = useRef(process.env.isProd as any as boolean);
 
@@ -31,6 +39,8 @@ export const PageLayout: FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   const isSSR = useIsSSR();
+
+  const disabledSidelines = cells.hCells < 50;
 
   return (
     <>
@@ -63,7 +73,41 @@ export const PageLayout: FC<{ children: ReactNode }> = ({ children }) => {
 
       {(isSSR || !initialized) && <Loader />}
 
-      {children}
+      <ConsoleContainer showDimensions={!isProd.current}>
+        <Container
+          padding={{ left: 1, right: 1, top: 1 }}
+          dimensions={{
+            vCells: 4
+          }}
+        >
+          <Heading hCells={cells.hCells} />
+        </Container>
+
+        <Container
+          dimensions={{
+            vCells: cells.vCells - 5
+          }}
+          padding={{
+            left: disabledSidelines ? 0 : 1,
+            right: disabledSidelines ? 0 : 1
+          }}
+        >
+          <BorderBox minVCells={6} disabledSidelines={disabledSidelines}>
+            <ScrollbarProvider>{children}</ScrollbarProvider>
+          </BorderBox>
+        </Container>
+
+        <Container
+          dimensions={{
+            vCells: 1
+          }}
+          padding={{ right: 1 }}
+        >
+          <div id="copyright" role="presentation">
+            ©2021 - Maurice el-Banna
+          </div>
+        </Container>
+      </ConsoleContainer>
     </>
   );
 };

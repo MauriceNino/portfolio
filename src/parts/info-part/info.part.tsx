@@ -1,16 +1,14 @@
-import Padded from '../../components/padded/padded';
+import { FC } from 'react';
+import { Container } from '../../components/container/container';
 import { CellsConverter } from '../../helpers/cells-converter';
-import { CellProps } from '../../types/default-props';
-import AboutMe from './about-me/about-me';
+import { useContainerCells } from '../../hooks/containerCells';
+import { AboutMe } from './about-me/about-me';
 import styles from './info.part.module.scss';
-import Projects from './projects/projects';
-import Skills from './skills/skills';
+import { Projects } from './projects/projects';
+import { Skills } from './skills/skills';
 
-type InfoProps = CellProps;
-
-const Info = (props: InfoProps) => {
-  const hCells = props.hCells;
-  const vCells = props.vCells;
+export const Info: FC = () => {
+  const { hCells, vCells } = useContainerCells();
 
   const maxCells = 130;
 
@@ -37,14 +35,36 @@ const Info = (props: InfoProps) => {
         }}
       >
         <div style={{ width: CellsConverter.cellsToWidth(leftCells) }}>
-          <Padded top={isFullscreen ? 1 : 5}>
-            <Skills hCells={leftCells - 2} />
-          </Padded>
+          <Container
+            dimensions={{
+              hCells: leftCells
+            }}
+            heightUnset
+            padding={{
+              top: isFullscreen ? 1 : 5,
+              left: 1,
+              right: 1,
+              bottom: 1
+            }}
+          >
+            <Skills />
+          </Container>
         </div>
         <div style={{ width: CellsConverter.cellsToWidth(rightCells) }}>
-          <Padded top={isFullscreen ? 1 : 5} left={isFullscreen ? 1 : 10}>
+          <Container
+            dimensions={{
+              hCells: rightCells
+            }}
+            heightUnset
+            padding={{
+              top: isFullscreen ? 1 : 5,
+              left: isFullscreen ? 1 : 10,
+              right: 1,
+              bottom: 1
+            }}
+          >
             <AboutMe isFullscreen={isFullscreen} />
-          </Padded>
+          </Container>
         </div>
       </div>
 
@@ -54,12 +74,21 @@ const Info = (props: InfoProps) => {
           marginLeft: CellsConverter.cellsToWidth(marginLeft)
         }}
       >
-        <Padded top={isFullscreen ? 1 : 5}>
+        <Container
+          dimensions={{
+            hCells: usingCells
+          }}
+          heightUnset
+          padding={{
+            top: isFullscreen ? 1 : 5,
+            left: 1,
+            right: 1,
+            bottom: 1
+          }}
+        >
           <Projects isFullscreen={isFullscreen} />
-        </Padded>
+        </Container>
       </div>
     </div>
   );
 };
-
-export default Info;

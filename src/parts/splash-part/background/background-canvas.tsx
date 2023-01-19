@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import PureCanvas from '../../../components/pure-canvas/pure-canvas';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { PureCanvas } from '../../../components/pure-canvas/pure-canvas';
 import { CellsConverter } from '../../../helpers/cells-converter';
 import { Circle } from '../../../types/background';
 import { CellProps } from '../../../types/default-props';
@@ -62,7 +62,7 @@ type BackgroundCanvasProps = {
 
 const FPS_SMOOTHING = 0.99;
 
-const BackgroundCanvas = (props: BackgroundCanvasProps) => {
+export const BackgroundCanvas: FC<BackgroundCanvasProps> = props => {
   const { hCells, vCells, circles } = props;
 
   const [canvasRef, setCanvasRef] = useState<HTMLCanvasElement | null>(null);
@@ -101,5 +101,3 @@ const BackgroundCanvas = (props: BackgroundCanvasProps) => {
     <PureCanvas hCells={hCells} vCells={vCells} contextRef={setCanvasRef} />
   );
 };
-
-export default BackgroundCanvas;

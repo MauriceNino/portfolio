@@ -1,20 +1,18 @@
 import { Trans, useTranslation } from 'next-i18next';
-import React, { RefObject } from 'react';
-import SimpleBar from 'simplebar-react';
-import BorderBox from '../../components/border-box/BorderBox';
-import Centered from '../../components/centered/centered';
-import { CellsConverter } from '../../helpers/cells-converter';
-import { CellProps } from '../../types/default-props';
-import Background from './background/background';
+import { FC, useRef } from 'react';
+import { BorderBox } from '../../components/border-box/BorderBox';
+import { Centered } from '../../components/centered/centered';
+import { Container } from '../../components/container/container';
+import { useContainerCells } from '../../hooks/containerCells';
+import { useScrollbar } from '../../hooks/scrollbar';
+import { Background } from './background/background';
 import styles from './splash.part.module.scss';
 
-type SplashProps = CellProps & {
-  scrollbarRef: RefObject<SimpleBar>;
-};
+export const Splash: FC = () => {
+  const containerCells = useContainerCells();
+  const scrollbar = useScrollbar();
 
-const Splash = (props: SplashProps) => {
-  const vCells = props.vCells;
-  const hCells = props.hCells;
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const { t } = useTranslation();
 
@@ -23,7 +21,7 @@ const Splash = (props: SplashProps) => {
   const heading_part2 = (
     <>
       <Trans i18nKey="splash.heading_part2">
-        <span id={styles.heading}>Name</span>
+        <span id={styles.name}>Name</span>
       </Trans>
     </>
   );
@@ -39,13 +37,13 @@ const Splash = (props: SplashProps) => {
 
   const heading_big = () => (
     <>
-      <Centered vCells={vCells} hCells={hCells} horizontal={true}>
+      <Centered horizontal={true}>
         <span id={styles.carret}>&gt;</span>&nbsp;
         {heading_part1}
         {heading_part2}
       </Centered>
       <br />
-      <Centered vCells={vCells} hCells={hCells} horizontal={true}>
+      <Centered horizontal={true}>
         {heading_part3}
         {heading_part4}
       </Centered>
@@ -53,62 +51,48 @@ const Splash = (props: SplashProps) => {
   );
   const heading_small = () => (
     <>
-      <Centered vCells={vCells} hCells={hCells} horizontal={true}>
+      <Centered horizontal={true}>
         <span id={styles.carret}>&gt;</span>&nbsp;
         <span>{heading_part1}</span>
       </Centered>
-      <Centered vCells={vCells} hCells={hCells} horizontal={true}>
-        {heading_part2}
-      </Centered>
+      <Centered horizontal={true}>{heading_part2}</Centered>
       <br />
-      <Centered vCells={vCells} hCells={hCells} horizontal={true}>
-        {heading_part3}
-      </Centered>
-      <Centered vCells={vCells} hCells={hCells} horizontal={true}>
-        {heading_part4}
-      </Centered>
+      <Centered horizontal={true}>{heading_part3}</Centered>
+      <Centered horizontal={true}>{heading_part4}</Centered>
     </>
   );
 
   const onClick = () => {
-    const splashContainer = document.getElementById(styles.splashContainer)!;
-
-    props.scrollbarRef.current?.getScrollElement().scrollTo({
-      top: splashContainer.clientHeight,
+    scrollbar?.current?.getScrollElement().scrollTo({
+      top: containerRef.current?.clientHeight ?? 0,
       behavior: 'smooth'
     });
   };
 
   return (
-    <>
-      <div
-        id={styles.splashContainer}
-        style={{
-          height: `${CellsConverter.cellsToHeight(vCells)}px`,
-          width: `${CellsConverter.cellsToWidth(hCells)}px`
-        }}
-      >
-        <Centered
-          vCells={vCells}
-          hCells={hCells}
-          vertical={true}
-          absolute={true}
-        >
-          <h1>{hCells > 40 ? heading_big() : heading_small()}</h1>
+    <Container ref={containerRef}>
+      <Centered vertical={true} absolute={true}>
+        <h1 id={styles.heading}>
+          {containerCells.hCells > 40 ? heading_big() : heading_small()}
+        </h1>
 
-          <Centered vCells={vCells} hCells={hCells} horizontal={true}>
-            <div className={styles.button} onClick={onClick}>
-              <BorderBox hCells={btn_text.length + 6} vCells={1}>
+        <Centered horizontal={true}>
+          <div className={styles.button} onClick={onClick}>
+            <Container
+              dimensions={{
+                vCells: 3,
+                hCells: btn_text.length + 6
+              }}
+            >
+              <BorderBox>
                 &nbsp;<div className={styles.downArrow}>&gt;</div> {btn_text}
               </BorderBox>
-            </div>
-          </Centered>
+            </Container>
+          </div>
         </Centered>
+      </Centered>
 
-        <Background vCells={vCells} hCells={hCells} />
-      </div>
-    </>
+      <Background />
+    </Container>
   );
 };
-
-export default Splash;

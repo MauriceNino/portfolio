@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import styles from './socials.module.scss';
 
-const Socials = () => {
+export const Socials: FC = () => {
   return (
     <>
       <div className={styles.socialLink}>
@@ -26,5 +27,3 @@ const Socials = () => {
     </>
   );
 };
-
-export default Socials;

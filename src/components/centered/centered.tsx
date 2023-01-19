@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { FC, PropsWithChildren, useEffect } from 'react';
 import { CellsConverter } from '../../helpers/cells-converter';
-import { CellProps } from '../../types/default-props';
+import { useContainerCells } from '../../hooks/containerCells';
 
-type CenteredProps = {
-  children: React.ReactNode;
+type CenteredProps = PropsWithChildren<{
   absolute?: boolean;
   horizontal?: boolean;
   vertical?: boolean;
-} & CellProps;
+}>;
 
-const Centered = (props: CenteredProps) => {
+export const Centered: FC<CenteredProps> = props => {
+  const { vCells, hCells } = useContainerCells();
   const childRef = React.useRef<HTMLElement>();
   const [style, setStyle] = React.useState<React.CSSProperties>({});
 
@@ -17,7 +17,7 @@ const Centered = (props: CenteredProps) => {
     const child = childRef.current;
 
     if (child) {
-      const { horizontal, vertical, absolute, vCells, hCells } = props;
+      const { horizontal, vertical, absolute } = props;
 
       setTimeout(() => {
         if (horizontal) {
@@ -61,7 +61,7 @@ const Centered = (props: CenteredProps) => {
         }
       }, 50);
     }
-  }, [childRef, props]);
+  }, [childRef, hCells, props, vCells]);
 
   return (
     <span ref={(el: HTMLElement) => (childRef.current = el)} style={style}>
@@ -69,5 +69,3 @@ const Centered = (props: CenteredProps) => {
     </span>
   );
 };
-
-export default Centered;
