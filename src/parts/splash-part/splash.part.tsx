@@ -19,20 +19,21 @@ export const Splash: FC = () => {
   const btn_text = t('splash.scroll_button');
   const heading_part1 = <>{t('splash.heading_part1')}&nbsp;</>;
   const heading_part2 = (
-    <>
-      <Trans i18nKey="splash.heading_part2">
-        <span id={styles.name}>Name</span>
-      </Trans>
-    </>
+    <Trans
+      i18nKey="splash.heading_part2"
+      components={{
+        name: <span id={styles.name} />
+      }}
+    />
   );
   const heading_part3 = <>{t('splash.heading_part3')}&nbsp;</>;
   const heading_part4 = (
-    <>
-      <Trans i18nKey="splash.heading_part4">
-        <span className={styles.austriaColored}></span>
-        <span className={styles.austriaColored}></span>
-      </Trans>
-    </>
+    <Trans
+      i18nKey="splash.heading_part4"
+      components={{
+        red_part: <span className={styles.austriaColored} />
+      }}
+    />
   );
 
   const heading_big = () => (
@@ -55,9 +56,11 @@ export const Splash: FC = () => {
         <span id={styles.carret}>&gt;</span>&nbsp;
         <span>{heading_part1}</span>
       </Centered>
+      <br />
       <Centered horizontal={true}>{heading_part2}</Centered>
       <br />
       <Centered horizontal={true}>{heading_part3}</Centered>
+      <br />
       <Centered horizontal={true}>{heading_part4}</Centered>
     </>
   );

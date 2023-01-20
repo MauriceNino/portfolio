@@ -1,5 +1,6 @@
+import moment from 'moment';
 import { Trans, useTranslation } from 'next-i18next';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { CellsConverter } from '../../../helpers/cells-converter';
 import ScrollHelper from '../../../helpers/scroll-helper';
 import ViewportHelper from '../../../helpers/viewport-helper';
@@ -35,6 +36,13 @@ export const AboutMe: FC<AboutMeProps> = props => {
     };
   }, []);
 
+  const age = useMemo(() => {
+    const birthday = moment('19980907');
+    const diff = moment.duration(moment().diff(birthday));
+
+    return Math.floor(diff.asYears());
+  }, []);
+
   return (
     <>
       <h2>{t('about_me.heading')}</h2>
@@ -48,15 +56,22 @@ export const AboutMe: FC<AboutMeProps> = props => {
             width: CellsConverter.cellsToWidth(isFullscreen ? 13 : 22)
           }}
         ></div>
-        <Trans i18nKey="about_me.text">
-          <a
-            href="https://www.linkedin.com/in/maurice-elbanna/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            LinkedIn
-          </a>
-        </Trans>
+        <Trans
+          i18nKey="about_me.text"
+          values={{
+            age
+          }}
+          components={{
+            linkedin_link: (
+              // eslint-disable-next-line jsx-a11y/anchor-has-content
+              <a
+                href="https://www.linkedin.com/in/maurice-elbanna/"
+                target="_blank"
+                rel="noreferrer"
+              />
+            )
+          }}
+        ></Trans>
       </div>
     </>
   );
