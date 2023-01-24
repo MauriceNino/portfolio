@@ -112,23 +112,27 @@ export const AsciiImage: FC<AsciiImageProps> = ({
   const isSSR = useIsSSR();
 
   const ascii = useMemo(() => {
-    const ctx = canvasRef.current?.getContext('2d', {
-      willReadFrequently: true
-    });
+    try {
+      const ctx = canvasRef.current?.getContext('2d', {
+        willReadFrequently: true
+      });
 
-    if (canvasRef.current && ctx && image && !isSSR) {
-      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+      if (canvasRef.current && ctx && image && !isSSR) {
+        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
-      const dimensions = getClampedImageDimensions(
-        image,
-        vCells,
-        hCells,
-        fitToWidth,
-        fitToHeight
-      );
+        const dimensions = getClampedImageDimensions(
+          image,
+          vCells,
+          hCells,
+          fitToWidth,
+          fitToHeight
+        );
 
-      ctx.drawImage(image, 0, 0, dimensions.width, dimensions.height);
-      return convertToColorMap(ctx, dimensions.width, dimensions.height);
+        ctx.drawImage(image, 0, 0, dimensions.width, dimensions.height);
+        return convertToColorMap(ctx, dimensions.width, dimensions.height);
+      }
+    } catch (e) {
+      console.error(e);
     }
   }, [fitToHeight, fitToWidth, hCells, image, isSSR, vCells]);
 
