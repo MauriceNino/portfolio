@@ -1,4 +1,4 @@
-import { forwardRef, PropsWithChildren, useMemo } from 'react';
+import { forwardRef, HTMLAttributes, PropsWithChildren, useMemo } from 'react';
 import { CellsConverter } from '../../helpers/cells-converter';
 import {
   ContainerCellsProvider,
@@ -18,10 +18,14 @@ type ContainerProps = PropsWithChildren<{
   widthUnset?: boolean;
   heightUnset?: boolean;
   showOutlines?: boolean;
-}>;
+}> &
+  HTMLAttributes<HTMLDivElement>;
 
 export const Container = forwardRef<HTMLDivElement, ContainerProps>(
-  (props, ref) => {
+  (
+    { dimensions, padding, widthUnset, heightUnset, showOutlines, ...props },
+    ref
+  ) => {
     const divRef = useForwardRef(ref);
     const containerCells = useContainerCells();
 
@@ -39,39 +43,37 @@ export const Container = forwardRef<HTMLDivElement, ContainerProps>(
       }
     }, [containerCells, divRef]);
 
-    const width = props.dimensions?.hCells ?? containerCells.hCells;
-    const height = props.dimensions?.vCells ?? containerCells.vCells;
+    const width = dimensions?.hCells ?? containerCells.hCells;
+    const height = dimensions?.vCells ?? containerCells.vCells;
 
-    const top = props.padding?.top ?? 0;
-    const bottom = props.padding?.bottom ?? 0;
-    const left = props.padding?.left ?? 0;
-    const right = props.padding?.right ?? 0;
+    const top = padding?.top ?? 0;
+    const bottom = padding?.bottom ?? 0;
+    const left = padding?.left ?? 0;
+    const right = padding?.right ?? 0;
 
     return (
       <div
         ref={divRef}
+        {...props}
         style={{
           paddingTop: `${CellsConverter.cellsToHeight(top)}px`,
           paddingBottom: `${CellsConverter.cellsToHeight(bottom)}px`,
           paddingLeft: `${CellsConverter.cellsToWidth(left)}px`,
           paddingRight: `${CellsConverter.cellsToWidth(right)}px`,
-          width: props.widthUnset
+          width: widthUnset
             ? undefined
             : `${CellsConverter.cellsToWidth(width)}px`,
-          height: props.heightUnset
+          height: heightUnset
             ? undefined
             : `${CellsConverter.cellsToHeight(height)}px`,
-          outline: props.showOutlines ? '1px solid red' : undefined
+          outline: showOutlines ? '1px solid red' : undefined,
+          ...props.style
         }}
       >
         <ContainerCellsProvider
           value={{
-            hCells: props.widthUnset
-              ? childDimensions.hCells
-              : width - left - right,
-            vCells: props.heightUnset
-              ? childDimensions.vCells
-              : height - top - bottom
+            hCells: widthUnset ? childDimensions.hCells : width - left - right,
+            vCells: heightUnset ? childDimensions.vCells : height - top - bottom
           }}
         >
           {props.children}

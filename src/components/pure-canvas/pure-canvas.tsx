@@ -1,21 +1,20 @@
-import { FC, memo } from 'react';
+import { CanvasHTMLAttributes, forwardRef, memo } from 'react';
 import { CellsConverter } from '../../helpers/cells-converter';
-import { CellProps } from '../../types/default-props';
+import { useContainerCells } from '../../hooks/containerCells';
 
-type PureCanvasProps = {
-  contextRef: (el: HTMLCanvasElement) => void;
-} & CellProps;
+export const PureCanvas = memo(
+  forwardRef<HTMLCanvasElement, CanvasHTMLAttributes<HTMLCanvasElement>>(
+    (props, ref) => {
+      const { vCells, hCells } = useContainerCells();
 
-export const PureCanvas: FC<PureCanvasProps> = memo(props => {
-  const { vCells, hCells } = props;
-
-  return (
-    <canvas
-      height={CellsConverter.cellsToHeight(vCells)}
-      width={CellsConverter.cellsToWidth(hCells)}
-      ref={el => {
-        el && props.contextRef(el);
-      }}
-    ></canvas>
-  );
-});
+      return (
+        <canvas
+          {...props}
+          height={CellsConverter.cellsToHeight(vCells)}
+          width={CellsConverter.cellsToWidth(hCells)}
+          ref={ref}
+        ></canvas>
+      );
+    }
+  )
+);

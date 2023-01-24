@@ -23,17 +23,17 @@
   "projects": {
     "heading": "Einige Meiner Projekte",
     "portfolio": {
-      "text": "Die Website, die Sie gerade sehen, wurde in React geschrieben, mit dem Ziel, das Framework im Laufe der Zeit zu erlernen. Die Idee dazu kam mir, als ich das Projekt <0>\"k9s\"</0> sah und von der schönen Konsolenanwendung beeindruckt war. Ich habe versucht, ein mehr oder weniger überzeugendes CLI-Feeling zu erzeugen und dabei die modernen Features eines Browsers für Animationen zu nutzen.<br/><br/>Wenn Sie sich für den Code interessieren, schauen Sie hier: <1>github.com</1>"
+      "text": "Die Website, die Sie gerade sehen, wurde in React geschrieben, mit dem Ziel, das Framework im Laufe der Zeit zu erlernen. Die Idee dazu kam mir, als ich das Projekt <k9s>\"k9s\"</k9s> sah und von der schönen Konsolenanwendung beeindruckt war. Ich habe versucht, ein mehr oder weniger überzeugendes CLI-Feeling zu erzeugen und dabei die modernen Features eines Browsers für Animationen zu nutzen.<br/><br/>Wenn Sie sich für den Code interessieren, schauen Sie hier: <github>github.com</github>"
     },
-    "q_help": {
-      "text": "Zu Beginn der Corona-Krise dachten ich und 2 Kollegen, dass wir den Menschen in Not irgendwie helfen wollen. Das Problem war, dass die Menschen, die unter Quarantäne standen, keine Möglichkeit hatten, ihre täglichen Bedürfnisse zu erfüllen, wie z.B. einkaufen oder mit dem Hund spazieren gehen. Q-Help hilft Menschen, indem es sie aufgrund ihrer geografischen Nähe zusammenbringt. Das Projekt basiert auf Ionic/Angular und Firebase (Storage, Firestore, Functions, Authentication, ...).<br/><br/>Sie können sich das Projekt hier live ansehen: <0>qhelp.app</0>"
+    "qhelp": {
+      "text": "Zu Beginn der Corona-Krise dachten ich und 2 Kollegen, dass wir den Menschen in Not irgendwie helfen wollen. Das Problem war, dass die Menschen, die unter Quarantäne standen, keine Möglichkeit hatten, ihre täglichen Bedürfnisse zu erfüllen, wie z.B. einkaufen oder mit dem Hund spazieren gehen. Q-Help hilft Menschen, indem es sie aufgrund ihrer geografischen Nähe zusammenbringt. Das Projekt basiert auf Ionic/Angular und Firebase (Storage, Firestore, Functions, Authentication, ...).<br/><br/>Sie können sich das Projekt hier live ansehen: <demo>qhelp.app</demo>"
     },
-    "gamerpals": {
-      "text": "Als begeisterte Gamer haben ich mich mit einem Klassenkameraden zusammengetan, um die ultimative Plattform zur Gruppenfindung zu schaffen. Das Ziel war es, Gruppen auf der Grundlage relevanter Kriterien zusammenzubringen - seien es Gilden oder sogar Matchmaking-Gruppen. Die relevanten Technologien sind Angular/Electron auf dem Frontend und ein Backend bestehend aus einem C# REST Service und einer MongoDB Datenbank, wobei ich hauptsächlich am Frontend gearbeitet habe.<br/><br/>Eine Demo des Projekts können Sie sich hier ansehen: <0>gamerpals-website.herokuapp.com</0><br/>Wenn Sie sich für den Frontend-Code interessieren, schauen Sie hier: <1>github.com</1>"
+    "dashdot": {
+      "text": "Dash. (oder Dashdot) ist ein modernes Server-Dashboard, welches für kleinere Server - vorallem im Homeserver-bereich eingesetzt wird. Mit über 1000 GitHub Stars, ist es eines der größten Projekte dieser Art.<br/><br/>- Hier kommen Sie zur Live-Demo: <demo>dash.mauz.io</demo><br/>- Und hier zum GitHub Projekt: <github>github.com</github>"
     },
     "more": {
       "heading": "Mehr",
-      "text": "Wenn Sie mehr über mich erfahren möchten oder sich einige meiner Projekte ansehen wollen, empfehle ich Ihnen, die folgenden Links zu besuchen:"
+      "text": "Wenn Sie mehr über mich erfahren möchten oder sich einige meiner Projekte ansehen wollen, empfehle ich Ihnen, die folgenden Links zu besuchen:<br/><br/>- <github>GitHub</github><br/>- <linkedin>LinkedIn</linkedin><br/>- <stackoverflow>StackOverflow</stackoverflow>"
     }
   }
 }

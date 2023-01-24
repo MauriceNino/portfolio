@@ -273,5 +273,5 @@ export const Background: FC = () => {
       document.removeEventListener('visibilitychange', visibilitychange);
   }, []);
 
-  return <BackgroundCanvas hCells={hCells} vCells={vCells} circles={circles} />;
+  return <BackgroundCanvas circles={circles} />;
 };

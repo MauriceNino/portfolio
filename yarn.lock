@@ -3064,6 +3064,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/tinycolor2@npm:1.4.3":
+  version: 1.4.3
+  resolution: "@types/tinycolor2@npm:1.4.3"
+  checksum: 61984b2825d4ee902016ef24777787bb2fb9e4999ccd4f7e5a709442c00cf90ba4afa510b9c78f18dcc83c03305d597d5fe3825a6aad38354f95c68af70ebc1b
+  languageName: node
+  linkType: hard
+
 "@types/trusted-types@npm:^2.0.2":
   version: 2.0.2
   resolution: "@types/trusted-types@npm:2.0.2"
@@ -9860,6 +9867,7 @@ __metadata:
     "@types/react": 18.0.26
     "@types/react-dom": 18.0.10
     "@types/react-gtm-module": 2.0.1
+    "@types/tinycolor2": 1.4.3
     eslint-config-next: 13.1.1
     i18next: 22.4.9
     moment: 2.29.4
@@ -9875,6 +9883,7 @@ __metadata:
     react-scripts: 5.0.1
     sass: 1.57.1
     simplebar-react: 2.4.3
+    tinycolor2: 1.5.2
     typescript: 4.9.4
     web-vitals: 3.1.0
   languageName: unknown
@@ -12599,6 +12608,13 @@ __metadata:
     globalyzer: 0.1.0
     globrex: ^0.1.2
   checksum: aea5801eb6663ddf77ebb74900b8f8bd9dfcfc9b6a1cc8018cb7421590c00bf446109ff45e4b64a98e6c95ddb1255a337a5d488fb6311930e2a95334151ec9c6
+  languageName: node
+  linkType: hard
+
+"tinycolor2@npm:1.5.2":
+  version: 1.5.2
+  resolution: "tinycolor2@npm:1.5.2"
+  checksum: 9df1ea9a986b03f1aebb1c1ac17fc561e358493f61b56d73ef2d7207fe7bd74eb71cf745b70487b2b5bb1ce33c9e8af7101088bb0b5fc532eaa1f9d1eda4ef31
   languageName: node
   linkType: hard
 

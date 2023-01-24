@@ -1,8 +1,7 @@
-import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, useCallback, useEffect, useRef } from 'react';
 import { PureCanvas } from '../../../components/pure-canvas/pure-canvas';
 import { CellsConverter } from '../../../helpers/cells-converter';
 import { Circle } from '../../../types/background';
-import { CellProps } from '../../../types/default-props';
 
 const roundToHeight = (h: number) => {
   return Math.ceil(h / CellsConverter.CELL_HEIGHT) * CellsConverter.CELL_HEIGHT;
@@ -58,14 +57,14 @@ const drawCircle = (ctx: CanvasRenderingContext2D, circle: Circle) => {
 
 type BackgroundCanvasProps = {
   circles: Circle[];
-} & CellProps;
+};
 
 const FPS_SMOOTHING = 0.99;
 
 export const BackgroundCanvas: FC<BackgroundCanvasProps> = props => {
-  const { hCells, vCells, circles } = props;
+  const { circles } = props;
 
-  const [canvasRef, setCanvasRef] = useState<HTMLCanvasElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const isProd = useRef(process.env.isProd);
   const currentFps = useRef(60);
   const lastFrameTime = useRef(Date.now());
@@ -79,12 +78,12 @@ export const BackgroundCanvas: FC<BackgroundCanvasProps> = props => {
   }, []);
 
   useEffect(() => {
-    const ctx = canvasRef?.getContext('2d');
+    const ctx = canvasRef.current?.getContext('2d');
 
-    if (canvasRef && ctx) {
+    if (canvasRef.current && ctx) {
       ctx.fillStyle = '#40434D';
       ctx.font = '16px Arial';
-      ctx.clearRect(0, 0, canvasRef.width, canvasRef.height);
+      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
       if (!isProd.current) {
         recalculateFps();
@@ -96,8 +95,7 @@ export const BackgroundCanvas: FC<BackgroundCanvasProps> = props => {
         drawCircle(ctx, circle);
       }
     }
-  }, [canvasRef, circles, recalculateFps, hCells, vCells]);
-  return (
-    <PureCanvas hCells={hCells} vCells={vCells} contextRef={setCanvasRef} />
-  );
+  }, [canvasRef, circles, recalculateFps]);
+
+  return <PureCanvas ref={canvasRef} />;
 };

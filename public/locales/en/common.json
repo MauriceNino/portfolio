@@ -23,17 +23,17 @@
   "projects": {
     "heading": "Some Of My Projects",
     "portfolio": {
-      "text": "The website you are currently viewing, was written in React with the goal of learning the framework in the progress. The idea for it came to me when I saw the project <0>\"k9s\"</0> and was impressed by the beautiful console application. I tried to create a more or less convincing CLI feeling while using the modern features of a browser for animations.<br/><br/>If you are interested in the code, look here: <1>github.com</1>"
+      "text": "The website you are currently viewing, was written in React with the goal of learning the framework in the progress. The idea for it came to me when I saw the project <k9s>\"k9s\"</k9s> and was impressed by the beautiful console application. I tried to create a more or less convincing CLI feeling while using the modern features of a browser for animations.<br/><br/>If you are interested in the code, look here: <github>github.com</github>"
     },
-    "q_help": {
-      "text": "At the start of the Corona crisis, myself and 2 colleagues thought that we would like to help the people in need somehow. The problem was that people who were in quarantine had no way to meet their daily needs, such as shopping, or walking the dog. Q-Help helps people by bringing them together based on geographical proximity. The project is based on Ionic/Angular and Firebase (Storage, Firestore, Functions, Authentication, ...).<br/><br/>You can view the project live here: <0>qhelp.app</0>"
+    "qhelp": {
+      "text": "At the start of the Corona crisis, myself and 2 colleagues thought that we would like to help the people in need somehow. The problem was that people who were in quarantine had no way to meet their daily needs, such as shopping, or walking the dog. Q-Help helps people by bringing them together based on geographical proximity. The project is based on Ionic/Angular and Firebase (Storage, Firestore, Functions, Authentication, ...).<br/><br/>You can view the project live here: <demo>qhelp.app</demo>"
     },
-    "gamerpals": {
-      "text": "As avid gamers, myself and a classmate teamed up to create the ultimate group finding platform. The goal was to bring groups together based on relevant criteria - be it guilds or even matchmaking groups. The relevant technologies are Angular/Electron on the frontend and a backend consisting of a C# REST service and a MongoDB database, where I worked mostly on the frontend.<br/><br/>You can view a demo of the project here: <0>gamerpals-website.herokuapp.com</0><br/>If you are interested in the frontend code, look here: <1>github.com</1>"
+    "dashdot": {
+      "text": "Dash. (or Dashdot) is a modern server dashboard, which is primarly used for smaller servers, especially in the home-server area. With over 1000 GitHub Stars, it is one of the most popular of its kind.<br/><br/>- Click here for the live demo: <demo>dash.mauz.io</demo><br/>- And here for the GitHub project: <github>github.com</github>"
     },
     "more": {
       "heading": "More",
-      "text": "If you want to learn more about me, or if you want to check out some more of my projects, I encourage you to visit the following links:"
+      "text": "If you want to learn more about me, or if you want to check out some more of my projects, I encourage you to visit the following links:<br/><br/>- <github>GitHub</github><br/>- <linkedin>LinkedIn</linkedin><br/>- <stackoverflow>StackOverflow</stackoverflow>"
     }
   }
 }
