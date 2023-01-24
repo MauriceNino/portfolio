@@ -3,6 +3,11 @@
     "title": "Maurice el-Banna //Portfolio",
     "description": "Portfolio von Maurice el-Banna, einem Frontend Entwickler aus Österreich. Schauen sie sich meine Skills und Erfahrungen an, oder treten Sie mit mir in Kontakt!"
   },
+  "menu": {
+    "home": "Home",
+    "cv": "Lebenslauf",
+    "linkedin": "LinkedIn"
+  },
   "splash": {
     "scroll_button": "Über Mich",
     "heading_part1": "Servus,",

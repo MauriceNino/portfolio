@@ -1,4 +1,11 @@
-import React, { FC, PropsWithChildren, useEffect } from 'react';
+import {
+  CSSProperties,
+  FC,
+  PropsWithChildren,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import { CellsConverter } from '../../helpers/cells-converter';
 import { useContainerCells } from '../../hooks/containerCells';
 
@@ -10,8 +17,8 @@ type CenteredProps = PropsWithChildren<{
 
 export const Centered: FC<CenteredProps> = props => {
   const { vCells, hCells } = useContainerCells();
-  const childRef = React.useRef<HTMLElement>();
-  const [style, setStyle] = React.useState<React.CSSProperties>({});
+  const childRef = useRef<HTMLElement>();
+  const [style, setStyle] = useState<CSSProperties>({});
 
   useEffect(() => {
     const child = childRef.current;

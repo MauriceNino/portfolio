@@ -1,28 +1,6 @@
-#headingContainer {
+#menu {
   position: relative;
-  height: calc(var(--text-height) * 2px);
 
-  > p {
-    user-select: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: var(--primary-color);
-
-    opacity: 0;
-    transform: scaleX(0);
-    transform-origin: right;
-
-    transition: transform 0.3s, opacity 0.3s;
-
-    &.show {
-      opacity: 1;
-      transform: scaleX(1);
-    }
-  }
-  > div {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap-reverse;
-  }
+  display: inline-flex;
+  flex-direction: row;
 }

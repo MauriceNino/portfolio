@@ -80,7 +80,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
             vCells: 4
           }}
         >
-          <Heading hCells={cells.hCells} />
+          <Heading />
         </Container>
 
         <Container
