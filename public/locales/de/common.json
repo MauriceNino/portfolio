@@ -23,7 +23,7 @@
   },
   "about_me": {
     "heading": "Über Mich",
-    "text": "Ich bin ein {{age}}-jähriger Full-Stack-Entwickler, der derzeit in Österreich lebt. Meine Leidenschaft ist es, Erlebnisse für Benutzer zu schaffen, vor allem im Web.<br/><br/>Ich habe bereits sowohl an kleinen privaten Projekten als auch an großen internationalen Langzeitprojekten gearbeitet. Obwohl ich nur 3 Jahre Berufserfahrung habe, programmiere ich schon seit über 10 Jahren.<br/><br/>Wenn Sie mich für ein Projekt engagieren möchten, können Sie mich gerne auf <linkedin_link>LinkedIn</linkedin_link> kontaktieren."
+    "text": "Ich bin ein {{age}} Jahre alter Frontend-Entwickler aus Österreich und habe eine Leidenschaft dafür, benutzerfreundliche und ansprechende Erlebnisse zu gestalten - besonders im Web.<br/><br/>Im Laufe der Jahre habe ich an einer Vielzahl von Projekten gearbeitet - von kleinen persönlichen Ideen bis hin zu umfangreichen internationalen Kooperationen. Seit über einem Jahrzehnt gehört Programmieren zu meinem Alltag, und ich setze gerne Ideen in ausgereifte, funktionale Lösungen um.<br/><br/>Wenn Sie an einer Zusammenarbeit interessiert sind, können Sie sich gerne über <linkedin_link>LinkedIn</linkedin_link> mit mir in Kontakt setzen."
   },
   "projects": {
     "heading": "Einige Meiner Projekte",
@@ -34,7 +34,7 @@
       "text": "Zu Beginn der Corona-Krise dachten ich und 2 Kollegen, dass wir den Menschen in Not irgendwie helfen wollen. Das Problem war, dass die Menschen, die unter Quarantäne standen, keine Möglichkeit hatten, ihre täglichen Bedürfnisse zu erfüllen, wie z.B. einkaufen oder mit dem Hund spazieren gehen. Q-Help hilft Menschen, indem es sie aufgrund ihrer geografischen Nähe zusammenbringt. Das Projekt basiert auf Ionic/Angular und Firebase (Storage, Firestore, Functions, Authentication, ...).<br/><br/>Sie können sich das Projekt hier live ansehen: <demo>qhelp.app</demo>"
     },
     "dashdot": {
-      "text": "Dash. (oder Dashdot) ist ein modernes Server-Dashboard, welches für kleinere Server - vorallem im Homeserver-bereich eingesetzt wird. Mit über 1000 GitHub Stars, ist es eines der größten Projekte dieser Art.<br/><br/>- Hier kommen Sie zur Live-Demo: <demo>dash.mauz.io</demo><br/>- Und hier zum GitHub Projekt: <github>github.com</github>"
+      "text": "Dash. (oder Dashdot) ist ein modernes Server-Dashboard, welches für kleinere Server - vorallem im Homeserver-bereich eingesetzt wird. Mit über 3000 GitHub Stars, ist es eines der größten Projekte dieser Art.<br/><br/>- Hier kommen Sie zur Live-Demo: <demo>dash.mauz.io</demo><br/>- Und hier zum GitHub Projekt: <github>github.com</github>"
     },
     "more": {
       "heading": "Mehr",

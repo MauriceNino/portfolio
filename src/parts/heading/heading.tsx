@@ -21,7 +21,7 @@ export const Heading: FC = () => {
           <a href="#">{t('menu.home')}</a>
           &nbsp;&nbsp;|&nbsp;&nbsp;
           <a
-            href="https://docs.google.com/document/d/1IQWo4dR96TlH6TIZhYwSWeKh5zmSHvvVT_8-MDCvoLU/edit?usp=sharing"
+            href="https://docs.google.com/document/d/1eeS4q_ZM9oVa7MSWa7vioDqNYrcszdxvgH17buF8l5M/edit?usp=sharing"
             target="_blank"
             rel="noreferrer"
           >
