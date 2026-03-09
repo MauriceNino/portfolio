@@ -104,7 +104,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
           padding={{ right: 1 }}
         >
           <div id="copyright" role="presentation">
-            ©2021 - Maurice el-Banna
+            ©2021 - Maurice Guttenberger
           </div>
         </Container>
       </ConsoleContainer>

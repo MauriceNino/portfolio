@@ -65,7 +65,7 @@ export const AboutMe: FC<AboutMeProps> = props => {
             linkedin_link: (
               // eslint-disable-next-line jsx-a11y/anchor-has-content
               <a
-                href="https://www.linkedin.com/in/maurice-elbanna/"
+                href="https://www.linkedin.com/in/mauricenino/"
                 target="_blank"
                 rel="noreferrer"
               />

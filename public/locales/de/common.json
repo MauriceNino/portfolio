@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Maurice el-Banna //Portfolio",
-    "description": "Portfolio von Maurice el-Banna, einem Frontend Entwickler aus Österreich. Schauen sie sich meine Skills und Erfahrungen an, oder treten Sie mit mir in Kontakt!"
+    "title": "Maurice Guttenberger //Portfolio",
+    "description": "Portfolio von Maurice Guttenberger, einem Frontend Entwickler aus Österreich. Schauen sie sich meine Skills und Erfahrungen an, oder treten Sie mit mir in Kontakt!"
   },
   "menu": {
     "home": "Home",
@@ -11,7 +11,7 @@
   "splash": {
     "scroll_button": "Über Mich",
     "heading_part1": "Servus,",
-    "heading_part2": "Ich bin <name>Maurice el-Banna</name>,",
+    "heading_part2": "Ich bin <name>Maurice Guttenberger</name>,",
     "heading_part3": "ein Frontend Entwickler",
     "heading_part4": "aus <red_part>Öst</red_part>erre<red_part>ich</red_part>"
   },

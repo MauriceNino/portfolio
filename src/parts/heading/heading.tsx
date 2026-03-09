@@ -29,7 +29,7 @@ export const Heading: FC = () => {
           </a>
           &nbsp;&nbsp;|&nbsp;&nbsp;
           <a
-            href="https://www.linkedin.com/in/maurice-elbanna/"
+            href="https://www.linkedin.com/in/mauricenino/"
             target="_blank"
             rel="noreferrer"
           >
